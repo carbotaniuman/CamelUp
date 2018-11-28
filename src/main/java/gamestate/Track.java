@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import game.Camel;
+import immutable.DesertCard;
 
 public class Track {
 	private Tile[] tiles;
@@ -30,5 +31,10 @@ public class Track {
 
 	public int getCamelPos(Camel c) {
 		return camelsPos.getOrDefault(c, -1);
+	}
+	
+	public void placeDesertCard ( DesertCard d, int tileNum )
+	{
+		tiles[tileNum].addDesertCard(d);
 	}
 }
