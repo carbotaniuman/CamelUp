@@ -68,9 +68,9 @@ public class GameState {
     {
         return p == curPlayer;
     }
-    public void placeDesertCard(DesertCard c) 
+    public void placeDesertCard(DesertCard c, int tileNum) 
     {
-
+    	track.placeDesertCard(c, tileNum);
     }
     public void commitTurn() 
     {
