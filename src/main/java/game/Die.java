@@ -36,4 +36,8 @@ public class Die {
 	public boolean getIfRolled() {
 		return ifRolled;
 	}
+	public void resetIfRolled()
+	{
+		ifRolled = false;
+	}
 }
