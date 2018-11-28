@@ -13,6 +13,7 @@ public class Die {
 	public Die(Color c) {
 		camelColor = c;
 		rand = new Random();
+		//asduqerhuihruq=werweirhwierhjwiebtgiaerhaehehe
 	}
 
 	public Die(Color c, int seed) {
