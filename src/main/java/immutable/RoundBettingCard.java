@@ -4,28 +4,19 @@ import java.awt.*;
 
 public class RoundBettingCard {
 
-    private Color camelColor;
-    private int points;
+    private final Color camelColor;
+    private final int points;
 
     public RoundBettingCard(Color c, int p) {
-        setCamelColor(c);
-        setPoints(p);
+    	camelColor = c;
+    	points = p;
     }
 
     public Color getCamelColor() {
         return camelColor;
     }
 
-    public void setCamelColor(Color camelColor) {
-        this.camelColor = camelColor;
-    }
-
     public int getPoints() {
         return points;
     }
-
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
 }
