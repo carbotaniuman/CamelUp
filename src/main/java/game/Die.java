@@ -22,6 +22,7 @@ public class Die {
 
 	public void roll() {
 		lastRoll = rand.nextInt(3) + 1;
+		ifRolled = true;
 	} 
 	
 	public Color getColor() {
