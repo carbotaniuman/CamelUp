@@ -1,6 +1,7 @@
 package gamestate;
 
 import game.Camel;
+import game.Die;
 import game.Pyramid;
 import immutable.DesertCard;
 import immutable.RaceBettingCard;
@@ -39,7 +40,8 @@ public class GameState {
     }
     public void moveCamel() 
     {
-    	int i = pyramid.getDieVal((int)(Math.random()*pyramid.getNumNotRolledDice()));
+    	Die d = pyramid.getDie((int)(Math.random()*pyramid.getNumNotRolledDice()));
+    	
     }
     public void placeWinBet(RaceBettingCard c) 
     {
@@ -75,5 +77,8 @@ public class GameState {
     	if(curPlayerIndex < players.size()-1)
     		curPlayer = players.get(curPlayerIndex+1);
     	curPlayer = players.get(0);
+    	
+    	if(pyramid.areAllDiceRolled())
+    		pyramid.resetDice();
     }
 }

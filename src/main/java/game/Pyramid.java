@@ -10,8 +10,8 @@ public class Pyramid {
 		resetDice();
 	}
 
-	public int getDieVal(int i) {
-		int ret = notRolledDice.get(i).getLastRoll();
+	public Die getDie(int i) {
+		Die ret = notRolledDice.get(i);
 		rolledDice.add(notRolledDice.get(i));
 		notRolledDice.remove(i);
 		return ret;
