@@ -18,7 +18,7 @@ public class Player {
     public Player(String n) {
         raceBets = new ArrayList<>();
         roundBets = new ArrayList<>();
-        op = Optional.empty();
+        op = Optional.of(new DesertCard(this));
         money = 0;
         name = n;
     }
@@ -27,7 +27,10 @@ public class Player {
     public boolean hasDesertCard() {
         return op.isPresent();
     }
-
+    public void removeDesertCard()
+    {
+    	op = Optional.empty();
+    }
     // getDesertCard
     public Optional<DesertCard> getDesertCard() {
         return op;
@@ -38,7 +41,7 @@ public class Player {
         roundBets.add(c);
     }
 
-    // addRaceBet
+    // addRaceBet  //WHY IS THIS HERE
     public void addRaceBet(RaceBettingCard c) {
         raceBets.add(c);
     }
@@ -67,7 +70,7 @@ public class Player {
     public void clearRoundBets() {
         roundBets.clear();
     }
-
+    
     //get playerName **SUBJECT TO CHANGE**
     public String getName() {
         return name;

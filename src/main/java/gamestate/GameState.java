@@ -22,6 +22,7 @@ public class GameState {
     private Player curPlayer;
     private int curPlayerIndex;
     private Pyramid pyramid;
+    private boolean hasTurnEnded;
 
     public GameState() 
     {
@@ -37,19 +38,30 @@ public class GameState {
         curPlayer = players.get(0);
         curPlayerIndex = 0;
         pyramid = new Pyramid();
+        hasTurnEnded = false;
     }
     public void moveCamel() 
     {
     	Die d = pyramid.getDie((int)(Math.random()*pyramid.getNumNotRolledDice()));
-    	
+    	int index = -1;
+    	for(int i = 0; i < camels.size(); i++)
+    		if(camels.get(i).getColor().equals(d.getColor()))
+    		{
+    			index = i;
+    			break;
+    		}
+    	track.moveCamel(camels.get(index), d.getLastRoll());
+    	this.commitTurn();
     }
     public void placeWinBet(RaceBettingCard c) 
     {
         winBets.add(c);
+        this.commitTurn();
     }
     public void placeLoseBet(RaceBettingCard c) 
     {
         loseBets.add(c);
+        this.commitTurn();
     }
     public void placeRoundBet(Color c) //**CHANGE**PREV: public void placeRoundBet(Player p)
     {
@@ -63,6 +75,7 @@ public class GameState {
             }
         }
         players.get(index).addRoundBet(roundBets.get(c).last());
+        this.commitTurn();
     }
     public boolean isCurPlayer(Player p) 
     {
@@ -70,15 +83,27 @@ public class GameState {
     }
     public void placeDesertCard(DesertCard c, int tileNum) 
     {
-    	track.placeDesertCard(c, tileNum);
+    	if(curPlayer.hasDesertCard())
+    	{
+    		track.placeDesertCard(c, tileNum);
+    		curPlayer.removeDesertCard();
+    		this.commitTurn();
+    	}
     }
-    public void commitTurn() 
+    public void resetTurn() 
     {
     	if(curPlayerIndex < players.size()-1)
     		curPlayer = players.get(curPlayerIndex+1);
     	curPlayer = players.get(0);
     	
     	if(pyramid.areAllDiceRolled())
+    	{
     		pyramid.resetDice();
+    		track.removeAllDesertCards();
+    	}
+    }
+    public void commitTurn()
+    {
+    	hasTurnEnded = true;
     }
 }

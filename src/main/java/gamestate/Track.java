@@ -7,13 +7,13 @@ import java.util.TreeMap;
 import game.Camel;
 import immutable.DesertCard;
 
-public class Track {
+public class Track 
+{
 	private Tile[] tiles;
 	private Map<Camel, Integer> camelsPos;
 
 	public Track(int size, ArrayList<Camel> camels) // CHANGES passed in arraylist of camels to intilize in the
-													// beggining of track
-	{
+	{												// beggining of track
 		tiles = new Tile[size];
 		camelsPos = new TreeMap<Camel, Integer>();
 
@@ -29,12 +29,17 @@ public class Track {
 		tiles[oldPos + rolled].addCamel(c);
 	}
 
-	public int getCamelPos(Camel c) {
+	public int getCamelPos(Camel c) 
+	{
 		return camelsPos.getOrDefault(c, -1);
 	}
-	
 	public void placeDesertCard ( DesertCard d, int tileNum )
 	{
 		tiles[tileNum].addDesertCard(d);
+	}
+	public void removeAllDesertCards()
+	{
+		for(int i = 0; i < tiles.length; i++)
+			tiles[i].removeDesertCard();
 	}
 }
