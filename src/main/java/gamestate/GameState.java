@@ -14,7 +14,7 @@ import java.util.Queue;
 public class GameState 
 {
     private final static Color[] camelColors = {Color.WHITE, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE};
-    private final static String[] names = {"Karl Engels", "Evile Vinciente", "A Confucius", "Prince Zuko", "Madame Bob Lee"};
+    private final static String[] names = {"KarleEngels1820", "Evile Vinciente", "A Confucius", "Prince Zuko", "Madame Bob Lee"};
     private ArrayList<Camel> camels;
     private ArrayList<Player> players;
     private Queue<RaceBettingCard> winBets;
