@@ -5,6 +5,7 @@ import gamestate.Player;
 import immutable.DesertCard;
 
 public class DesertCardTester {
+	
 	@Test
 	public void playerDesertCardTest() {
 		Player p = new Player("Test");
