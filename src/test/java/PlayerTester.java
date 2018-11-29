@@ -1,24 +1,24 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 
 import gamestate.Player;
-import immutable.DesertCard;
 
 public class PlayerTester {
 	private Player player;
-	
-	@Before
-    public void setUp() {
-		player = new Player("Test");
-    }
 
-    @After
-    public void tearDown() {
-    	player = null;
-    }
+	@Before
+	public void setUp() {
+		player = new Player("Test");
+	}
+
+	@After
+	public void tearDown() {
+		player = null;
+	}
 
 	@Test
 	public void playerNonEqualityTest() {
@@ -34,14 +34,14 @@ public class PlayerTester {
 		player.setMoney(Integer.MAX_VALUE);
 		assertEquals(player.getMoney(), Integer.MAX_VALUE);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void noNegativeMoneyTest() {
 		player.setMoney(-1);
 	}
-	
+
 	@Test
 	public void desertCardTest() {
-		
+
 	}
 }
