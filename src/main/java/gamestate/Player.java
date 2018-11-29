@@ -58,6 +58,8 @@ public class Player {
 
     // setMoney
     public void setMoney(int i) {
+    	if(i < 0)
+    		throw new IllegalArgumentException("Money cannot be negative");
         money = i;
     }
 
