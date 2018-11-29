@@ -11,7 +11,8 @@ import java.awt.*;
 import java.util.*;
 import java.util.Queue;
 
-public class GameState {
+public class GameState 
+{
     private final static Color[] camelColors = {Color.WHITE, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE};
     private ArrayList<Camel> camels;
     private ArrayList<Player> players;
@@ -22,7 +23,6 @@ public class GameState {
     private Player curPlayer;
     private int curPlayerIndex;
     private Pyramid pyramid;
-    private boolean hasTurnEnded;
 
     public GameState() 
     {
@@ -38,7 +38,6 @@ public class GameState {
         curPlayer = players.get(0);
         curPlayerIndex = 0;
         pyramid = new Pyramid();
-        hasTurnEnded = false;
     }
     public void moveCamel() 
     {
@@ -90,20 +89,17 @@ public class GameState {
     		this.commitTurn();
     	}
     }
-    public void resetTurn() 
+    public void commitTurn() 
     {
-    	if(curPlayerIndex < players.size()-1)
+    	if(curPlayerIndex == players.size()-1)
+    		curPlayer = players.get(0);
+    	else
     		curPlayer = players.get(curPlayerIndex+1);
-    	curPlayer = players.get(0);
     	
     	if(pyramid.areAllDiceRolled())
     	{
     		pyramid.resetDice();
     		track.removeAllDesertCards();
     	}
-    }
-    public void commitTurn()
-    {
-    	hasTurnEnded = true;
     }
 }
