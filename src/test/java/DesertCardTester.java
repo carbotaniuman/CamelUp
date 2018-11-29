@@ -1,27 +1,43 @@
 import static org.junit.Assert.*;
+
+import java.awt.Color;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import gamestate.Player;
 import immutable.DesertCard;
 
 public class DesertCardTester {
+	private Player player;
+	
+	@Before
+    public void setUp() {
+		player = new Player("Test");
+    }
+
+
+    @After
+    public void tearDown() {
+        player = null;
+    }
 	
 	@Test
-	public void playerDesertCardTest() {
-		Player p = new Player("Test");
-		DesertCard ds = new DesertCard(p, false);
-		assertEquals(ds.getPlayer(), p);
+	public void playerMoveNumTest() {
+		DesertCard ds = new DesertCard(player, false);
 		assertEquals(ds.getMoveNum(), -1);
 		
-		DesertCard dsi = new DesertCard(p, true);
-		assertEquals(dsi.getPlayer(), p);
+		DesertCard dsi = new DesertCard(player, true);
 		assertEquals(dsi.getMoveNum(), 1);
 	}
 
 	@Test
 	public void playerEqualityTest() {
-		Player p = new Player("Test");
-		assertNotEquals(p, new Player("Test"));
-		assertNotEquals(p, new Player("Adadsdasd"));
+		DesertCard ds = new DesertCard(player, false);
+		assertEquals(ds.getPlayer(), player);
+		
+		DesertCard dsi = new DesertCard(player, true);
+		assertEquals(dsi.getPlayer(), player);
 	}
 }

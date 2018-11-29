@@ -18,7 +18,7 @@ public class Tile
 		trapCard = Optional.empty();
 	}
 
-	public boolean addDesertCard(DesertCard d) // CHANGES added a addDesertCard method because we have no way of adding
+	public boolean addDesertCard(DesertCard d)	// CHANGES added a addDesertCard method because we have no way of adding
 	{											// a desert card...
 		if (trapCard.isPresent())
 			throw new IllegalStateException("DesertCard non existent");

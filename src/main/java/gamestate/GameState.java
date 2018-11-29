@@ -14,6 +14,7 @@ import java.util.Queue;
 public class GameState 
 {
     private final static Color[] camelColors = {Color.WHITE, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE};
+    private final static String[] names = {"KarleEngels1820", "Evile Vinciente", "A Confucius", "Prince Zuko", "Madame Bob Lee"};
     private ArrayList<Camel> camels;
     private ArrayList<Player> players;
     private Queue<RaceBettingCard> winBets;
@@ -30,7 +31,8 @@ public class GameState
         for (int i = 0; i < camelColors.length; i++)
             camels.add(new Camel(camelColors[i]));
         players = new ArrayList<Player>();
-        //initialize players
+        for(int i = 0; i < 5; i++)
+        	players.add(new Player(names[i]));
         winBets = new ArrayDeque<>();
         loseBets = new ArrayDeque<>();
         roundBets = new TreeMap<>();
