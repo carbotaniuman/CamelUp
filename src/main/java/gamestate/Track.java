@@ -22,7 +22,7 @@ public class Track
 	}
 
 	public void moveCamel(Camel c, int rolled) // CHANGES dont need oldPos and newPos because we can pass in siply why was rolled for that camel
-	{ // ]
+	{
 		int oldPos = camelsPos.getOrDefault(c, -1);
 		tiles[oldPos].removeCamel(c);
 		camelsPos.put(c, oldPos + rolled);

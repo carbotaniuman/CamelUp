@@ -8,53 +8,45 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 public class Player {
-    private ArrayList<RaceBettingCard> raceBets;
-    private Optional<DesertCard> op;
-    private ArrayList<RoundBettingCard> roundBets;
-    private int money;
-    private String name; //what we use to differentiate players is subject to change and prob should change cause we need to do something that works for graphics and txt
+	private ArrayList<RaceBettingCard> raceBets;
+	private Optional<DesertCard> op;
+	private ArrayList<RoundBettingCard> roundBets;
+	private int money;
+	private String name; // what we use to differentiate players is subject to change and prob should
+							// change cause we need to do something that works for graphics and txt
 
-    // Constructor
-    public Player(String n) {
-        raceBets = new ArrayList<>();
-        roundBets = new ArrayList<>();
-        op = Optional.of(new DesertCard(this));
-        money = 0;
-        name = n;
-    }
+	// Constructor
+	public Player(String n) {
+		raceBets = new ArrayList<>();
+		roundBets = new ArrayList<>();
+		op = Optional.of(new DesertCard(this));
+		money = 0;
+		name = n;
+	}
 
-    // hasDesertCard
-    public boolean hasDesertCard() {
-        return op.isPresent();
-    }
-    public void removeDesertCard()
-    {
-    	op = Optional.empty();
-    }
-    // getDesertCard
-    public Optional<DesertCard> getDesertCard() {
-        return op;
-    }
+	// hasDesertCard
+	public boolean hasDesertCard() {
+		return op.isPresent();
+	}
 
-    // addRoundBet
-    public void addRoundBet(RoundBettingCard c) {
-        roundBets.add(c);
-    }
+	public void removeDesertCard() {
+		op = Optional.empty();
+	}
 
-    // addRaceBet  //WHY IS THIS HERE
-    public void addRaceBet(RaceBettingCard c) {
-        raceBets.add(c);
-    }
+	// getDesertCard
+	public Optional<DesertCard> getDesertCard() {
+		return op;
+	}
 
-    // getRaceBets
-    public ArrayList<RaceBettingCard> getRaceBets() {
-        return raceBets;
-    }
+	// addRoundBet
+	public void addRoundBet(RoundBettingCard c) {
+		roundBets.add(c);
+	}
 
-    // getRoundBets
-    public ArrayList<RoundBettingCard> getRoundBets() {
-        return roundBets;
-    }
+	// addRaceBet //WHY IS THIS HERE
+	public void addRaceBet(RaceBettingCard c) {
+		raceBets.add(c);
+	}
 
     // setMoney
     public void setMoney(int i) {
@@ -63,18 +55,29 @@ public class Player {
         money = i;
     }
 
-    // getMoney
-    public int getMoney() {
-        return money;
-    }
+	// getRaceBets
+	public ArrayList<RaceBettingCard> getRaceBets() {
+		return raceBets;
+	}
 
-    // clearRoundBets
-    public void clearRoundBets() {
-        roundBets.clear();
-    }
-    
-    //get playerName **SUBJECT TO CHANGE**
-    public String getName() {
-        return name;
-    }
+
+	// getRoundBets
+	public ArrayList<RoundBettingCard> getRoundBets() {
+		return roundBets;
+	}
+
+	// getMoney
+	public int getMoney() {
+		return money;
+	}
+
+	// clearRoundBets
+	public void clearRoundBets() {
+		roundBets.clear();
+	}
+
+	// get playerName **SUBJECT TO CHANGE**
+	public String getName() {
+		return name;
+	}
 }
