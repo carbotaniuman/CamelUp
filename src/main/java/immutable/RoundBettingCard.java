@@ -3,7 +3,6 @@ package immutable;
 import java.awt.Color;
 
 public class RoundBettingCard {
-
     private final Color camelColor;
     private final int points;
 

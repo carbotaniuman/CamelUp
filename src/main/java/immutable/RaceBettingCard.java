@@ -9,7 +9,6 @@ public class RaceBettingCard {
 	private Player myPlayer;
 
 	public RaceBettingCard(Color color, Player myPlayer) {
-		super();
 		this.color = color;
 		this.myPlayer = myPlayer;
 	}

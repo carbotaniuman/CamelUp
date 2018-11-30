@@ -20,7 +20,7 @@ public class Tile {
 
 	public boolean addDesertCard(DesertCard d) {
 		if (trapCard.isPresent())
-			throw new IllegalStateException("DesertCard non existent");
+			throw new IllegalStateException("DesertCard exists!");
 		trapCard = Optional.of(d);
 		return true;
 	}
