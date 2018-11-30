@@ -3,7 +3,7 @@ package immutable;
 import java.awt.Color;
 import java.util.Objects;
 
-public class Camel implements Comparable {
+public class Camel {
 	private Color color;
 
 	// Constructor
@@ -36,11 +36,5 @@ public class Camel implements Comparable {
 	@Override
 	public String toString() {
 		return "Camel: " + color;
-	}
-
-	@Override
-	public int compareTo(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 }
