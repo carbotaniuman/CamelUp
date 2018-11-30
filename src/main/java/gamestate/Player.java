@@ -19,7 +19,7 @@ public class Player {
 	public Player(String n) {
 		raceBets = new ArrayList<>();
 		roundBets = new ArrayList<>();
-		op = Optional.of(new DesertCard(this));
+		op = Optional.empty();
 		money = 0;
 		name = n;
 	}
@@ -37,6 +37,10 @@ public class Player {
 	public Optional<DesertCard> getDesertCard() {
 		return op;
 	}
+	
+	public void setDesertCard(boolean isOasis) {
+		op = Optional.of(new DesertCard(this, isOasis));
+	}
 
 	// addRoundBet
 	public void addRoundBet(RoundBettingCard c) {
@@ -48,18 +52,17 @@ public class Player {
 		raceBets.add(c);
 	}
 
-    // setMoney
-    public void setMoney(int i) {
-    	if(i < 0)
-    		throw new IllegalArgumentException("Money cannot be negative");
-        money = i;
-    }
+	// setMoney
+	public void setMoney(int i) {
+		if (i < 0)
+			throw new IllegalArgumentException("Money cannot be negative");
+		money = i;
+	}
 
 	// getRaceBets
 	public ArrayList<RaceBettingCard> getRaceBets() {
 		return raceBets;
 	}
-
 
 	// getRoundBets
 	public ArrayList<RoundBettingCard> getRoundBets() {

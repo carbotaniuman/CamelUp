@@ -11,10 +11,7 @@ public class DesertCard {
 		this.isOasis = isOasis;
 		this.p = p;
 	}
-	public DesertCard(Player p)
-	{
-		this.p = p;
-	}
+
 	// getMoveNum
 	public int getMoveNum() {
 		if (isOasis) {

@@ -1,4 +1,4 @@
-package game;
+package immutable;
 
 import java.awt.Color;
 import java.util.Objects;
@@ -25,14 +25,14 @@ public class Camel {
 		Camel c = (Camel) obj;
 		return Objects.equals(color, c.getColor());
 	}
-	
+
 	// hashcode
 	@Override
 	public int hashCode() {
 		return color.hashCode() * 31 - 1;
 	}
-	
-	//toString
+
+	// toString
 	@Override
 	public String toString() {
 		return "Camel: " + color;

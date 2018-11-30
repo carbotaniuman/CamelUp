@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import game.Camel;
+import immutable.Camel;
 import immutable.DesertCard;
 
 public class Track 
