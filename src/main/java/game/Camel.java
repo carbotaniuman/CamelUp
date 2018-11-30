@@ -3,7 +3,7 @@ package game;
 import java.awt.Color;
 import java.util.Objects;
 
-public class Camel {
+public class Camel implements Comparable {
 	private Color color;
 
 	// Constructor
@@ -36,5 +36,11 @@ public class Camel {
 	@Override
 	public String toString() {
 		return "Camel: " + color;
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
