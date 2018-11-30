@@ -1,8 +1,8 @@
 package gamestate;
 
-import game.Camel;
 import game.Die;
 import game.Pyramid;
+import immutable.Camel;
 import immutable.DesertCard;
 import immutable.RaceBettingCard;
 import immutable.RoundBettingCard;

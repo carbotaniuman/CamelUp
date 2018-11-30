@@ -22,8 +22,8 @@ public class PlayerTester {
 
 	@Test
 	public void playerNonEqualityTest() {
-		assertNotEquals(player, new Player("Test"));
-		assertNotEquals(player, new Player("aefawerfaehioi"));
+		assertNotEquals(player, new Player("TestNG"));
+		assertNotEquals(player, new Player("Boolean Jim"));
 	}
 
 	@Test
@@ -42,6 +42,6 @@ public class PlayerTester {
 
 	@Test
 	public void desertCardTest() {
-
+		player.getDesertCard();
 	}
 }

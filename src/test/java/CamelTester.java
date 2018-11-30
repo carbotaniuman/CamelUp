@@ -3,8 +3,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import immutable.Camel;
+
 import java.awt.Color;
-import game.Camel;
 
 public class CamelTester {
 	private Camel camel;
@@ -13,7 +14,6 @@ public class CamelTester {
     public void setUp() {
 		camel = new Camel(Color.RED);
     }
-
 
     @After
     public void tearDown() {
