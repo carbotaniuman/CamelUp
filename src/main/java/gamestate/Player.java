@@ -43,13 +43,9 @@ public class Player {
 	}
 
 	// addRoundBet
-	public void addRoundBet(RoundBettingCard c) {
+	public void addRoundBet(RoundBettingCard c) 
+	{
 		roundBets.add(c);
-	}
-
-	// addRaceBet //WHY IS THIS HERE
-	public void addRaceBet(RaceBettingCard c) {
-		raceBets.add(c);
 	}
 
 	// setMoney
@@ -60,7 +56,8 @@ public class Player {
 	}
 
 	// getRaceBets
-	public ArrayList<RaceBettingCard> getRaceBets() {
+	public ArrayList<RaceBettingCard> getRaceBets() 
+	{
 		return raceBets;
 	}
 
@@ -80,7 +77,8 @@ public class Player {
 	}
 
 	// get playerName **SUBJECT TO CHANGE**
-	public String getName() {
+	public String getName() 
+	{
 		return name;
 	}
 }
