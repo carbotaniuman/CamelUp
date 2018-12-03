@@ -26,8 +26,6 @@ public class Pyramid {
 
 	public boolean areAllDiceRolled() {
 		Iterator<Die> iter = notRolledDice.iterator();
-		// return notRolledDice.stream().map(d -> d.getIfRolled()).filter(n -> n ==
-		// false).count() == 0;
 		while (iter.hasNext())
 			if (iter.next().getIfRolled() == false)
 				return false;
@@ -35,12 +33,9 @@ public class Pyramid {
 	}
 
 	public void resetDice() {
-		int i = 0;
-		while (rolledDice.size() > 0)
-			notRolledDice.add(rolledDice.get(i++));
-		Iterator<Die> iter = notRolledDice.iterator();
-		while (iter.hasNext())
-			iter.next().roll();
+		notRolledDice.addAll(rolledDice);
+		rolledDice.clear();
+		notRolledDice.forEach(Die::roll);
 	}
 
 	public int getNumNotRolledDice() {
