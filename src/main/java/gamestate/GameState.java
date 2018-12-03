@@ -35,7 +35,7 @@ public class GameState
         	players.add(new Player(names[i]));
         winBets = new ArrayDeque<>();
         loseBets = new ArrayDeque<>();
-        roundBets = new TreeMap<>();
+        roundBets = new HashMap<>();
         for(int i = 0; i < 5; i++)
         {
         	TreeSet<RoundBettingCard> tree = new TreeSet<RoundBettingCard>();
@@ -44,6 +44,7 @@ public class GameState
         	tree.add(new RoundBettingCard(camelColors[i], 2));
         	roundBets.put(camelColors[i], tree);
         }
+        
         track = new Track(16, camels);
         curPlayer = players.get(0);
         curPlayerIndex = 0;
@@ -76,7 +77,7 @@ public class GameState
     {
     	Player p = this.curPlayer;
         int index = -1;
-        for (int i = 0; i < players.size(); i++) //change if no name forplayer
+        for (int i = 0; i < players.size(); i++) //change if no name for player
         {
             if (p.getName().equals(players.get(i).getName())) {
                 index = i;
