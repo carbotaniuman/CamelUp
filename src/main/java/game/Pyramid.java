@@ -2,18 +2,17 @@ package game;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 
 public class Pyramid {
-	private static final Color[] diceColors = { Color.WHITE, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE };
 	private ArrayList<Die> notRolledDice;
 	private ArrayList<Die> rolledDice;
 
-	public Pyramid() {
+	public Pyramid(List<Color> colors) {
 		notRolledDice = new ArrayList<Die>();
 		rolledDice = new ArrayList<Die>();
-		for (int i = 0; i < diceColors.length; i++)
-			notRolledDice.add(new Die(diceColors[i]));
+		for (Color c : colors)
+			notRolledDice.add(new Die(c));
 		resetDice();
 	}
 
@@ -25,11 +24,7 @@ public class Pyramid {
 	}
 
 	public boolean areAllDiceRolled() {
-		Iterator<Die> iter = notRolledDice.iterator();
-		while (iter.hasNext())
-			if (iter.next().getIfRolled() == false)
-				return false;
-		return true;
+		return notRolledDice.isEmpty();
 	}
 
 	public void resetDice() {

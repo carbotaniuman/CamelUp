@@ -1,10 +1,13 @@
 package drawers;
 
 import java.awt.Color;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Shape;
+import java.awt.geom.Rectangle2D;
+import java.util.List;
 
-import gamestate.*;
+import gamestate.Player;
+import immutable.RaceBettingCard;
 
 public class HandDrawer 
 {
@@ -12,7 +15,6 @@ public class HandDrawer
 	//size of hand: 1920x280
 	public static void drawHand(Graphics g, Player p) 
 	{
-		Color[] colors = {Color.WHITE, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.CYAN};
 		//WholeHand
 		g.setColor(Color.ORANGE);
 		g.fillRect(0, 800, 1920, 280);
@@ -24,16 +26,23 @@ public class HandDrawer
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 800, 180, 100);
 		//RaceBettingCards
-		for(int i = 0; i < 5; i++)
-		{
+		List<RaceBettingCard> cards = p.getRaceBets();
+		for(int i = 0; i < cards.size(); i++) {
 			g.setColor(Color.LIGHT_GRAY);
 			g.fillRect(i*150, 900, 150, 180);
 			g.setColor(Color.BLACK);
 			g.drawRect(i*150, 900, 150, 180);
-			g.setColor(Color.BLACK);
+			
+			g.setColor(cards.get(i).getColor());
+			g.fillOval(i* 150 + (150 - 20) / 2, 900 + (180 - 20) / 2, 20, 20);
 			g.fillOval(i*150+25, 935, 100, 100);
-			g.setColor(colors[i]);
-			g.drawString(p.getName(), i*150+65, 990);
+			
+			g.setColor(Color.BLACK);
+			FontMetrics fm = g.getFontMetrics();
+			Rectangle2D textSize = fm.getStringBounds(p.getName(), g);
+			int xPos = (150 - (int) textSize.getWidth()) / 2;
+			int yPos = (180 - (int) textSize.getHeight()) / 2 + fm.getAscent();
+			g.drawString(p.getName(), i*150+xPos, 900 + yPos);
 		}
 	}
 }

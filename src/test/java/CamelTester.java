@@ -24,6 +24,7 @@ public class CamelTester {
 	public void camelEqualityTest() {
 		assertEquals(camel, new Camel(Color.RED));
 		assertNotEquals(camel, new Camel(Color.BLUE));
+		assertNotEquals(camel, null);
 	}
 	
 	@Test

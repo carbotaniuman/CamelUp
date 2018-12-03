@@ -13,7 +13,7 @@ public class TextRunner
 	{
 		Scanner scan = new Scanner(System.in);
 		out.print("Enter player name = ");
-		Player p = new Player(scan.nextLine());
+		Player p = new Player(scan.nextLine(), GameState.CAMELCOLORS);
 		out.print("Enter color 1 = ");
 		String color1 = scan.nextLine();
 		out.print("Enter color 2 = ");

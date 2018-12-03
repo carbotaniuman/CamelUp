@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import drawers.HandDrawer;
+import gamestate.GameState;
 import gamestate.Player;
 
 public class HandDrawTest extends JPanel 
@@ -21,6 +22,6 @@ public class HandDrawTest extends JPanel
 	@Override
 	public void paintComponent(Graphics g)
 	{
-		HandDrawer.drawHand(g, new Player("Bob Lee"));
+		HandDrawer.drawHand(g, new Player("Test", GameState.CAMELCOLORS));
 	}
 }

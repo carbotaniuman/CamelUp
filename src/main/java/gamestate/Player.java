@@ -4,7 +4,10 @@ import immutable.DesertCard;
 import immutable.RaceBettingCard;
 import immutable.RoundBettingCard;
 
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 public class Player {
@@ -16,7 +19,7 @@ public class Player {
 							// change cause we need to do something that works for graphics and txt
 
 	// Constructor
-	public Player(String n) {
+	public Player(String n, List<Color> colors) {
 		raceBets = new ArrayList<>();
 		roundBets = new ArrayList<>();
 		op = Optional.empty();
@@ -37,14 +40,13 @@ public class Player {
 	public Optional<DesertCard> getDesertCard() {
 		return op;
 	}
-	
+
 	public void setDesertCard(boolean isOasis) {
 		op = Optional.of(new DesertCard(this, isOasis));
 	}
 
 	// addRoundBet
-	public void addRoundBet(RoundBettingCard c) 
-	{
+	public void addRoundBet(RoundBettingCard c) {
 		roundBets.add(c);
 	}
 
@@ -56,14 +58,13 @@ public class Player {
 	}
 
 	// getRaceBets
-	public ArrayList<RaceBettingCard> getRaceBets() 
-	{
-		return raceBets;
+	public List<RaceBettingCard> getRaceBets() {
+		return Collections.unmodifiableList(raceBets);
 	}
 
 	// getRoundBets
-	public ArrayList<RoundBettingCard> getRoundBets() {
-		return roundBets;
+	public List<RoundBettingCard> getRoundBets() {
+		return Collections.unmodifiableList(roundBets);
 	}
 
 	// getMoney
@@ -77,8 +78,7 @@ public class Player {
 	}
 
 	// get playerName **SUBJECT TO CHANGE**
-	public String getName() 
-	{
+	public String getName() {
 		return name;
 	}
 }

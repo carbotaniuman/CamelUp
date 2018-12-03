@@ -1,27 +1,21 @@
 import static org.junit.Assert.*;
 
-import java.awt.Color;
-
-import org.junit.After;
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
+import org.mockito.quality.Strictness;
 
 import gamestate.Player;
 import immutable.DesertCard;
 
 public class DesertCardTester {
-	private Player player;
+	@Rule
+	public MockitoRule rule = MockitoJUnit.rule().strictness(Strictness.STRICT_STUBS);
 	
-	@Before
-    public void setUp() {
-		player = new Player("Test");
-    }
-
-
-    @After
-    public void tearDown() {
-        player = null;
-    }
+	@Mock
+	private Player player;
 	
 	@Test
 	public void playerMoveNumTest() {

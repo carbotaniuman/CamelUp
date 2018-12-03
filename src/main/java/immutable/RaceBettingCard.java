@@ -17,7 +17,7 @@ public class RaceBettingCard {
 		return color;
 	}
 
-	public Player getMyPlayer() {
+	public Player getPlayer() {
 		return myPlayer;
 	}
 

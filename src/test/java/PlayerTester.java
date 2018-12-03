@@ -1,9 +1,10 @@
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.google.common.collect.ImmutableList;
 
 import gamestate.Player;
 
@@ -12,7 +13,7 @@ public class PlayerTester {
 
 	@Before
 	public void setUp() {
-		player = new Player("Test");
+		player = new Player("Test", ImmutableList.of());
 	}
 
 	@After
@@ -22,8 +23,8 @@ public class PlayerTester {
 
 	@Test
 	public void playerNonEqualityTest() {
-		assertNotEquals(player, new Player("TestNG"));
-		assertNotEquals(player, new Player("Boolean Jim"));
+		assertNotEquals(player, new Player("TestNG", ImmutableList.of()));
+		assertNotEquals(player, new Player("Boolean Jim", ImmutableList.of()));
 	}
 
 	@Test
