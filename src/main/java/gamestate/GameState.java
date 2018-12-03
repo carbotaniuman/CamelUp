@@ -35,7 +35,7 @@ public class GameState
         	players.add(new Player(names[i]));
         winBets = new ArrayDeque<>();
         loseBets = new ArrayDeque<>();
-        roundBets = new TreeMap<>();
+        roundBets = new HashMap<>();
         track = new Track(16, camels);
         curPlayer = players.get(0);
         curPlayerIndex = 0;
