@@ -37,7 +37,7 @@ public class Pyramid {
 	public void resetDice() {
 		int i = 0;
 		while (rolledDice.size() > 0)
-			notRolledDice.add(rolledDice.get(i++));
+			notRolledDice.remove(rolledDice.get(i++));
 		Iterator<Die> iter = notRolledDice.iterator();
 		while (iter.hasNext())
 			iter.next().roll();

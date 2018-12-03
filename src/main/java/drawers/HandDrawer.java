@@ -10,7 +10,7 @@ public class HandDrawer
 {
 	//size of screen: 1920x1080
 	//size of hand: 1920x280
-	public void drawHand(Graphics g, Player p) 
+	public static void drawHand(Graphics g, Player p) 
 	{
 		Color[] colors = {Color.WHITE, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE};
 		//WholeHand
@@ -33,6 +33,5 @@ public class HandDrawer
 			g.setColor(colors[i]);
 			g.drawString(p.getName(), i*150+75, 990);
 		}
-		//
 	}
 }
