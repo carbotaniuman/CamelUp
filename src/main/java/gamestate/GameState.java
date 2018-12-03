@@ -36,6 +36,14 @@ public class GameState
         winBets = new ArrayDeque<>();
         loseBets = new ArrayDeque<>();
         roundBets = new TreeMap<>();
+        for(int i = 0; i < 5; i++)
+        {
+        	TreeSet<RoundBettingCard> tree = new TreeSet<RoundBettingCard>();
+        	tree.add(new RoundBettingCard(camelColors[i], 5));
+        	tree.add(new RoundBettingCard(camelColors[i], 3));
+        	tree.add(new RoundBettingCard(camelColors[i], 2));
+        	roundBets.put(camelColors[i], tree);
+        }
         track = new Track(16, camels);
         curPlayer = players.get(0);
         curPlayerIndex = 0;

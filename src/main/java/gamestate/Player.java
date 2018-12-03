@@ -77,7 +77,8 @@ public class Player {
 	}
 
 	// get playerName **SUBJECT TO CHANGE**
-	public String getName() {
+	public String getName() 
+	{
 		return name;
 	}
 }

@@ -21,6 +21,6 @@ public class HandDrawTest extends JPanel
 	@Override
 	public void paintComponent(Graphics g)
 	{
-		HandDrawer.drawHand(g, new Player("bob"));
+		HandDrawer.drawHand(g, new Player("Bob Lee"));
 	}
 }
