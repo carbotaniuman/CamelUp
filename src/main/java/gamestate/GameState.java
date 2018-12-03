@@ -41,6 +41,9 @@ public class GameState
         curPlayerIndex = 0;
         pyramid = new Pyramid();
     }
+    //Accessors
+    public Pyramid getPyramid() { return pyramid;}
+    
     public void moveCamel() 
     {
     	Die d = pyramid.getDie((int)(Math.random()*pyramid.getNumNotRolledDice()));
@@ -64,6 +67,7 @@ public class GameState
         loseBets.add(c);
         this.commitTurn();
     }
+    
     public void placeRoundBet(Color c) //**CHANGE**PREV: public void placeRoundBet(Player p)
     {
     	Player p = this.curPlayer;
