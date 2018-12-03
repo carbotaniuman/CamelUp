@@ -68,7 +68,7 @@ public class GameState
     {
     	Player p = this.curPlayer;
         int index = -1;
-        for (int i = 0; i < players.size(); i++) //change if no name forplayer
+        for (int i = 0; i < players.size(); i++) //change if no name for player
         {
             if (p.getName().equals(players.get(i).getName())) {
                 index = i;
