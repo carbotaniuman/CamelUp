@@ -9,19 +9,24 @@ import java.util.Stack;
 import java.util.TreeSet;
 
 import game.Die;
+import gamestate.GameState;
 import game.Pyramid;
 import immutable.RaceBettingCard;
 import immutable.RoundBettingCard;
 
 public class BoardDrawer {
-
-    private final static Color[] colors = {Color.BLUE, Color.GREEN, Color.ORANGE, Color.YELLOW, Color.WHITE,};
+	
+	private GraphicsMap map; 
 
 	public void drawRoundsBets(Graphics g, Map<Color,TreeSet<RoundBettingCard>> cards)
-	{	//draw x = 1035
+	{	//draw x = 1050
 		int c = 0; 
 		for( int y = 30; y <= 800; y += 130 )
 		{
+			if ( cards.get(c) != null)
+			{
+				map.drawRoundBettingCard(g, 1050, y, cards.get(c).last(), GameState.CAMELCOLORS.get(c++));
+			}
 			
 		}
 	}
