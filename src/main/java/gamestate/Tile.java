@@ -28,6 +28,18 @@ public class Tile {
 	public void addCamel(Camel c) {
 		camels.add(c);
 	}
+	
+	public void addCamelTop(Camel c) {
+		camels.add(0, c);
+	}
+	
+	public void addCamels(ArrayList<Camel> c) {
+		camels.addAll(c);
+	}
+	
+	public void addCamelsTop(ArrayList<Camel> c) {
+		camels.addAll(0, c);
+	}
 
 	public void removeCamel(Camel c) {
 		camels.remove(c);
@@ -43,5 +55,10 @@ public class Tile {
 
 	public void removeDesertCard() {
 		trapCard = Optional.empty();
+	}
+	
+	//-1 no exist, else 0 is top of stack
+	public int getCamelPos(Camel c) {
+		return camels.indexOf(c);
 	}
 }

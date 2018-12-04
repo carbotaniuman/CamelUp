@@ -12,7 +12,7 @@ public class Track {
 	private Map<Camel, Integer> camelsPos;
 
 	public Track(int size, ArrayList<Camel> camels) // CHANGES passed in arraylist of camels to intilize in the
-	{												// beggining of track
+	{	
 		tiles = new Tile[size];
 		for(int i = 0; i < tiles.length; i++) {
 			tiles[i] = new Tile();
