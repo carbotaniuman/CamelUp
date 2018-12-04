@@ -106,11 +106,11 @@ public class GameState {
 	}
 
 	public void placeDesertCard(boolean isOasis, int tileNum) {
-		if (curPlayer.hasDesertCard()) {
-			track.placeDesertCard(c, tileNum);
-			curPlayer.removeDesertCard();
-			this.commitTurn();
-		}
+//		if (curPlayer.hasDesertCard()) {
+//			track.placeDesertCard(curPlayer, tileNum);
+//			curPlayer.removeDesertCard();
+//			this.commitTurn();
+//		}
 	}
 
 	public void commitTurn() {
