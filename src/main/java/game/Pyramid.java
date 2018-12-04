@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pyramid {
-	private ArrayList<Die> notRolledDice;
-	private ArrayList<Die> rolledDice;
+	private final ArrayList<Die> notRolledDice;
+	private final ArrayList<Die> rolledDice;
 
 	public Pyramid(List<Color> colors) {
+		if(colors.size() < 1) {
+			throw new IllegalArgumentException("At least one die needed");
+		}
 		notRolledDice = new ArrayList<Die>();
 		rolledDice = new ArrayList<Die>();
 		for (Color c : colors)
