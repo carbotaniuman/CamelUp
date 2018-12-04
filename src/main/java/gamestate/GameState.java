@@ -23,15 +23,16 @@ public class GameState {
 			Color.GREEN, new Color(51, 153,255));
 	private final static String[] names = { "KarleEngels1820", "Evile Vinciente", "A Confucius", "Prince Zuko",
 			"Madame Bob Lee" };
-	private ArrayList<Camel> camels;
-	private ArrayList<Player> players;
-	private Queue<RaceBettingCard> winBets;
-	private Queue<RaceBettingCard> loseBets;
-	private Map<Color, TreeSet<RoundBettingCard>> roundBets;
-	private Track track;
+	private final ArrayList<Camel> camels;
+	private final ArrayList<Player> players;
+	private final Queue<RaceBettingCard> winBets;
+	private final Queue<RaceBettingCard> loseBets;
+	private final Map<Color, TreeSet<RoundBettingCard>> roundBets;
+	private final Track track;
+	private final Pyramid pyramid;
+	
 	private Player curPlayer;
 	private int curPlayerIndex;
-	private Pyramid pyramid;
 
 	public GameState() {
 		camels = new ArrayList<Camel>();
@@ -95,6 +96,9 @@ public class GameState {
 				break;
 			}
 		}
+		System.out.println(index + " " + players.get(index));
+		System.out.println(roundBets + " " + players);
+		System.out.println(roundBets.get(c));
 		players.get(index).addRoundBet(roundBets.get(c).last());
 		this.commitTurn();
 	}

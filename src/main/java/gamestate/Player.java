@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class Player {
-	private ArrayList<RaceBettingCard> raceBets;
+	private final ArrayList<RaceBettingCard> raceBets;
+	private final ArrayList<RoundBettingCard> roundBets;
 	private Optional<DesertCard> op;
-	private ArrayList<RoundBettingCard> roundBets;
 	private int money;
-	private String name; // what we use to differentiate players is subject to change and prob should
+	private final String name; // what we use to differentiate players is subject to change and prob should
 							// change cause we need to do something that works for graphics and txt
 
 	// Constructor

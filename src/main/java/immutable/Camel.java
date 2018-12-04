@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.Objects;
 
 public class Camel {
-	private Color color;
+	private final Color color;
 
 	// Constructor
 	public Camel(Color c) {

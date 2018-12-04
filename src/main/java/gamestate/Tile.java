@@ -9,7 +9,7 @@ import immutable.Camel;
 import immutable.DesertCard;
 
 public class Tile {
-	private ArrayList<Camel> camels;
+	private final ArrayList<Camel> camels;
 	private Optional<DesertCard> trapCard;
 
 	public Tile() {
