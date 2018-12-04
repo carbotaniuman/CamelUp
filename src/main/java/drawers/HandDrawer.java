@@ -26,17 +26,7 @@ public class HandDrawer
 		//DesertCard
 		if(!p.hasDesertCard())
 		{
-			g.setColor(Color.YELLOW);
-			g.fillRect(0, 800, 180, 100);
-			g.setColor(Color.BLACK);
-			g.drawRect(0, 800, 180, 100);
-			g.setColor(Color.BLACK);
-			g.setFont(new Font("TimesRoman", Font.BOLD, 30));
-			FontMetrics fm = g.getFontMetrics();
-			Rectangle2D textSize = fm.getStringBounds("+/-", g);
-			int xPos = (180 - (int) textSize.getWidth()) / 2;
-			int yPos = (100 - (int) textSize.getHeight()) / 2 + fm.getAscent();
-			g.drawString("+/-", xPos, 800+yPos);
+			GraphicsMap.drawDesertCard(g, 0, 800, "+/-");
 		}
 		//RaceBettingCards
 		List<RaceBettingCard> cards = p.getRaceBets();

@@ -42,7 +42,7 @@ public class TextRunner
 		Color c = null;
 		if(color.equalsIgnoreCase("blue"))
 		{
-			c = Color.blue;
+			c = new Color(51, 153,255);
 		}
 		else if(color.equalsIgnoreCase("green"))
 		{
