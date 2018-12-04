@@ -3,7 +3,7 @@ package immutable;
 import gamestate.Player;
 
 public class DesertCard {
-	private final boolean isOasis;
+	private finalboolean isOasis;
 	private final Player p;
 
 	// Constructor
