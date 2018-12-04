@@ -1,11 +1,17 @@
+import java.awt.Color;
 import java.awt.Graphics;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeSet;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import drawers.BoardDrawer;
 import drawers.HandDrawer;
 import gamestate.GameState;
 import gamestate.Player;
+import immutable.RoundBettingCard;
 
 public class HandDrawTest extends JPanel 
 {
@@ -23,5 +29,14 @@ public class HandDrawTest extends JPanel
 	public void paintComponent(Graphics g)
 	{
 		HandDrawer.drawHand(g, new Player("Test", GameState.CAMELCOLORS));
+		Map<Color,TreeSet<RoundBettingCard>> roundBets = new HashMap<Color, TreeSet<RoundBettingCard>>();
+		for (int i = 0; i < 5; i++) {
+			TreeSet<RoundBettingCard> tree = new TreeSet<RoundBettingCard>();
+			tree.add(new RoundBettingCard(GameState.CAMELCOLORS.get(i), 5));
+			tree.add(new RoundBettingCard(GameState.CAMELCOLORS.get(i), 3));
+			tree.add(new RoundBettingCard(GameState.CAMELCOLORS.get(i), 2));
+			roundBets.put(GameState.CAMELCOLORS.get(i), tree);
+		}
+		BoardDrawer.drawRoundsBets(g, roundBets);
 	}
 }

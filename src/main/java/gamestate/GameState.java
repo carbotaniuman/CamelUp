@@ -96,10 +96,8 @@ public class GameState {
 				break;
 			}
 		}
-		System.out.println(index + " " + players.get(index));
-		System.out.println(roundBets + " " + players);
-		System.out.println(roundBets.get(c));
 		players.get(index).addRoundBet(roundBets.get(c).last());
+		
 		this.commitTurn();
 	}
 

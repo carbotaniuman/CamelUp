@@ -25,30 +25,11 @@ public class HandDrawer
 		g.drawRect(0, 800, 1920, 280);
 		//DesertCard
 		if(!p.hasDesertCard())
-		{
 			GraphicsMap.drawDesertCard(g, 0, 800, "+/-");
-		}
 		//RaceBettingCards
 		List<RaceBettingCard> cards = p.getRaceBets();
-		for(int i = 0; i < cards.size(); i++) {
-			g.setColor(Color.LIGHT_GRAY);
-			g.fillRect(i*150, 900, 150, 180);
-			g.setColor(Color.BLACK);
-			g.drawRect(i*150, 900, 150, 180);
-			
-			g.setColor(cards.get(i).getColor());
-			g.fillOval(i* 150 + (150 - 20) / 2, 900 + (180 - 20) / 2, 20, 20);
-			g.fillOval(i*150+25, 935, 100, 100);
-			
-			g.setColor(Color.BLACK);
-			
-			g.setFont(new Font("TimesRoman", Font.BOLD, 22));
-			FontMetrics fm = g.getFontMetrics();
-			Rectangle2D textSize = fm.getStringBounds(p.getName(), g);
-			int xPos = (150 - (int) textSize.getWidth()) / 2;
-			int yPos = (180 - (int) textSize.getHeight()) / 2 + fm.getAscent();
-			g.drawString(p.getName(), i*150+xPos, 895+yPos);
-		}
+		for(int i = 0; i < cards.size(); i++) 
+			GraphicsMap.drawRaceBettingCard(g, 150*i, 900, cards.get(i).getColor(), p);
 		//RoundBettingCards
 		g.setColor(GameState.CAMELCOLORS.get(0));
 		g.fillRect(1920-200, 800, 200, 100);
@@ -57,6 +38,7 @@ public class HandDrawer
 		//numWh++;
 		List<RoundBettingCard> roundBets = p.getRoundBets();
 		int numWh=0, numOrng=0, numYel=0, numGrn=0, numBlu=0;
+		/*
 		for(int i =0; i < roundBets.size(); i++)
 		{
 			RoundBettingCard r = roundBets.get(i);
@@ -89,5 +71,6 @@ public class HandDrawer
 				numBlu++;
 			}
 		}
+		*/
 	}
 }
