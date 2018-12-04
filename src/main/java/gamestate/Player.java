@@ -21,6 +21,8 @@ public class Player {
 	// Constructor
 	public Player(String n, List<Color> colors) {
 		raceBets = new ArrayList<>();
+		for(int i = 0; i < 5; i++)
+			raceBets.add(new RaceBettingCard(GameState.CAMELCOLORS.get(i), this));
 		roundBets = new ArrayList<>();
 		op = Optional.empty();
 		money = 0;
