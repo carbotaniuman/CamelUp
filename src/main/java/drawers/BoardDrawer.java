@@ -15,23 +15,21 @@ import immutable.RaceBettingCard;
 import immutable.RoundBettingCard;
 
 public class BoardDrawer {
-	
-	private GraphicsMap map; 
 
-	public void drawRoundsBets(Graphics g, Map<Color,TreeSet<RoundBettingCard>> cards)
+	public static void drawRoundsBets(Graphics g, Map<Color,TreeSet<RoundBettingCard>> cards)
 	{	//draw x = 1050
 		int c = 0; 
 		for( int y = 30; y <= 800; y += 130 )
 		{
-			if ( cards.get(c) != null)
+			if ( cards.get( GameState.CAMELCOLORS.get(c)) != null)
 			{
-				map.drawRoundBettingCard(g, 1050, y, cards.get(c).last(), GameState.CAMELCOLORS.get(c++));
+				GraphicsMap.drawRoundBettingCard(g, 1050, y, cards.get(c).last(), GameState.CAMELCOLORS.get(c++));
 			}
 			
 		}
 	}
 	
-	public void drawBets ( Graphics g, Queue<RaceBettingCard> cards )
+	public static void drawBets ( Graphics g, Queue<RaceBettingCard> cards )
 	{
 		
 	}

@@ -29,9 +29,7 @@ public class HandDrawer
 		//RaceBettingCards
 		List<RaceBettingCard> cards = p.getRaceBets();
 		for(int i = 0; i < cards.size(); i++) 
-		{
 			GraphicsMap.drawRaceBettingCard(g, 150*i, 900, cards.get(i).getColor(), p);
-		}
 		//RoundBettingCards
 		g.setColor(GameState.CAMELCOLORS.get(0));
 		g.fillRect(1920-200, 800, 200, 100);
@@ -40,6 +38,7 @@ public class HandDrawer
 		//numWh++;
 		List<RoundBettingCard> roundBets = p.getRoundBets();
 		int numWh=0, numOrng=0, numYel=0, numGrn=0, numBlu=0;
+		/*
 		for(int i =0; i < roundBets.size(); i++)
 		{
 			RoundBettingCard r = roundBets.get(i);
@@ -72,5 +71,6 @@ public class HandDrawer
 				numBlu++;
 			}
 		}
+		*/
 	}
 }
