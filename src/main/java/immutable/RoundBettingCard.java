@@ -2,7 +2,7 @@ package immutable;
 
 import java.awt.Color;
 
-public class RoundBettingCard {
+public class RoundBettingCard implements Comparable<RoundBettingCard> {
     private final Color camelColor;
     private final int points;
 
@@ -18,4 +18,9 @@ public class RoundBettingCard {
     public int getPoints() {
         return points;
     }
+
+	@Override
+	public int compareTo(RoundBettingCard rbc) {
+		return Integer.compare(rbc.getPoints(), points);
+	}
 }
