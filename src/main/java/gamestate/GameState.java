@@ -107,7 +107,7 @@ public class GameState {
 		return p == curPlayer;
 	}
 
-	public void placeDesertCard(DesertCard c, int tileNum) {
+	public void placeDesertCard(boolean isOasis, int tileNum) {
 		if (curPlayer.hasDesertCard()) {
 			track.placeDesertCard(c, tileNum);
 			curPlayer.removeDesertCard();

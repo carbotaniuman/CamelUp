@@ -11,30 +11,39 @@ public class TextRunner
 {
 	public static void main(String[] args)
 	{
-		Scanner scan = new Scanner(System.in);
-		out.print("Enter player name = ");
-		Player p = new Player(scan.nextLine(), GameState.CAMELCOLORS);
-		out.print("Enter color 1 = ");
-		String color1 = scan.nextLine();
-		out.print("Enter color 2 = ");
-		String color2 = scan.nextLine();
-		Color c1 = getColor(color1);
-		Color c2 = getColor(color2);
-		out.print("Enter isOasis = ");
-		boolean isOasis = scan.nextBoolean();
-		out.print("Enter num = ");
-		int tileNum = scan.nextInt();
-		RaceBettingCard raceb1 = new RaceBettingCard(c1, p);
-		RaceBettingCard raceb2 = new RaceBettingCard(c2, p);
-		DesertCard dc = new DesertCard(p, isOasis);
-		GameState g = new GameState();
-		g.moveCamel();
-		g.placeWinBet(raceb1);
-		g.placeLoseBet(raceb2);
-		g.placeRoundBet(c1);
-		out.println(g.isCurPlayer(p));
-		g.placeDesertCard(dc, tileNum);
-		g.commitTurn();
+		Scanner scanner = new Scanner(System.in);
+		GameState game = new GameState();
+		while(true)
+		{
+		  	boolean runCorrect = false;
+		  	while(runCorrect == false) //make sure if a/b/c/d works, break out of if else and keep it false until a/b/c/d works
+		  	{
+		  		runCorrect = false;
+		  		out.print("A - place round bet; B - place race bet; C - roll die; D - place Desert Card : ");
+		  		String choice = scanner.nextLine();
+		  		if(choice.equalsIgnoreCase("a"))
+		  		{
+		  			//figure out how to call player's cards, pull/remove one of color,make sure it hasn't been used, 
+		  			//remove that number from card set, throw false if it can't get removed cause none left (make boolean method)
+		  		}
+		 		else if(choice.equalsIgnoreCase("b"))
+		 		{
+		 			//same thing with place round bet
+		 		}
+		 		else if(choice.equalsIgnoreCase("c"))
+		 		{
+		 			//make method that rolls die in GameState
+		 		}
+		 		else if(choice.equalsIgnoreCase("d"))
+		 		{
+		 			out.print("Plus one or minus one? ");
+		 			boolean isOasis = scanner.nextBoolean();
+		 			out.print("Which tile? ");
+		 			int tileNum = scanner.nextInt();
+		 			
+		 		}
+		  	}
+		}
 	}
 	
 	public static Color getColor(String color)
@@ -63,3 +72,5 @@ public class TextRunner
 		return c;
 	}
 }
+
+
