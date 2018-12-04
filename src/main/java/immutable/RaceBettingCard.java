@@ -5,8 +5,8 @@ import java.awt.Color;
 import gamestate.Player;
 
 public class RaceBettingCard {
-	private Color color;
-	private Player myPlayer;
+	private final Color color;
+	private final Player myPlayer;
 
 	public RaceBettingCard(Color color, Player myPlayer) {
 		this.color = color;

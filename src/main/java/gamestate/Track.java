@@ -8,8 +8,8 @@ import immutable.Camel;
 import immutable.DesertCard;
 
 public class Track {
-	private Tile[] tiles;
-	private Map<Camel, Integer> camelsPos;
+	private final Tile[] tiles;
+	private final Map<Camel, Integer> camelsPos;
 
 	public Track(int size, ArrayList<Camel> camels) // CHANGES passed in arraylist of camels to intilize in the
 	{												// beggining of track

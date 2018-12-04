@@ -5,8 +5,8 @@ import java.util.Random;
 
 public class Die {
 
-	private Random rand;
-	private Color camelColor;
+	private final Random rand;
+	private final Color camelColor;
 	private boolean ifRolled;
 	private int lastRoll;
 
