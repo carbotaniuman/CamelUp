@@ -28,7 +28,7 @@ public class HandDrawTest extends JPanel
 	@Override
 	public void paintComponent(Graphics g)
 	{
-		Player pl = new Player("Test", GameState.CAMELCOLORS);
+		Player pl = new Player("Madame Bob Lee", GameState.CAMELCOLORS);
 		//TESTS
 		pl.addRoundBet(new RoundBettingCard(Color.WHITE, 1));
 		//pl.addRoundBet(new RoundBettingCard(Color.WHITE, 3));
@@ -46,7 +46,7 @@ public class HandDrawTest extends JPanel
 		pl.addRoundBet(new RoundBettingCard(c, 5));
 		pl.addRoundBet(new RoundBettingCard(c, 3));
 		pl.addRoundBet(new RoundBettingCard(c, 1));
-		
+		pl.setMoney(34);
 		HandDrawer.drawHand(g, pl);
 		Map<Color,TreeSet<RoundBettingCard>> roundBets = new HashMap<Color, TreeSet<RoundBettingCard>>();
 		for (int i = 0; i < 5; i++) {

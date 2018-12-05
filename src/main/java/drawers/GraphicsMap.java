@@ -39,10 +39,10 @@ public class GraphicsMap
 		g.drawLine(x+100, y, x+100, y+80);
 		g.drawLine(x, y+40, x+100, y+40);
 		g.setFont(new Font("TimesRoman", Font.BOLD, 30));
-		g.drawString("1",x+38, y+38);
-		g.drawString("-1",x+34, y+78);
+		g.drawString("1",x+38, y+35);
+		g.drawString("-1",x+34, y+75);
 		g.setFont(new Font("TimesRoman", Font.BOLD, 60));
-		g.drawString(r.getPoints() + "", x+148, y+70);
+		g.drawString(r.getPoints() + "", x+140, y+66);
 	}
 	public static void drawRaceBettingCard(Graphics g, int x, int y, Color c, Player p)
 	{
@@ -52,11 +52,11 @@ public class GraphicsMap
 		g.drawRect(x, y, 150, 180);
 		
 		g.setColor(c);
-		g.fillOval(x + (150 - 100) / 2, y + (180 - 100) / 2, 100, 100);
+		g.fillOval(x + (150 - 140) / 2, y + (180 - 140) / 2, 140, 140);
 		
 		g.setColor(Color.BLACK);
 		
-		g.setFont(new Font("TimesRoman", Font.BOLD, 22));
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		FontMetrics fm = g.getFontMetrics();
 		Rectangle2D textSize = fm.getStringBounds(p.getName(), g);
 		int xPos = (150 - (int) textSize.getWidth()) / 2;
