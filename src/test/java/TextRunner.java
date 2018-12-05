@@ -39,7 +39,8 @@ public class TextRunner
 		 			boolean isOasis = scanner.nextBoolean();
 		 			out.print("Which tile? ");
 		 			int tileNum = scanner.nextInt();
-		 			runCorrect = game.placeDesertCard(isOasis, tileNum);
+		 			Player p = game.getCurPlayer();
+		 			runCorrect = game.placeDesertCard(isOasis, p, tileNum);
 		 		}
 		  	}
 		}
