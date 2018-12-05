@@ -16,10 +16,20 @@ import immutable.RoundBettingCard;
 
 public class BoardDrawer {
 	
-	public void drawBoard(Graphics g, Map<Color,TreeSet<RoundBettingCard>> cards, Queue<RaceBettingCard> races, ArrayList<Die> dice)
+	public static void drawBoard(Graphics g, Map<Color,TreeSet<RoundBettingCard>> cards/*, Queue<RaceBettingCard> races, ArrayList<Die> dice*/)
 	{
 		//draws the board outline
 		g.setColor(Color.ORANGE);
+		g.fillRect(800, 0, 1120, 800);
+		//draws the RoundBettingCards
+		int c = 0; 
+		for( int y = 50 ; y <= 750; y += 150 )
+		{
+			if ( cards.get(GameState.CAMELCOLORS.get(c)) != null)
+			{
+				GraphicsMap.drawRoundBettingCard(g, 1050, y, cards.get(GameState.CAMELCOLORS.get(c++)).first());
+			}
+		}
 	}
 
 	public static void drawRoundsBets(Graphics g, Map<Color,TreeSet<RoundBettingCard>> cards)
