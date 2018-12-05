@@ -23,7 +23,7 @@ public class BoardDrawer {
 		{
 			if ( cards.get( GameState.CAMELCOLORS.get(c)) != null)
 			{
-				GraphicsMap.drawRoundBettingCard(g, 1050, y, cards.get(c).last(), GameState.CAMELCOLORS.get(c++));
+				GraphicsMap.drawRoundBettingCard(g, 1050, y, cards.get(c).last());
 			}
 			
 		}

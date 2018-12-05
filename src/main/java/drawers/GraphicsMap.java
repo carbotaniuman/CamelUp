@@ -30,19 +30,19 @@ public class GraphicsMap
 	}
 
 	
-	public static void drawRoundBettingCard( Graphics g, int x, int y, RoundBettingCard r, Color c)
+	public static void drawRoundBettingCard( Graphics g, int x, int y, RoundBettingCard r)
 	{
-		g.setColor(c);
-		g.fillRect(x, y, 200, 100);
+		g.setColor(r.getCamelColor());
+		g.fillRect(x, y, 200, 80);
 		g.setColor(Color.BLACK);
-		g.drawRect(x, y, 200, 100);
-		g.drawLine(x+100, y, x+100, y+100);
-		g.drawLine(x, y+50, x+100, y+50);
+		g.drawRect(x, y, 200, 80);
+		g.drawLine(x+100, y, x+100, y+80);
+		g.drawLine(x, y+40, x+100, y+40);
 		g.setFont(new Font("TimesRoman", Font.BOLD, 30));
-		g.drawString("1",x+48, y+48);
-		g.drawString("-1",x+48, y+98);
+		g.drawString("1",x+38, y+38);
+		g.drawString("-1",x+34, y+78);
 		g.setFont(new Font("TimesRoman", Font.BOLD, 60));
-		g.drawString(r.getPoints() + "", x+148, y+80);
+		g.drawString(r.getPoints() + "", x+148, y+70);
 	}
 	public static void drawRaceBettingCard(Graphics g, int x, int y, Color c, Player p)
 	{
