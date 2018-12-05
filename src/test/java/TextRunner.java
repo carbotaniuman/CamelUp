@@ -18,7 +18,6 @@ public class TextRunner
 		  	boolean runCorrect = false;
 		  	while(runCorrect == false) //make sure if a/b/c/d works, break out of if else and keep it false until a/b/c/d works
 		  	{
-		  		runCorrect = false;
 		  		out.print("A - place round bet; B - place race bet; C - roll die; D - place Desert Card : ");
 		  		String choice = scanner.nextLine();
 		  		if(choice.equalsIgnoreCase("a"))
@@ -32,7 +31,7 @@ public class TextRunner
 		 		}
 		 		else if(choice.equalsIgnoreCase("c"))
 		 		{
-		 			//make method that rolls die in GameState
+		 			game.moveCamel();
 		 		}
 		 		else if(choice.equalsIgnoreCase("d"))
 		 		{
@@ -40,7 +39,7 @@ public class TextRunner
 		 			boolean isOasis = scanner.nextBoolean();
 		 			out.print("Which tile? ");
 		 			int tileNum = scanner.nextInt();
-		 			
+		 			runCorrect = game.placeDesertCard(isOasis, tileNum);
 		 		}
 		  	}
 		}
