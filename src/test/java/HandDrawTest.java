@@ -29,9 +29,24 @@ public class HandDrawTest extends JPanel
 	public void paintComponent(Graphics g)
 	{
 		Player pl = new Player("Test", GameState.CAMELCOLORS);
+		//TESTS
+		pl.addRoundBet(new RoundBettingCard(Color.WHITE, 1));
+		//pl.addRoundBet(new RoundBettingCard(Color.WHITE, 3));
 		pl.addRoundBet(new RoundBettingCard(Color.WHITE, 5));
-		pl.addRoundBet(new RoundBettingCard(Color.WHITE, 5));
-		pl.addRoundBet(new RoundBettingCard(Color.WHITE, 5));
+		pl.addRoundBet(new RoundBettingCard(Color.YELLOW, 5));
+		//pl.addRoundBet(new RoundBettingCard(Color.YELLOW, 3));
+		pl.addRoundBet(new RoundBettingCard(Color.YELLOW, 1));
+		//pl.addRoundBet(new RoundBettingCard(Color.GREEN, 5));
+		pl.addRoundBet(new RoundBettingCard(Color.GREEN, 3));
+		pl.addRoundBet(new RoundBettingCard(Color.GREEN, 1));
+		//pl.addRoundBet(new RoundBettingCard(Color.ORANGE, 5));
+		//pl.addRoundBet(new RoundBettingCard(Color.ORANGE, 3));
+		pl.addRoundBet(new RoundBettingCard(Color.ORANGE, 1));
+		Color c = GameState.CAMELCOLORS.get(4);
+		pl.addRoundBet(new RoundBettingCard(c, 5));
+		pl.addRoundBet(new RoundBettingCard(c, 3));
+		pl.addRoundBet(new RoundBettingCard(c, 1));
+		
 		HandDrawer.drawHand(g, pl);
 		Map<Color,TreeSet<RoundBettingCard>> roundBets = new HashMap<Color, TreeSet<RoundBettingCard>>();
 		for (int i = 0; i < 5; i++) {

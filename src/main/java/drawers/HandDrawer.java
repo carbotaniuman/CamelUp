@@ -59,7 +59,7 @@ public class HandDrawer
 			}
 			else if(r.getCamelColor().equals((GameState.CAMELCOLORS.get(4))))//BLUE
 			{
-				GraphicsMap.drawRoundBettingCard(g, (1920-1000), 800+numBlu*100, r);
+				GraphicsMap.drawRoundBettingCard(g, (1920-1000), 800+numBlu*80, r);
 				numBlu++;
 			}
 		}
