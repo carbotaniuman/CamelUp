@@ -64,6 +64,7 @@ public class GameState {
 	}
 
 	public void moveCamel() {
+		curPlayer.setMoney(curPlayer.getMoney()+1);
 		Die d = pyramid.getDie((int) (Math.random() * pyramid.getNumNotRolledDice()));
 		int index = -1;
 		for (int i = 0; i < camels.size(); i++)
@@ -123,5 +124,9 @@ public class GameState {
 			pyramid.resetDice();
 			track.removeAllDesertCards();
 		}
+	}
+	public void endGame()
+	{
+		
 	}
 }
