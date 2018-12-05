@@ -63,8 +63,7 @@ public class GameState {
 		return pyramid;
 	}
 	
-	public Player getCurPlayer() 
-	{
+	public Player getCurPlayer() {
 		return curPlayer;
 	}
 
@@ -82,38 +81,29 @@ public class GameState {
 	}
 
 	public void placeWinBet(RaceBettingCard c) {
-		if(curPlayer.getRaceBets().contains(c))
-		{
-			winBets.add(c);
-			this.commitTurn();
-		}
+		winBets.add(c);
+		this.commitTurn();
 	}
 
 	public void placeLoseBet(RaceBettingCard c) {
-		if(curPlayer.getRaceBets().contains(c))
-		{
-			loseBets.add(c);
-			this.commitTurn();
-		}
+		loseBets.add(c);
+		this.commitTurn();
 	}
 
 	public void placeRoundBet(Color c) // **CHANGE**PREV: public void placeRoundBet(Player p)
 	{
-		if(roundBets.containsKey(c))
+		Player p = this.curPlayer;
+		int index = -1;
+		for (int i = 0; i < players.size(); i++) // change if no name for player
 		{
-			Player p = this.curPlayer;
-			int index = -1;
-			for (int i = 0; i < players.size(); i++) // change if no name for player
-			{
-				if (p.getName().equals(players.get(i).getName())) {
-					index = i;
-					break;
-				}
+			if (p.getName().equals(players.get(i).getName())) {
+				index = i;
+				break;
 			}
-			players.get(index).addRoundBet(roundBets.get(c).last());
-			
-			this.commitTurn();
 		}
+		players.get(index).addRoundBet(roundBets.get(c).last());
+		
+		this.commitTurn();
 	}
 
 	public boolean isCurPlayer(Player p) {
@@ -121,17 +111,12 @@ public class GameState {
 	}
 
 	public boolean placeDesertCard(boolean isOasis, Player p, int tileNum) {
-		if(!track.canPlaceCard(tileNum)) {
-			return false;
-		}
-		
 		p.setDesertCard(isOasis);
 		track.placeDesertCard(p.getDesertCard().get(), tileNum);
-		return true;
+		return false;
 	}
 
-	public void commitTurn() 
-	{
+	public void commitTurn() {
 		if (pyramid.areAllDiceRolled()) {
 			pyramid.resetDice();
 			track.removeAllDesertCards();
@@ -143,7 +128,6 @@ public class GameState {
 		for(Player p : players) {
 			p.removeDesertCard();
 		}
-		
 	}
 	
 	private void endGame()
