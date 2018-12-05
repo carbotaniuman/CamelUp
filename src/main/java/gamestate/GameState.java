@@ -106,17 +106,27 @@ public class GameState {
 		this.commitTurn();
 	}
 
-	public void placeWinBet(RaceBettingCard c) {
-		if (curPlayer.getRaceBets().contains(c)) {
-			winBets.add(c);
-			this.commitTurn();
+	public void placeWinBet(Color c) {
+		for(RaceBettingCard rbc : curPlayer.getRaceBets())
+		{
+			if(rbc.getColor().equals(c)) {
+				curPlayer.removeRaceBet(rbc);
+				winBets.add(rbc);
+				this.commitTurn();
+				break;
+			}
 		}
 	}
 
-	public void placeLoseBet(RaceBettingCard c) {
-		if (curPlayer.getRaceBets().contains(c)) {
-			loseBets.add(c);
-			this.commitTurn();
+	public void placeLoseBet(Color c) {
+		for(RaceBettingCard rbc : curPlayer.getRaceBets())
+		{
+			if(rbc.getColor().equals(c)) {
+				curPlayer.removeRaceBet(rbc);
+				loseBets.add(rbc);
+				this.commitTurn();
+				break;
+			}
 		}
 	}
 

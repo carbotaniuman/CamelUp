@@ -2,8 +2,8 @@ package gamestate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import immutable.Camel;
 import immutable.DesertCard;
@@ -26,7 +26,9 @@ public class Track {
 
 	public void moveCamel(Camel c, int rolled) // CHANGES dont need oldPos and newPos because we can pass in siply why											// was rolled for that camel
 	{
-		int oldPos = camelsPos.getOrDefault(c, -1);
+		int oldPos = camelsPos.get(c);
+		int cPosOnTile = tiles[oldPos].getCamelPos(c);
+		List<Camel> l = tiles[oldPos].getCamels().subList(0, cPosOnTile+1);
 		tiles[oldPos].removeCamel(c);
 		camelsPos.put(c, oldPos + rolled);
 		tiles[oldPos + rolled].addCamel(c);

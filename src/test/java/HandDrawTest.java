@@ -56,6 +56,6 @@ public class HandDrawTest extends JPanel
 			tree.add(new RoundBettingCard(GameState.CAMELCOLORS.get(i), 2));
 			roundBets.put(GameState.CAMELCOLORS.get(i), tree);
 		}
-		//BoardDrawer.drawRoundsBets(g, roundBets);
+		BoardDrawer.drawBoard(g, roundBets);
 	}
 }
