@@ -47,7 +47,7 @@ public class Track {
 		if(!tiles[tileNum - 1].getCamels().isEmpty()) 
 			return false;
 		
-		if(tileNum == 16)
+		if(tileNum == 15)
 			return true;
 		else return tiles[tileNum + 1].getCamels().isEmpty();
 	}

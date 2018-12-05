@@ -19,8 +19,8 @@ import immutable.RaceBettingCard;
 import immutable.RoundBettingCard;
 
 public class GameState {
-	public final static List<Color> CAMELCOLORS = ImmutableList.of(Color.WHITE, Color.ORANGE, Color.YELLOW,
-			Color.GREEN, new Color(51, 153,255));
+	public final static List<Color> CAMELCOLORS = ImmutableList.of(Color.WHITE, Color.ORANGE, Color.YELLOW, Color.GREEN,
+			new Color(51, 153, 255));
 	private final static String[] names = { "KarleEngels1820", "Evile Vinciente", "A Confucius", "Prince Zuko",
 			"Madame Bob Lee" };
 	private final ArrayList<Camel> camels;
@@ -30,9 +30,10 @@ public class GameState {
 	private final Map<Color, TreeSet<RoundBettingCard>> roundBets;
 	private final Track track;
 	private final Pyramid pyramid;
-	
+
 	private Player curPlayer;
 	private int curPlayerIndex;
+	private long turnIndex;
 
 	public GameState() {
 		camels = new ArrayList<Camel>();
@@ -62,45 +63,65 @@ public class GameState {
 	public Pyramid getPyramid() {
 		return pyramid;
 	}
-	
-	public Player getCurPlayer() 
-	{
-		return curPlayer;
+
+	public boolean isCurPlayer(Player p) {
+		return p == curPlayer;
 	}
 
+	public void commitTurn() {
+		if (pyramid.areAllDiceRolled()) {
+			pyramid.resetDice();
+			track.removeAllDesertCards();
+		}
+
+		curPlayerIndex = (curPlayerIndex + 1) % 5;
+		curPlayer = players.get(curPlayerIndex);
+
+		for (Player p : players) {
+			p.removeDesertCard();
+		}
+		turnIndex++;
+	}
+	
+	public long getTurnIndex() {
+		return turnIndex;
+	}
+
+	private void endGame() {
+
+	}
+
+	// Commit Turn Methods
 	public void moveCamel() {
-		curPlayer.setMoney(curPlayer.getMoney()+1);
+		curPlayer.setMoney(curPlayer.getMoney() + 1);
 		Die d = pyramid.getDie((int) (Math.random() * pyramid.getNumNotRolledDice()));
 		int index = -1;
-		for (int i = 0; i < camels.size(); i++)
+		for (int i = 0; i < camels.size(); i++) {
 			if (camels.get(i).getColor().equals(d.getColor())) {
 				index = i;
 				break;
 			}
+		}
 		track.moveCamel(camels.get(index), d.getLastRoll());
 		this.commitTurn();
 	}
 
 	public void placeWinBet(RaceBettingCard c) {
-		if(curPlayer.getRaceBets().contains(c))
-		{
+		if (curPlayer.getRaceBets().contains(c)) {
 			winBets.add(c);
 			this.commitTurn();
 		}
 	}
 
 	public void placeLoseBet(RaceBettingCard c) {
-		if(curPlayer.getRaceBets().contains(c))
-		{
+		if (curPlayer.getRaceBets().contains(c)) {
 			loseBets.add(c);
 			this.commitTurn();
 		}
 	}
 
-	public void placeRoundBet(Color c) // **CHANGE**PREV: public void placeRoundBet(Player p)
-	{
-		if(roundBets.containsKey(c))
-		{
+	public void placeRoundBet(Color c) {
+		if (roundBets.containsKey(c)) {
 			Player p = this.curPlayer;
 			int index = -1;
 			for (int i = 0; i < players.size(); i++) // change if no name for player
@@ -111,43 +132,15 @@ public class GameState {
 				}
 			}
 			players.get(index).addRoundBet(roundBets.get(c).last());
-			
+
 			this.commitTurn();
 		}
 	}
 
-	public boolean isCurPlayer(Player p) {
-		return p == curPlayer;
-	}
-
-	public boolean placeDesertCard(boolean isOasis, Player p, int tileNum) {
-		if(!track.canPlaceCard(tileNum)) {
-			return false;
+	public void placeDesertCard(boolean isOasis, int tileNum) {
+		if (track.canPlaceCard(tileNum)) {
+			curPlayer.setDesertCard(isOasis);
+			track.placeDesertCard(curPlayer.getDesertCard().get(), tileNum);
 		}
-		
-		p.setDesertCard(isOasis);
-		track.placeDesertCard(p.getDesertCard().get(), tileNum);
-		return true;
-	}
-
-	public void commitTurn() 
-	{
-		if (pyramid.areAllDiceRolled()) {
-			pyramid.resetDice();
-			track.removeAllDesertCards();
-		}
-		
-		curPlayerIndex = (curPlayerIndex + 1) % 5;
-		curPlayer = players.get(curPlayerIndex);
-		
-		for(Player p : players) {
-			p.removeDesertCard();
-		}
-		
-	}
-	
-	private void endGame()
-	{
-		
 	}
 }
