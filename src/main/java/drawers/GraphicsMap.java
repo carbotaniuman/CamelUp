@@ -18,7 +18,7 @@ public class GraphicsMap
 	{
 		g.setColor(Color.YELLOW);
 		g.fillRect(x, y, 180, 100);
-		g.setColor(Color.BLACK);
+		g.setColor(Color.BLACK); 
 		g.drawRect(x, y, 180, 100);
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("TimesRoman", Font.BOLD, 30));
