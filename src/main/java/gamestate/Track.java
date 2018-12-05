@@ -30,6 +30,7 @@ public class Track {
 		tiles[oldPos].removeCamel(c);
 		camelsPos.put(c, oldPos + rolled);
 		tiles[oldPos + rolled].addCamel(c);
+		if()
 		
 	}
 
