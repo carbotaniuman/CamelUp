@@ -140,10 +140,8 @@ public class GameState {
 		curPlayerIndex = (curPlayerIndex + 1) % 5;
 		curPlayer = players.get(curPlayerIndex);
 		
-		for(Player p : players) {
+		for(Player p : players)
 			p.removeDesertCard();
-		}
-		
 	}
 	
 	private void endGame()
