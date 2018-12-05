@@ -62,6 +62,10 @@ public class GameState {
 	public Pyramid getPyramid() {
 		return pyramid;
 	}
+	
+	public Player getCurPlayer() {
+		return curPlayer;
+	}
 
 	public void moveCamel() {
 		curPlayer.setMoney(curPlayer.getMoney()+1);
@@ -106,26 +110,26 @@ public class GameState {
 		return p == curPlayer;
 	}
 
-	public void placeDesertCard(boolean isOasis, int tileNum) {
-//		if (curPlayer.hasDesertCard()) {
-//			track.placeDesertCard(curPlayer, tileNum);
-//			curPlayer.removeDesertCard();
-//			this.commitTurn();
-//		}
+	public void placeDesertCard(boolean isOasis, Player p, int tileNum) {
+		p.setDesertCard(isOasis);
+		track.placeDesertCard(p.getDesertCard().get(), tileNum);
 	}
 
 	public void commitTurn() {
-		if (curPlayerIndex == players.size() - 1)
-			curPlayer = players.get(0);
-		else
-			curPlayer = players.get(curPlayerIndex + 1);
-
 		if (pyramid.areAllDiceRolled()) {
 			pyramid.resetDice();
 			track.removeAllDesertCards();
 		}
+		
+		curPlayerIndex = (curPlayerIndex + 1) % 5;
+		curPlayer = players.get(curPlayerIndex);
+		
+		for(Player p : players) {
+			p.removeDesertCard();
+		}
 	}
-	public void endGame()
+	
+	private void endGame()
 	{
 		
 	}
