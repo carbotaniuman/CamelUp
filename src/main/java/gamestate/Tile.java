@@ -9,7 +9,7 @@ import immutable.Camel;
 import immutable.DesertCard;
 
 public class Tile {
-	private final ArrayList<Camel> camels;
+	private final List<Camel> camels;
 	private Optional<DesertCard> trapCard;
 
 	public Tile() {
@@ -33,16 +33,20 @@ public class Tile {
 		camels.add(0, c);
 	}
 	
-	public void addCamels(ArrayList<Camel> c) {
+	public void addCamels(List<Camel> c) {
 		camels.addAll(c);
 	}
 	
-	public void addCamelsTop(ArrayList<Camel> c) {
+	public void addCamelsTop(List<Camel> c) {
 		camels.addAll(0, c);
 	}
 
 	public void removeCamel(Camel c) {
 		camels.remove(c);
+	}
+	
+	public void removeCamels(List<Camel> c) {
+		camels.removeAll(c);
 	}
 	
 	public List<Camel> getCamels() {

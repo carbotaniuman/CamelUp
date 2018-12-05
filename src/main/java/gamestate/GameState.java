@@ -36,14 +36,20 @@ public class GameState {
 
 	public GameState() {
 		camels = new ArrayList<Camel>();
-		for (int i = 0; i < CAMELCOLORS.size(); i++)
+		for (int i = 0; i < CAMELCOLORS.size(); i++) {
 			camels.add(new Camel(CAMELCOLORS.get(i)));
+		}
+		
 		players = new ArrayList<Player>();
-		for (int i = 0; i < 5; i++)
-			players.add(new Player(names[i], CAMELCOLORS));
+		
+		for (String name: names) {
+			players.add(new Player(name, CAMELCOLORS));
+		}
+		
 		winBets = new ArrayDeque<>();
 		loseBets = new ArrayDeque<>();
 		roundBets = new HashMap<>();
+		
 		for (int i = 0; i < 5; i++) {
 			TreeSet<RoundBettingCard> tree = new TreeSet<RoundBettingCard>();
 			tree.add(new RoundBettingCard(CAMELCOLORS.get(i), 5));
@@ -53,8 +59,7 @@ public class GameState {
 		}
 
 		track = new Track(16, camels);
-		curPlayer = players.get(0);
-		curPlayerIndex = 0;
+		curPlayer = players.get(curPlayerIndex);
 		pyramid = new Pyramid(CAMELCOLORS);
 	}
 
@@ -62,12 +67,12 @@ public class GameState {
 	public Pyramid getPyramid() {
 		return pyramid;
 	}
-
-	public boolean isCurPlayer(Player p) {
-		return p == curPlayer;
+	
+	public long getTurnIndex() {
+		return turnIndex;
 	}
-
-	public void commitTurn() {
+	
+	private void commitTurn() {
 		if (pyramid.areAllDiceRolled()) {
 			pyramid.resetDice();
 			track.removeAllDesertCards();
@@ -80,10 +85,6 @@ public class GameState {
 			p.removeDesertCard();
 		}
 		turnIndex++;
-	}
-	
-	public long getTurnIndex() {
-		return turnIndex;
 	}
 
 	private void endGame() {
