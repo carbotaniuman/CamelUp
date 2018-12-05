@@ -110,9 +110,14 @@ public class GameState {
 		return p == curPlayer;
 	}
 
-	public void placeDesertCard(boolean isOasis, Player p, int tileNum) {
+	public boolean placeDesertCard(boolean isOasis, Player p, int tileNum) {
+		if(!track.canPlaceCard(tileNum)) {
+			return false;
+		}
+		
 		p.setDesertCard(isOasis);
 		track.placeDesertCard(p.getDesertCard().get(), tileNum);
+		return true;
 	}
 
 	public void commitTurn() {

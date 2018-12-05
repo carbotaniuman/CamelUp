@@ -3,6 +3,7 @@ package gamestate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import immutable.Camel;
 import immutable.DesertCard;
@@ -34,6 +35,21 @@ public class Track {
 
 	public int getCamelPos(Camel c) {
 		return camelsPos.getOrDefault(c, -1);
+	}
+	
+	public boolean canPlaceCard(int tileNum) {
+		if(tileNum == 0) 
+			return false;
+		
+		if(!tiles[tileNum].getCamels().isEmpty()) 
+			return false;
+		
+		if(!tiles[tileNum - 1].getCamels().isEmpty()) 
+			return false;
+		
+		if(tileNum == 16)
+			return true;
+		else return tiles[tileNum + 1].getCamels().isEmpty();
 	}
 
 	public void placeDesertCard(DesertCard d, int tileNum) {
