@@ -117,7 +117,7 @@ public class GameState {
 		}
 	}
 
-	public void placeWinBet(Color c) {
+	public void placeLoseBet(Color c) {
 		for(RaceBettingCard rbc : curPlayer.getRaceBets())
 		{
 			if(rbc.getColor().equals(c)) {
