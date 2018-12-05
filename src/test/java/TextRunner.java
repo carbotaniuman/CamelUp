@@ -15,13 +15,15 @@ public class TextRunner
 		GameState game = new GameState();
 		while(true)
 		{
-		  	boolean runCorrect = false;
-		  	while(runCorrect == false) //make sure if a/b/c/d works, break out of if else and keep it false until a/b/c/d works
-		  	{
+		  	long turnIndex = game.getTurnIndex();
+		  	do {
 		  		out.print("A - place round bet; B - place race bet; C - roll die; D - place Desert Card : ");
 		  		String choice = scanner.nextLine();
 		  		if(choice.equalsIgnoreCase("a"))
 		  		{
+		  			out.print("What color camel are you betting on? ");
+		  			Color c = getColor(scanner.nextLine());
+		  			runCorrect = game.placeRoundBet(c);
 		  			//figure out how to call player's cards, pull/remove one of color,make sure it hasn't been used, 
 		  			//remove that number from card set, throw false if it can't get removed cause none left (make boolean method)
 		  		}
@@ -40,9 +42,9 @@ public class TextRunner
 		 			out.print("Which tile? ");
 		 			int tileNum = scanner.nextInt();
 		 			Player p = game.getCurPlayer();
-		 			runCorrect = game.placeDesertCard(isOasis, p, tileNum);
+		 			game.placeDesertCard(isOasis, p, tileNum);
 		 		}
-		  	}
+		  	} while(turnIndex != game.getTurnIndex());
 		}
 	}
 	
