@@ -21,6 +21,9 @@ public class TextRunner
 		  		String choice = scanner.nextLine();
 		  		if(choice.equalsIgnoreCase("a"))
 		  		{
+		  			out.print("What color camel are you betting on? ");
+		  			Color c = getColor(scanner.nextLine());
+		  			runCorrect = game.placeRoundBet(c);
 		  			//figure out how to call player's cards, pull/remove one of color,make sure it hasn't been used, 
 		  			//remove that number from card set, throw false if it can't get removed cause none left (make boolean method)
 		  		}
