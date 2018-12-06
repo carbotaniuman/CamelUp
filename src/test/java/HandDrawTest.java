@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeSet;
@@ -47,7 +48,13 @@ public class HandDrawTest extends JPanel
 		pl.addRoundBet(new RoundBettingCard(c, 3));
 		pl.addRoundBet(new RoundBettingCard(c, 1));
 		pl.setMoney(34);
-		HandDrawer.drawHand(g, pl);
+		ArrayList<Player> plyrs = new ArrayList<Player>();
+		for(int i = 0; i < 5; i++)
+		{
+			Player p = new Player(GameState.names[i], GameState.CAMELCOLORS);
+			plyrs.add(p);
+		}
+		HandDrawer.drawHand(g, pl, plyrs);
 		Map<Color,TreeSet<RoundBettingCard>> roundBets = new HashMap<Color, TreeSet<RoundBettingCard>>();
 		for (int i = 0; i < 5; i++) {
 			TreeSet<RoundBettingCard> tree = new TreeSet<RoundBettingCard>();
@@ -56,6 +63,7 @@ public class HandDrawTest extends JPanel
 			tree.add(new RoundBettingCard(GameState.CAMELCOLORS.get(i), 2));
 			roundBets.put(GameState.CAMELCOLORS.get(i), tree);
 		}
+		
 		BoardDrawer.drawBoard(g, roundBets);
 	}
 }

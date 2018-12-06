@@ -20,7 +20,7 @@ import immutable.RoundBettingCard;
 public class GameState {
 	public final static List<Color> CAMELCOLORS = ImmutableList.of(Color.WHITE, Color.ORANGE, Color.YELLOW, Color.GREEN,
 			new Color(51, 153, 255));
-	private final static String[] names = { "KarleEngels1820", "Evile Vinciente", "A Confucius", "Prince Zuko",
+	public final static String[] names = { "KarleEngels1820", "Evile Vinciente", "A Confucius", "Prince Zuko",
 			"Madame Bob Lee" };
 	private final ArrayList<Camel> camels;
 	private final ArrayList<Player> players;
