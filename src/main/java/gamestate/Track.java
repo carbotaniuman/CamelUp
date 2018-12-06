@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 import immutable.Camel;
 import immutable.DesertCard;
@@ -12,48 +13,77 @@ public class Track {
 	private final Tile[] tiles;
 	private final Map<Camel, Integer> camelsPos;
 
-	public Track(int size, ArrayList<Camel> camels) // CHANGES passed in arraylist of camels to intilize in the
-	{	
+	public Track(int size, ArrayList<Camel> camels) {
 		tiles = new Tile[size];
-		for(int i = 0; i < tiles.length; i++) {
+		for (int i = 0; i < tiles.length; i++) {
 			tiles[i] = new Tile();
 		}
-		
+
 		camelsPos = new HashMap<Camel, Integer>();
-		for (int i = 0; i < camels.size(); i++)
-			camelsPos.put(camels.get(i), 0);
+		for (Camel c : camels) {
+			int startPos = ThreadLocalRandom.current().nextInt(1, 4);
+			camelsPos.put(c, startPos);
+			tiles[startPos].addCamelBot(c);
+		}
 	}
 
-	public void moveCamel(Camel c, int rolled) // CHANGES dont need oldPos and newPos because we can pass in siply why											// was rolled for that camel
-	{
+	public void moveCamel(Camel c, int rolled) {
 		int oldPos = camelsPos.get(c);
 		int cPosOnTile = tiles[oldPos].getCamelPos(c);
-		List<Camel> list = tiles[oldPos].getCamels().subList(0, cPosOnTile+1);
-		tiles[oldPos].removeCamels(list);
-		tiles[(oldPos + rolled) % 16].addCamels(list);
-		
-		for(Camel camel : list) {
-			camelsPos.put(camel, oldPos + rolled);
+		List<Camel> list = tiles[oldPos].getCamels().subList(0, cPosOnTile + 1);
+
+		Tile newTile = tiles[(oldPos + rolled) % 16];
+
+		if (newTile.getDesertCard().isPresent()) {
+			Player trapper = newTile.getDesertCard().get().getPlayer();
+			trapper.setMoney(trapper.getMoney() + 1);
+			
+			if (newTile.getDesertCard().get().getMoveNum() == 1) {
+				newTile = tiles[(oldPos + rolled + 1) % 16];
+
+				newTile.addCamelsTop(list);
+
+				for (Camel camel : list) {
+					camelsPos.put(camel, oldPos + rolled + 1);
+				}
+			} else {
+				newTile = tiles[(oldPos + rolled - 1) % 16];
+
+				newTile.addCamelsBot(list);
+
+				for (Camel camel : list) {
+					camelsPos.put(camel, oldPos + rolled - 1);
+				}
+			}
+		} else {
+			newTile.addCamelsTop(list);
+
+			for (Camel camel : list) {
+				camelsPos.put(camel, oldPos + rolled);
+			}
 		}
+
+		tiles[oldPos].removeCamels(list); // Must be last command
 	}
 
 	public int getCamelPos(Camel c) {
 		return camelsPos.getOrDefault(c, -1);
 	}
-	
+
 	public boolean canPlaceCard(int tileNum) {
-		if(tileNum <= 0) 
+		if (tileNum <= 0)
 			return false;
-		
-		if(!tiles[tileNum].getCamels().isEmpty()) 
+
+		if (!tiles[tileNum].getCamels().isEmpty() || tiles[tileNum].getDesertCard().isPresent())
 			return false;
-		
-		if(!tiles[tileNum - 1].getCamels().isEmpty()) 
+
+		if (tiles[tileNum - 1].getDesertCard().isPresent())
 			return false;
-		
-		if(tileNum == 15)
+
+		if (tileNum == 15)
 			return true;
-		else return tiles[tileNum + 1].getCamels().isEmpty();
+		
+		return !tiles[tileNum + 1].getDesertCard().isPresent();
 	}
 
 	public void placeDesertCard(DesertCard d, int tileNum) {
@@ -63,5 +93,13 @@ public class Track {
 	public void removeAllDesertCards() {
 		for (int i = 0; i < tiles.length; i++)
 			tiles[i].removeDesertCard();
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder("Track:\n");
+		for (int i = 0; i < tiles.length; i++) {
+			sb.append(i + " " + tiles[i] + "\n");
+		}
+		return sb.toString();
 	}
 }

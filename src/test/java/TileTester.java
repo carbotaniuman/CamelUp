@@ -76,14 +76,11 @@ public class TileTester {
 	public void camelHoldTest() {
 		assertTrue(tile.getCamels().isEmpty());
 
-		for(Camel c : mockCamels) {
-			tile.addCamel(c);
-		}
+		tile.addCamelsTop(mockCamels);
+		
 		assertEquals(tile.getCamels().size(), mockCamels.size());
 
-		for(Camel c : mockCamels) {
-			tile.removeCamel(c);
-		}
+		tile.removeCamels(mockCamels);
 		
 		assertTrue(tile.getCamels().isEmpty());
 		

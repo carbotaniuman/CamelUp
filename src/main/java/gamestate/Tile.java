@@ -18,27 +18,26 @@ public class Tile {
 		trapCard = Optional.empty();
 	}
 
-	public boolean addDesertCard(DesertCard d) {
+	public void addDesertCard(DesertCard d) {
 		if (trapCard.isPresent())
 			throw new IllegalStateException("DesertCard exists!");
 		trapCard = Optional.of(d);
-		return true;
-	}
-
-	public void addCamel(Camel c) {
-		camels.add(c);
 	}
 	
 	public void addCamelTop(Camel c) {
 		camels.add(0, c);
 	}
-	
-	public void addCamels(List<Camel> c) {
-		camels.addAll(c);
+
+	public void addCamelBot(Camel c) {
+		camels.add(c);
 	}
 	
 	public void addCamelsTop(List<Camel> c) {
 		camels.addAll(0, c);
+	}
+	
+	public void addCamelsBot(List<Camel> c) {
+		camels.addAll(c);
 	}
 
 	public void removeCamel(Camel c) {
@@ -64,5 +63,13 @@ public class Tile {
 	//-1 no exist, else 0 is top of stack
 	public int getCamelPos(Camel c) {
 		return camels.indexOf(c);
+	}
+	
+	public String toString() {
+		if(trapCard.isPresent()) {
+			return "[" + trapCard.get().toString() + "]";
+		} else {
+			return camels.toString();
+		}
 	}
 }

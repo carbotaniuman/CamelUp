@@ -3,6 +3,8 @@ package immutable;
 import java.awt.Color;
 import java.util.Objects;
 
+import gamestate.GameState;
+
 public class Camel {
 	private final Color color;
 
@@ -35,6 +37,6 @@ public class Camel {
 	// toString
 	@Override
 	public String toString() {
-		return "Camel: " + color;
+		return "Camel: " + GameState.COLORBIMAP.inverse().get(color);
 	}
 }

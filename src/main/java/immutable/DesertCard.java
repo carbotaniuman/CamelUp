@@ -25,4 +25,8 @@ public class DesertCard {
 	public Player getPlayer() {
 		return p;
 	}
+	
+	public String toString() {
+		return "DesertCard: " + p.getName() + " " + (isOasis ? "1" : "-1");
+	}
 }

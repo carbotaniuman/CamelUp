@@ -171,9 +171,12 @@ public class GameState {
 	}
 
 	public void placeDesertCard(boolean isOasis, int tileNum) {
+		System.out.println(tileNum + " " + track.canPlaceCard(tileNum));
 		if (track.canPlaceCard(tileNum)) {
 			curPlayer.setDesertCard(isOasis);
 			track.placeDesertCard(curPlayer.getDesertCard().get(), tileNum);
+			
+			this.commitTurn();
 		}
 	}
 
