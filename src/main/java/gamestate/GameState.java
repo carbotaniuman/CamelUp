@@ -112,6 +112,10 @@ public class GameState {
 		}
 	}
 
+	public Player getCurPlayer()
+	{
+		return curPlayer;
+	}
 	public void placeLoseBet(RaceBettingCard c) {
 		if (curPlayer.getRaceBets().contains(c)) {
 			loseBets.add(c);
@@ -141,5 +145,9 @@ public class GameState {
 			curPlayer.setDesertCard(isOasis);
 			track.placeDesertCard(curPlayer.getDesertCard().get(), tileNum);
 		}
+	}
+
+	public boolean isGameEnded() {
+		return false;
 	}
 }

@@ -16,6 +16,7 @@ public class TextRunner
 		while(true)
 		{
 		  	long turnIndex = game.getTurnIndex();
+		  	out.println(game.getCurPlayer().getName() + "\n");
 		  	do {
 		  		out.print("A - place round bet; B - place race bet; C - roll die; D - place Desert Card : ");
 		  		String choice = scanner.nextLine();
@@ -23,13 +24,24 @@ public class TextRunner
 		  		{
 		  			out.print("What color camel are you betting on? ");
 		  			Color c = getColor(scanner.nextLine());
-		  			runCorrect = game.placeRoundBet(c);
+		  			game.placeRoundBet(c);
 		  			//figure out how to call player's cards, pull/remove one of color,make sure it hasn't been used, 
 		  			//remove that number from card set, throw false if it can't get removed cause none left (make boolean method)
 		  		}
 		 		else if(choice.equalsIgnoreCase("b"))
 		 		{
-		 			//same thing with place round bet
+		 			out.print("Win or lose bet? ");
+		 			String bet = scanner.nextLine();
+		 			out.print("Enter color of bet: ");
+		 			Color c = getColor(scanner.nextLine());
+		 			if(bet.equalsIgnoreCase("win"))
+		 			{
+		 				game.placeWinBet(c);
+		 			}
+		 			else if(bet.equalsIgnoreCase("lose"))
+		 			{
+		 				game.placeLoseBet(c);
+		 			}	
 		 		}
 		 		else if(choice.equalsIgnoreCase("c"))
 		 		{
@@ -41,10 +53,14 @@ public class TextRunner
 		 			boolean isOasis = scanner.nextBoolean();
 		 			out.print("Which tile? ");
 		 			int tileNum = scanner.nextInt();
-		 			Player p = game.getCurPlayer();
-		 			game.placeDesertCard(isOasis, p, tileNum);
+		 			game.placeDesertCard(isOasis, tileNum);
 		 		}
 		  	} while(turnIndex != game.getTurnIndex());
+		  	out.println();
+		  	if(game.isGameEnded())
+		  	{
+		  		break;
+		  	}
 		}
 	}
 	
