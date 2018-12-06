@@ -43,7 +43,7 @@ public class PyramidTester {
 		assertEquals(pyramid.getNumNotRolledDice(), CAMELCOLORS.size());
 		assertFalse(pyramid.areAllDiceRolled());
 		while(!pyramid.areAllDiceRolled()) {
-			pyramid.getDie(ThreadLocalRandom.current().nextInt(pyramid.getNumNotRolledDice()));
+			pyramid.getRandomDie();
 		}
 		assertEquals(pyramid.getNumNotRolledDice(), 0);
 		assertTrue(pyramid.areAllDiceRolled());

@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.TreeSet;
 
+import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableList;
 
 import game.Die;
@@ -18,10 +19,14 @@ import immutable.RaceBettingCard;
 import immutable.RoundBettingCard;
 
 public class GameState {
-	public final static List<Color> CAMELCOLORS = ImmutableList.of(Color.WHITE, Color.ORANGE, Color.YELLOW, Color.GREEN,
-			new Color(51, 153, 255));
+	
 	public final static String[] names = { "KarleEngels1820", "Evile Vinciente", "A Confucius", "Prince Zuko",
 			"Madame Bob Lee" };
+
+	public final static ImmutableBiMap<String, Color> COLORBIMAP = ImmutableBiMap.of("blue", new Color(51, 153, 255),
+			"green", Color.green, "yellow", Color.yellow, "white", Color.white, "orange", Color.orange);
+	public final static List<Color> CAMELCOLORS = ImmutableList.copyOf(COLORBIMAP.values());
+	
 	private final ArrayList<Camel> camels;
 	private final ArrayList<Player> players;
 	private final Queue<RaceBettingCard> winBets;
@@ -41,15 +46,15 @@ public class GameState {
 		}
 		
 		players = new ArrayList<Player>();
-		
-		for (String name: names) {
+
+		for (String name : names) {
 			players.add(new Player(name, CAMELCOLORS));
 		}
-		
+
 		winBets = new ArrayDeque<>();
 		loseBets = new ArrayDeque<>();
 		roundBets = new HashMap<>();
-		
+
 		for (int i = 0; i < 5; i++) {
 			TreeSet<RoundBettingCard> tree = new TreeSet<RoundBettingCard>();
 			tree.add(new RoundBettingCard(CAMELCOLORS.get(i), 5));
@@ -67,19 +72,23 @@ public class GameState {
 	public Pyramid getPyramid() {
 		return pyramid;
 	}
-	
-	public Queue<RaceBettingCard> getWinBets(){
+
+	public Track getTrack() {
+		return track;
+	}
+
+	public Queue<RaceBettingCard> getWinBets() {
 		return winBets;
 	}
-	
-	public Queue<RaceBettingCard> getLoseBets(){
+
+	public Queue<RaceBettingCard> getLoseBets() {
 		return loseBets;
 	}
-	
+
 	public long getTurnIndex() {
 		return turnIndex;
 	}
-	
+
 	public Player getCurPlayer() {
 		return curPlayer;
 	}
@@ -92,25 +101,25 @@ public class GameState {
 		if (pyramid.areAllDiceRolled()) {
 			pyramid.resetDice();
 			track.removeAllDesertCards();
+			for (Player p : players) {
+				p.removeDesertCard();
+			}
 		}
 
 		curPlayerIndex = (curPlayerIndex + 1) % 5;
 		curPlayer = players.get(curPlayerIndex);
 
-		for (Player p : players) {
-			p.removeDesertCard();
-		}
 		turnIndex++;
 	}
 
-	private void endGame() {
+	private void checkAndEndGame() {
 
 	}
 
 	// Commit Turn Methods
 	public void moveCamel() {
 		curPlayer.setMoney(curPlayer.getMoney() + 1);
-		Die d = pyramid.getDie((int) (Math.random() * pyramid.getNumNotRolledDice()));
+		Die d = pyramid.getRandomDie();
 		int index = -1;
 		for (int i = 0; i < camels.size(); i++) {
 			if (camels.get(i).getColor().equals(d.getColor())) {
@@ -123,9 +132,8 @@ public class GameState {
 	}
 
 	public void placeWinBet(Color c) {
-		for(RaceBettingCard rbc : curPlayer.getRaceBets())
-		{
-			if(rbc.getColor().equals(c)) {
+		for (RaceBettingCard rbc : curPlayer.getRaceBets()) {
+			if (rbc.getColor().equals(c)) {
 				curPlayer.removeRaceBet(rbc);
 				winBets.add(rbc);
 				this.commitTurn();
@@ -135,9 +143,8 @@ public class GameState {
 	}
 
 	public void placeLoseBet(Color c) {
-		for(RaceBettingCard rbc : curPlayer.getRaceBets())
-		{
-			if(rbc.getColor().equals(c)) {
+		for (RaceBettingCard rbc : curPlayer.getRaceBets()) {
+			if (rbc.getColor().equals(c)) {
 				curPlayer.removeRaceBet(rbc);
 				loseBets.add(rbc);
 				this.commitTurn();
@@ -147,7 +154,7 @@ public class GameState {
 	}
 
 	public void placeRoundBet(Color c) {
-		if (roundBets.containsKey(c)) {
+		if (roundBets.containsKey(c) && !roundBets.get(c).isEmpty()) {
 			Player p = this.curPlayer;
 			int index = -1;
 			for (int i = 0; i < players.size(); i++) // change if no name for player

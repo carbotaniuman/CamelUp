@@ -28,11 +28,13 @@ public class Track {
 	{
 		int oldPos = camelsPos.get(c);
 		int cPosOnTile = tiles[oldPos].getCamelPos(c);
-		List<Camel> l = tiles[oldPos].getCamels().subList(0, cPosOnTile+1);
-		tiles[oldPos].removeCamel(c);
-		camelsPos.put(c, oldPos + rolled);
-		tiles[oldPos + rolled].addCamel(c);
+		List<Camel> list = tiles[oldPos].getCamels().subList(0, cPosOnTile+1);
+		tiles[oldPos].removeCamels(list);
+		tiles[(oldPos + rolled) % 16].addCamels(list);
 		
+		for(Camel camel : list) {
+			camelsPos.put(camel, oldPos + rolled);
+		}
 	}
 
 	public int getCamelPos(Camel c) {
@@ -40,7 +42,7 @@ public class Track {
 	}
 	
 	public boolean canPlaceCard(int tileNum) {
-		if(tileNum == 0) 
+		if(tileNum <= 0) 
 			return false;
 		
 		if(!tiles[tileNum].getCamels().isEmpty()) 

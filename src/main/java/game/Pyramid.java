@@ -3,10 +3,13 @@ package game;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Pyramid {
 	private final ArrayList<Die> notRolledDice;
 	private final ArrayList<Die> rolledDice;
+	
+	private Die lastDie;
 
 	public Pyramid(List<Color> colors) {
 		if(colors.size() < 1) {
@@ -19,11 +22,15 @@ public class Pyramid {
 		resetDice();
 	}
 
-	public Die getDie(int i) {
-		Die ret = notRolledDice.get(i);
-		rolledDice.add(notRolledDice.get(i));
-		notRolledDice.remove(i);
-		return ret;
+	public Die getRandomDie() {
+		lastDie = notRolledDice.get(ThreadLocalRandom.current().nextInt(notRolledDice.size()));
+		rolledDice.add(lastDie);
+		notRolledDice.remove(lastDie);
+		return lastDie;
+	}
+	
+	public Die getLastDie() {
+		return lastDie;
 	}
 
 	public boolean areAllDiceRolled() {
