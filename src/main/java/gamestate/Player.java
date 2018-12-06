@@ -29,11 +29,6 @@ public class Player {
 		name = n;
 	}
 
-	// hasDesertCard
-	public boolean hasDesertCard() {
-		return op.isPresent();
-	}
-
 	public void removeDesertCard() {
 		op = Optional.empty();
 	}

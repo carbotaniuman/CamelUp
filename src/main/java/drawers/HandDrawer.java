@@ -25,7 +25,7 @@ public class HandDrawer
 		g.setColor(Color.BLACK); 
 		g.drawRect(0, 800, 1920, 280);
 		//DesertCard
-		if(!p.hasDesertCard())
+		if(!p.getDesertCard().isPresent())
 			GraphicsMap.drawDesertCard(g, 0, 800, "+/-");
 		//RaceBettingCards
 		List<RaceBettingCard> cards = p.getRaceBets();

@@ -43,6 +43,8 @@ public class PlayerTester {
 
 	@Test
 	public void desertCardTest() {
-		player.getDesertCard();
+		assertFalse(player.getDesertCard().isPresent());
+		player.setDesertCard(true);
+		assertTrue(player.getDesertCard().isPresent());
 	}
 }
