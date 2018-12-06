@@ -16,9 +16,9 @@ public class TextRunner
 		while(true)
 		{
 		  	long turnIndex = game.getTurnIndex();
-		  	out.println(game.getCurPlayer().getName() + "\n");
+		  	out.println(game.getCurPlayer().getName());
 		  	do {
-		  		out.print("A - place round bet; B - place race bet; C - roll die; D - place Desert Card : ");
+		  		out.print("\nA - place round bet; B - place race bet; C - roll die; D - place Desert Card : ");
 		  		String choice = scanner.nextLine();
 		  		if(choice.equalsIgnoreCase("a"))
 		  		{
