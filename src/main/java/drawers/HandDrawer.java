@@ -62,11 +62,17 @@ public class HandDrawer
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("TimesRoman", Font.ITALIC, 35));
 		g.drawString("Player data", 770, 830);
+		g.setFont(new Font("Monospaced", Font.BOLD, 15));
+		String st = String.format("%-15s %1s %10s %6s", "Name", "RaceBets", "RoundBets", "Money");
+		g.drawString(st, 770, 830+20*(1));
 		for(int i = 0; i < players.size(); i++)
 		{
 			Player pl = players.get(i);
-			g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-			g.drawString(pl.getName() + " has " + pl.getRaceBets().size() + " RaceBettingCards", 770, 830+20*(i+1));
+			System.out.println(pl.getName().length());
+			g.setFont(new Font("Monospaced", Font.BOLD, 15));
+			String minS = String.format("10s", 50);
+			String s = String.format("%-15s %1d %9d %10d.00E£", pl.getName(), pl.getRaceBets().size(), 50, pl.getMoney());
+			g.drawString(s, 770, 830+20*(i+2));
 		}
 	}
 }
