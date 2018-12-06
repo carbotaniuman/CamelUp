@@ -78,7 +78,10 @@ public class Player {
 	public void clearRoundBets() {
 		roundBets.clear();
 	}
-
+	public void removeRaceBet(RaceBettingCard r)
+	{
+		raceBets.remove(r);
+	}
 	// get playerName **SUBJECT TO CHANGE**
 	public String getName() {
 		return name;

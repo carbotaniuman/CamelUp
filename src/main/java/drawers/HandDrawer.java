@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 import java.util.List;
 
 import gamestate.GameState;
@@ -16,7 +17,7 @@ public class HandDrawer
 {
 	//size of screen: 1920x1080
 	//size of hand: 1920x280
-	public static void drawHand(Graphics g, Player p) 
+	public static void drawHand(Graphics g, Player p, ArrayList<Player> players) 
 	{
 		//WholeHand
 		g.setColor(Color.ORANGE);
@@ -57,5 +58,15 @@ public class HandDrawer
 		int xPos = (500 - (int) textSize.getWidth()) / 2;
 		int yPos = (100 - (int) textSize.getHeight()) / 2 + fm.getAscent();
 		g.drawString(p.getName()+"'s Balance = "+p.getMoney() + ".00E£", 250+xPos, 800+yPos);
+		//Players Data
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("TimesRoman", Font.ITALIC, 35));
+		g.drawString("Player data", 770, 830);
+		for(int i = 0; i < players.size(); i++)
+		{
+			Player pl = players.get(i);
+			g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+			g.drawString(pl.getName() + " has " + pl.getRaceBets().size() + " RaceBettingCards", 770, 830+20*(i+1));
+		}
 	}
 }
