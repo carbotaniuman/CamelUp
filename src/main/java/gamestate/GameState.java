@@ -68,6 +68,14 @@ public class GameState {
 		return pyramid;
 	}
 	
+	public Queue<RaceBettingCard> getWinBets(){
+		return winBets;
+	}
+	
+	public Queue<RaceBettingCard> getLoseBets(){
+		return loseBets;
+	}
+	
 	public long getTurnIndex() {
 		return turnIndex;
 	}
