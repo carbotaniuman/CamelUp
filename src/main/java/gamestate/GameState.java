@@ -80,6 +80,14 @@ public class GameState {
 		return turnIndex;
 	}
 	
+	public Player getCurPlayer() {
+		return curPlayer;
+	}
+
+	public void setCurPlayer(Player curPlayer) {
+		this.curPlayer = curPlayer;
+	}
+
 	private void commitTurn() {
 		if (pyramid.areAllDiceRolled()) {
 			pyramid.resetDice();
