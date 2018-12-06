@@ -56,6 +56,6 @@ public class HandDrawer
 		Rectangle2D textSize = fm.getStringBounds(p.getName()+"'s Balance = "+p.getMoney() + ".00E£", g);
 		int xPos = (500 - (int) textSize.getWidth()) / 2;
 		int yPos = (100 - (int) textSize.getHeight()) / 2 + fm.getAscent();
-		//g.drawString(p.getName()+"'s Balance = "+p.getMoney() + ".00E£", 250+xPos, 800+yPos);
+		g.drawString(p.getName()+"'s Balance = "+p.getMoney() + ".00E£", 250+xPos, 800+yPos);
 	}
 }
