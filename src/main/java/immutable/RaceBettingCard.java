@@ -2,6 +2,7 @@ package immutable;
 
 import java.awt.Color;
 
+import gamestate.GameState;
 import gamestate.Player;
 
 public class RaceBettingCard {
@@ -20,5 +21,8 @@ public class RaceBettingCard {
 	public Player getPlayer() {
 		return myPlayer;
 	}
-
+	
+	public String toString() {
+		return "RaceBettingCard: " + myPlayer.getName() + " " + GameState.COLORBIMAP.inverse().get(color);
+	}
 }
