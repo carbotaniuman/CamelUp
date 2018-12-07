@@ -30,7 +30,7 @@ public class HandDrawTest extends JPanel
 	@Override
 	public void paintComponent(Graphics g)
 	{
-		Player pl = new Player("Madame Bob Lee", GameState.CAMELCOLORS);
+		Player pl = new Player("Prince Zuko", GameState.CAMELCOLORS);
 		//TESTS
 		pl.addRoundBet(new RoundBettingCard(Color.WHITE, 1));
 		//pl.addRoundBet(new RoundBettingCard(Color.WHITE, 3));

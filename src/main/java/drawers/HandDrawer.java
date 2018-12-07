@@ -49,10 +49,10 @@ public class HandDrawer
 		}
 		//Balance
 		g.setColor(new Color(51, 204, 255));
-		g.fillRoundRect(250, 800, 500, 100, 30, 30);
+		g.fillRoundRect(250, 825, 500, 50, 30, 30);
 		g.setColor(Color.BLACK);
-		g.drawRoundRect(250, 800, 500, 100, 30, 30);
-		g.setFont(new Font("Serif", Font.BOLD, 30));
+		g.drawRoundRect(250, 825, 500, 50, 30, 30);
+		g.setFont(new Font("Serif", Font.ITALIC, 30));
 		FontMetrics fm = g.getFontMetrics();
 		Rectangle2D textSize = fm.getStringBounds(p.getName()+"'s Balance = "+p.getMoney() + ".00E£", g);
 		int xPos = (500 - (int) textSize.getWidth()) / 2;
