@@ -31,7 +31,7 @@ public class BoardDrawer {
 		{
 			if ( cards.get(GameState.CAMELCOLORS.get(c)) != null)
 			{
-				GraphicsMap.drawRoundBettingCard(g, 1050, y, cards.get(GameState.CAMELCOLORS.get(c++)).first());
+				CardDrawer.drawRoundBettingCard(g, 1050, y, cards.get(GameState.CAMELCOLORS.get(c++)).first());
 			}
 		}
 		//draws the buttons for the raceBettingCards
@@ -64,7 +64,7 @@ public class BoardDrawer {
 		for ( int x = 1760; x >= 1400; x -= 90)
 		{
 			if ( !cards.isEmpty())
-				GraphicsMap.drawRaceBettingCard(g, x, 130, cards.poll().getColor(), cards.poll().getPlayer());
+				CardDrawer.drawRaceBettingCard(g, x, 130, cards.poll().getColor(), cards.poll().getPlayer());
 		}
 	}
 	
@@ -73,7 +73,7 @@ public class BoardDrawer {
 		for ( int x = 1760; x >= 1400; x -= 90)
 		{
 			if ( !cards.isEmpty())
-				GraphicsMap.drawRaceBettingCard(g, x, 530, cards.poll().getColor(), cards.poll().getPlayer());
+				CardDrawer.drawRaceBettingCard(g, x, 530, cards.poll().getColor(), cards.poll().getPlayer());
 		}
 	}
 	
