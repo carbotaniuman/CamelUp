@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.Collection;
 import java.util.Scanner;
 
 import game.Die;
@@ -10,12 +11,15 @@ public class TextRunner {
 		GameState game = new GameState();
 		while (!game.isGameEnded()) {
 			long turnIndex = game.getTurnIndex();
-			System.out.println(game.getTrack() + "\n");
+			System.out.println("Track:\n" + game.getTrack() + "\n");
+			System.out.println("Played Win Bets:\n" + game.getWinBets() + "\n");
+			System.out.println("Played Lose Bets:\n" + game.getLoseBets() +  "\n");
+			System.out.println("Players:\n" + collectionToString(game.getAllPlayers()));
 			System.out.println(game.getCurPlayer().getName() + "'s Turn:");
 			do {
 				System.out.println("A: Place Round Bet\tB: Place Race Bet\tC: Roll Die\tD: Place Desert Card");
 				System.out.print("Input: ");
-				String choice = scanner.nextLine();
+				String choice = scanner.nextLine().trim();
 				if (choice.equalsIgnoreCase("a")) {
 					System.out.print("What color camel are you betting on? ");
 					Color c = GameState.COLORBIMAP.get(scanner.nextLine().toLowerCase());
@@ -43,8 +47,8 @@ public class TextRunner {
 					scanner.nextLine();
 					game.placeDesertCard(isOasis, tileNum);
 				}
-				
-				if(turnIndex == game.getTurnIndex()){
+
+				if (turnIndex == game.getTurnIndex()) {
 					System.out.println("Invalid Input!");
 				}
 			} while (turnIndex == game.getTurnIndex());
@@ -54,5 +58,15 @@ public class TextRunner {
 
 	public static String toUpperCase(String s) {
 		return s.substring(0, 1).toUpperCase() + s.substring(1);
+	}
+
+	public static String collectionToString(Collection<?> c) {
+		StringBuilder sb = new StringBuilder();
+
+		for (Object o : c) {
+			sb.append(o.toString());
+			sb.append("\n");
+		}
+		return sb.toString();
 	}
 }

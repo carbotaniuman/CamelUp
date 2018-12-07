@@ -3,9 +3,11 @@ package gamestate;
 import java.awt.Color;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Queue;
 import java.util.TreeSet;
 
@@ -15,6 +17,7 @@ import com.google.common.collect.ImmutableList;
 import game.Die;
 import game.Pyramid;
 import immutable.Camel;
+import immutable.DesertCard;
 import immutable.RaceBettingCard;
 import immutable.RoundBettingCard;
 
@@ -93,6 +96,10 @@ public class GameState {
 		return curPlayer;
 	}
 
+	public List<Player> getAllPlayers() {
+		return Collections.unmodifiableList(players);
+	}
+
 	public boolean isGameEnded() {
 		return gameEnded;
 	}
@@ -110,17 +117,16 @@ public class GameState {
 		curPlayer = players.get(curPlayerIndex);
 
 		turnIndex++;
-		
-		if(isGameOver()) {
+
+		if (isGameOver()) {
 			gameEnded = true;
-			
-			
+
 		}
 	}
 
 	private boolean isGameOver() {
 		for (Camel c : camels) {
-			if(track.getCamelPos(c) > 15) {
+			if (track.getCamelPos(c) > 15) {
 				return true;
 			}
 		}
@@ -204,8 +210,9 @@ public class GameState {
 
 		System.out.println(tileNum + " " + track.canPlaceCard(tileNum));
 		if (track.canPlaceCard(tileNum)) {
-			curPlayer.setDesertCard(isOasis);
-			track.placeDesertCard(curPlayer.getDesertCard().get(), tileNum);
+			Optional<DesertCard> old = curPlayer.getDesertCard();
+			curPlayer.setDesertCard(isOasis, tileNum);
+			track.placeDesertCard(old, curPlayer.getDesertCard().get(), tileNum);
 
 			this.commitTurn();
 		}

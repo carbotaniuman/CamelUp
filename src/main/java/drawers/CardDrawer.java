@@ -12,7 +12,7 @@ import immutable.RoundBettingCard;
 import gamestate.Player;
 
 
-public class GraphicsMap 
+public class CardDrawer 
 {
 	public static void drawDesertCard(Graphics g, int x,int y, String plusOrMinus)
 	{
