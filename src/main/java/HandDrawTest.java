@@ -3,7 +3,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 import java.util.TreeSet;
 
 import javax.swing.JFrame;
@@ -13,6 +15,7 @@ import drawers.BoardDrawer;
 import drawers.HandDrawer;
 import gamestate.GameState;
 import gamestate.Player;
+import immutable.RaceBettingCard;
 import immutable.RoundBettingCard;
 
 public class HandDrawTest extends JPanel 
@@ -64,6 +67,30 @@ public class HandDrawTest extends JPanel
 			tree.add(new RoundBettingCard(GameState.CAMELCOLORS.get(i), 2));
 			roundBets.put(GameState.CAMELCOLORS.get(i), tree);
 		}
+		Queue<RaceBettingCard> winQue = new LinkedList<RaceBettingCard>();
+		winQue.offer ( new RaceBettingCard(Color.ORANGE, pl));
+		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
+		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));
+		winQue.offer ( new RaceBettingCard(Color.ORANGE, pl));
+		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
+		winQue.offer ( new RaceBettingCard(Color.ORANGE, pl));
+		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
+		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));
+		winQue.offer ( new RaceBettingCard(Color.ORANGE, pl));
+		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
+		Queue<RaceBettingCard> loseQue = new LinkedList<RaceBettingCard>();
+		loseQue.offer ( new RaceBettingCard(Color.GREEN, pl));
+		loseQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
+		loseQue.offer ( new RaceBettingCard(Color.WHITE, pl));
+		loseQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
+		loseQue.offer ( new RaceBettingCard(Color.WHITE, pl));
+		loseQue.offer ( new RaceBettingCard(Color.GREEN, pl));
+		loseQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
+		loseQue.offer ( new RaceBettingCard(Color.WHITE, pl));
+		loseQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
+		loseQue.offer ( new RaceBettingCard(Color.WHITE, pl));
 		BoardDrawer.drawBoard(g, roundBets);
+		BoardDrawer.drawWinBets(g, winQue);
+		BoardDrawer.drawLoseBets(g, loseQue);
 	}
 }

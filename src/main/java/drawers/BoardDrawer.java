@@ -61,19 +61,35 @@ public class BoardDrawer {
 
 	public static void drawWinBets ( Graphics g, Queue<RaceBettingCard> cards )
 	{
+		int y = 50;
+		int c = 0;
 		for ( int x = 1760; x >= 1400; x -= 90)
 		{
+			if ( c == 5 || c == 10 || c== 15 || c == 20 )
+			{
+				y += 50;
+				x = 1760;
+			}
 			if ( !cards.isEmpty())
-				GraphicsMap.drawRaceBettingCard(g, x, 130, cards.poll().getColor(), cards.poll().getPlayer());
+				GraphicsMap.drawRaceBettingCard(g, x, y, cards.peek().getColor(), cards.poll().getPlayer());
+				c++;
 		}
 	}
 	
 	public static void drawLoseBets ( Graphics g, Queue<RaceBettingCard> cards )
 	{
+		int y = 450;
+		int c = 0;
 		for ( int x = 1760; x >= 1400; x -= 90)
 		{
+			if ( c == 5 || c == 10 || c== 15 || c == 20 )
+			{
+				y += 50;
+				x = 1760;
+			}
 			if ( !cards.isEmpty())
-				GraphicsMap.drawRaceBettingCard(g, x, 530, cards.poll().getColor(), cards.poll().getPlayer());
+				GraphicsMap.drawRaceBettingCard(g, x, y, cards.peek().getColor(), cards.poll().getPlayer());
+				c++;
 		}
 	}
 	
