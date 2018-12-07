@@ -5,14 +5,15 @@ import gamestate.Player;
 public class DesertCard {
 	private final boolean isOasis;
 	private final Player p;
+	private final int tile;
 
 	// Constructor
-	public DesertCard(Player p, boolean isOasis) {
+	public DesertCard(Player p, boolean isOasis, int tile) {
 		this.isOasis = isOasis;
 		this.p = p;
+		this.tile = tile;
 	}
 
-	// getMoveNum
 	public int getMoveNum() {
 		if (isOasis) {
 			return 1;
@@ -21,9 +22,12 @@ public class DesertCard {
 		}
 	}
 
-	// getPlayer
 	public Player getPlayer() {
 		return p;
+	}
+	
+	public int getTile() {
+		return tile;
 	}
 	
 	public String toString() {

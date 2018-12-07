@@ -20,19 +20,19 @@ public class DesertCardTester {
 	
 	@Test
 	public void playerMoveNumTest() {
-		DesertCard ds = new DesertCard(player, false);
+		DesertCard ds = new DesertCard(player, false, 0);
 		assertEquals(ds.getMoveNum(), -1);
 		
-		DesertCard dsi = new DesertCard(player, true);
+		DesertCard dsi = new DesertCard(player, true, 0);
 		assertEquals(dsi.getMoveNum(), 1);
 	}
 
 	@Test
 	public void playerEqualityTest() {
-		DesertCard ds = new DesertCard(player, false);
+		DesertCard ds = new DesertCard(player, false, 0);
 		assertEquals(ds.getPlayer(), player);
 		
-		DesertCard dsi = new DesertCard(player, true);
+		DesertCard dsi = new DesertCard(player, true, 0);
 		assertEquals(dsi.getPlayer(), player);
 	}
 }

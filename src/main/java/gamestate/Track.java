@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 import immutable.Camel;
@@ -86,13 +87,19 @@ public class Track {
 		return !tiles[tileNum + 1].getDesertCard().isPresent();
 	}
 
-	public void placeDesertCard(DesertCard d, int tileNum) {
+	public void placeDesertCard(Optional<DesertCard> old, DesertCard d, int tileNum) {
+		if(old.isPresent()) {
+			tiles[old.get().getTile()].removeDesertCard();
+		}
+		
 		tiles[tileNum].addDesertCard(d);
 	}
 
 	public void removeAllDesertCards() {
-		for (int i = 0; i < tiles.length; i++)
-			tiles[i].removeDesertCard();
+		for (Tile t : tiles) {
+			t.getDesertCard().ifPresent(c -> c.getPlayer().getDesertCard());
+			t.removeDesertCard();
+		}
 	}
 
 	@Override
