@@ -71,7 +71,7 @@ public class BoardDrawer {
 				x = 1760;
 			}
 			if ( !cards.isEmpty())
-				GraphicsMap.drawRaceBettingCard(g, x, y, cards.peek().getColor(), cards.poll().getPlayer());
+				CardDrawer.drawRaceBettingCard(g, x, y, cards.peek().getColor(), cards.poll().getPlayer());
 				c++;
 		}
 	}
@@ -88,7 +88,7 @@ public class BoardDrawer {
 				x = 1760;
 			}
 			if ( !cards.isEmpty())
-				GraphicsMap.drawRaceBettingCard(g, x, y, cards.peek().getColor(), cards.poll().getPlayer());
+				CardDrawer.drawRaceBettingCard(g, x, y, cards.peek().getColor(), cards.poll().getPlayer());
 				c++;
 		}
 	}
