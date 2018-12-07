@@ -14,16 +14,16 @@ public class Player {
 	private final ArrayList<RaceBettingCard> raceBets;
 	private final ArrayList<RoundBettingCard> roundBets;
 	private Optional<DesertCard> op;
-	private int money;
 	private final String name;
+
+	private int money, rollCards;
 
 	public Player(String n, List<Color> colors) {
 		raceBets = new ArrayList<>();
-		for(int i = 0; i < 5; i++)
+		for (int i = 0; i < 5; i++)
 			raceBets.add(new RaceBettingCard(GameState.CAMELCOLORS.get(i), this));
 		roundBets = new ArrayList<>();
 		op = Optional.empty();
-		money = 0;
 		name = n;
 	}
 
@@ -41,6 +41,19 @@ public class Player {
 
 	public void addRoundBet(RoundBettingCard c) {
 		roundBets.add(c);
+	}
+	
+	public int getRollCards() {
+		return rollCards;
+	}
+	
+	public void giveRollCard() {
+		rollCards++;
+		money++;
+	}
+	
+	public void resetRollCards() {
+		rollCards = 0;
 	}
 
 	public void setMoney(int i) {
@@ -64,11 +77,11 @@ public class Player {
 	public void clearRoundBets() {
 		roundBets.clear();
 	}
-	public void removeRaceBet(RaceBettingCard r)
-	{
+
+	public void removeRaceBet(RaceBettingCard r) {
 		raceBets.remove(r);
 	}
-	
+
 	public String getName() {
 		return name;
 	}

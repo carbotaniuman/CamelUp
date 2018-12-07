@@ -133,7 +133,7 @@ public class GameState {
 			throw new IllegalStateException("Game has ended");
 		}
 
-		curPlayer.setMoney(curPlayer.getMoney() + 1);
+		curPlayer.giveRollCard();
 		Die d = pyramid.getRandomDie();
 		int index = -1;
 		for (int i = 0; i < camels.size(); i++) {
