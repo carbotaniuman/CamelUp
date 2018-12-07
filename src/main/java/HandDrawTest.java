@@ -44,7 +44,7 @@ public class HandDrawTest extends JPanel
 		//pl.addRoundBet(new RoundBettingCard(Color.ORANGE, 5));
 		//pl.addRoundBet(new RoundBettingCard(Color.ORANGE, 3));
 		pl.addRoundBet(new RoundBettingCard(Color.ORANGE, 1));
-		Color c = GameState.CAMELCOLORS.get(4);
+		Color c = GameState.CAMELCOLORS.get(0);
 		pl.addRoundBet(new RoundBettingCard(c, 5));
 		pl.addRoundBet(new RoundBettingCard(c, 3));
 		pl.addRoundBet(new RoundBettingCard(c, 1));

@@ -13,12 +13,12 @@ import gamestate.Player;
 import immutable.RaceBettingCard;
 import immutable.RoundBettingCard;
 
-public class HandDrawer {
-	// size of screen: 1920x1080
-	// size of hand: 1920x280
-	public static void drawHand(Graphics g, Player p, ArrayList<Player> players) {
-		// WholeHand
-		g.setColor(Color.ORANGE);
+public class HandDrawer 
+{
+	public static void drawHand(Graphics g, Player p, ArrayList<Player> players) 
+	{
+		//WholeHand
+		g.setColor(new Color(255, 153, 0));
 		g.fillRect(0, 800, 1920, 280);
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 800, 1920, 280);
