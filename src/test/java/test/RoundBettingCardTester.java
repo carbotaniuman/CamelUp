@@ -18,6 +18,6 @@ public class RoundBettingCardTester {
 	public void compareToTest() {
 		RoundBettingCard rbc1 = new RoundBettingCard(Color.RED, 5);
 		RoundBettingCard rbc2 = new RoundBettingCard(Color.RED, 1);
-		assertTrue(rbc1.compareTo(rbc2) > 0);
+		assertTrue(rbc1.compareTo(rbc2) < 0);
 	}
 }
