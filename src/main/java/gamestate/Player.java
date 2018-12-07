@@ -42,16 +42,16 @@ public class Player {
 	public void addRoundBet(RoundBettingCard c) {
 		roundBets.add(c);
 	}
-	
+
 	public int getRollCards() {
 		return rollCards;
 	}
-	
+
 	public void giveRollCard() {
 		rollCards++;
 		money++;
 	}
-	
+
 	public void resetRollCards() {
 		rollCards = 0;
 	}
@@ -84,5 +84,13 @@ public class Player {
 
 	public String getName() {
 		return name;
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(name + " " + money + "\n");
+		sb.append("Race Bets:\n" + raceBets + "\n");
+		sb.append("Round Bets:\n" + roundBets + "\n");
+		return sb.toString();
 	}
 }

@@ -97,9 +97,14 @@ public class Track {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder("Track:\n");
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < tiles.length; i++) {
-			sb.append(i + " " + tiles[i] + "\n");
+			sb.append(i);
+			sb.append(" ");
+			sb.append(tiles[i]);
+			if(i != tiles.length - 1) {
+				sb.append("\n");
+			}
 		}
 		return sb.toString();
 	}

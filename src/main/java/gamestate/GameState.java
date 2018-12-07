@@ -3,6 +3,7 @@ package gamestate;
 import java.awt.Color;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,6 +94,10 @@ public class GameState {
 		return curPlayer;
 	}
 
+	public List<Player> getAllPlayers() {
+		return Collections.unmodifiableList(players);
+	}
+
 	public boolean isGameEnded() {
 		return gameEnded;
 	}
@@ -110,17 +115,16 @@ public class GameState {
 		curPlayer = players.get(curPlayerIndex);
 
 		turnIndex++;
-		
-		if(isGameOver()) {
+
+		if (isGameOver()) {
 			gameEnded = true;
-			
-			
+
 		}
 	}
 
 	private boolean isGameOver() {
 		for (Camel c : camels) {
-			if(track.getCamelPos(c) > 15) {
+			if (track.getCamelPos(c) > 15) {
 				return true;
 			}
 		}
