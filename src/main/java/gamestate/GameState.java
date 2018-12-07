@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Queue;
 import java.util.TreeSet;
 
@@ -15,6 +16,7 @@ import com.google.common.collect.ImmutableList;
 import game.Die;
 import game.Pyramid;
 import immutable.Camel;
+import immutable.DesertCard;
 import immutable.RaceBettingCard;
 import immutable.RoundBettingCard;
 
@@ -204,8 +206,9 @@ public class GameState {
 
 		System.out.println(tileNum + " " + track.canPlaceCard(tileNum));
 		if (track.canPlaceCard(tileNum)) {
-			curPlayer.setDesertCard(isOasis);
-			track.placeDesertCard(curPlayer.getDesertCard().get(), tileNum);
+			Optional<DesertCard> old = curPlayer.getDesertCard();
+			curPlayer.setDesertCard(isOasis, tileNum);
+			track.placeDesertCard(old, curPlayer.getDesertCard().get(), tileNum);
 
 			this.commitTurn();
 		}

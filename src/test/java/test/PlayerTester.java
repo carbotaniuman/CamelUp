@@ -45,7 +45,7 @@ public class PlayerTester {
 	@Test
 	public void desertCardTest() {
 		assertFalse(player.getDesertCard().isPresent());
-		player.setDesertCard(true);
+		player.setDesertCard(true, 0);
 		assertTrue(player.getDesertCard().isPresent());
 	}
 }
