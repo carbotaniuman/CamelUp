@@ -35,8 +35,8 @@ public class Player {
 		return op;
 	}
 
-	public void setDesertCard(boolean isOasis) {
-		op = Optional.of(new DesertCard(this, isOasis));
+	public void setDesertCard(boolean isOasis, int tile) {
+		op = Optional.of(new DesertCard(this, isOasis, tile));
 	}
 
 	public void addRoundBet(RoundBettingCard c) {

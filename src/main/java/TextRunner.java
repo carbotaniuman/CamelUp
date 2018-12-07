@@ -19,7 +19,7 @@ public class TextRunner {
 			do {
 				System.out.println("A: Place Round Bet\tB: Place Race Bet\tC: Roll Die\tD: Place Desert Card");
 				System.out.print("Input: ");
-				String choice = scanner.nextLine();
+				String choice = scanner.nextLine().trim();
 				if (choice.equalsIgnoreCase("a")) {
 					System.out.print("What color camel are you betting on? ");
 					Color c = GameState.COLORBIMAP.get(scanner.nextLine().toLowerCase());
