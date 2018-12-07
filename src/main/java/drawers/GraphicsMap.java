@@ -32,7 +32,7 @@ public class GraphicsMap
 	
 	public static void drawRoundBettingCard( Graphics g, int x, int y, RoundBettingCard r)
 	{
-		g.setColor(r.getCamelColor());
+		g.setColor(r.getColor());
 		g.fillRect(x, y, 150, 80);
 		g.setColor(Color.BLACK);
 		g.drawRect(x, y, 150, 80);

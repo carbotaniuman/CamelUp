@@ -36,15 +36,15 @@ public class HandDrawer
 		for(int i = 0; i < p.getRoundBets().size(); i++)
 		{
 			RoundBettingCard r = p.getRoundBets().get(i);
-			if(r.getCamelColor().equals(GameState.CAMELCOLORS.get(0))) //WHITE
+			if(r.getColor().equals(GameState.CAMELCOLORS.get(0))) //WHITE
 				GraphicsMap.drawRoundBettingCard(g, (1920-150), 800+numWh++*80, r);
-			else if(r.getCamelColor().equals((GameState.CAMELCOLORS.get(1))))//ORANGE
+			else if(r.getColor().equals((GameState.CAMELCOLORS.get(1))))//ORANGE
 				GraphicsMap.drawRoundBettingCard(g, (1920-300), 800+numOrng++*80, r);
-			else if(r.getCamelColor().equals((GameState.CAMELCOLORS.get(2))))//YELLOW
+			else if(r.getColor().equals((GameState.CAMELCOLORS.get(2))))//YELLOW
 				GraphicsMap.drawRoundBettingCard(g, (1920-450), 800+numYel++*80, r);
-			else if(r.getCamelColor().equals((GameState.CAMELCOLORS.get(3)))) //GREEN
+			else if(r.getColor().equals((GameState.CAMELCOLORS.get(3)))) //GREEN
 				GraphicsMap.drawRoundBettingCard(g, (1920-600), 800+numGrn++*80, r);
-			else if(r.getCamelColor().equals((GameState.CAMELCOLORS.get(4))))//BLUE
+			else if(r.getColor().equals((GameState.CAMELCOLORS.get(4))))//BLUE
 				GraphicsMap.drawRoundBettingCard(g, (1920-750), 800+numBlu++*80, r);
 		}
 		//Balance

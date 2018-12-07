@@ -15,10 +15,8 @@ public class Player {
 	private final ArrayList<RoundBettingCard> roundBets;
 	private Optional<DesertCard> op;
 	private int money;
-	private final String name; // what we use to differentiate players is subject to change and prob should
-							// change cause we need to do something that works for graphics and txt
+	private final String name;
 
-	// Constructor
 	public Player(String n, List<Color> colors) {
 		raceBets = new ArrayList<>();
 		for(int i = 0; i < 5; i++)
@@ -33,7 +31,6 @@ public class Player {
 		op = Optional.empty();
 	}
 
-	// getDesertCard
 	public Optional<DesertCard> getDesertCard() {
 		return op;
 	}
@@ -42,34 +39,28 @@ public class Player {
 		op = Optional.of(new DesertCard(this, isOasis));
 	}
 
-	// addRoundBet
 	public void addRoundBet(RoundBettingCard c) {
 		roundBets.add(c);
 	}
 
-	// setMoney
 	public void setMoney(int i) {
 		if (i < 0)
 			throw new IllegalArgumentException("Money cannot be negative");
 		money = i;
 	}
 
-	// getRaceBets
 	public List<RaceBettingCard> getRaceBets() {
 		return Collections.unmodifiableList(raceBets);
 	}
 
-	// getRoundBets
 	public List<RoundBettingCard> getRoundBets() {
 		return Collections.unmodifiableList(roundBets);
 	}
 
-	// getMoney
 	public int getMoney() {
 		return money;
 	}
 
-	// clearRoundBets
 	public void clearRoundBets() {
 		roundBets.clear();
 	}
@@ -77,7 +68,7 @@ public class Player {
 	{
 		raceBets.remove(r);
 	}
-	// get playerName **SUBJECT TO CHANGE**
+	
 	public String getName() {
 		return name;
 	}

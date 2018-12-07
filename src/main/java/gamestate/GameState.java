@@ -19,14 +19,14 @@ import immutable.RaceBettingCard;
 import immutable.RoundBettingCard;
 
 public class GameState {
-	
+
 	public final static String[] names = { "KarleEngels1820", "Evile Vinciente", "A Confucius", "Prince Zuko",
 			"Madame Bob Lee" };
 
 	public final static ImmutableBiMap<String, Color> COLORBIMAP = ImmutableBiMap.of("blue", new Color(51, 153, 255),
 			"green", Color.green, "yellow", Color.yellow, "white", Color.white, "orange", Color.orange);
 	public final static List<Color> CAMELCOLORS = ImmutableList.copyOf(COLORBIMAP.values());
-	
+
 	private final ArrayList<Camel> camels;
 	private final ArrayList<Player> players;
 	private final Queue<RaceBettingCard> winBets;
@@ -38,13 +38,14 @@ public class GameState {
 	private Player curPlayer;
 	private int curPlayerIndex;
 	private long turnIndex;
+	private boolean gameEnded;
 
 	public GameState() {
 		camels = new ArrayList<Camel>();
 		for (int i = 0; i < CAMELCOLORS.size(); i++) {
 			camels.add(new Camel(CAMELCOLORS.get(i)));
 		}
-		
+
 		players = new ArrayList<Player>();
 
 		for (String name : names) {
@@ -68,7 +69,6 @@ public class GameState {
 		pyramid = new Pyramid(CAMELCOLORS);
 	}
 
-	// Accessors
 	public Pyramid getPyramid() {
 		return pyramid;
 	}
@@ -93,8 +93,8 @@ public class GameState {
 		return curPlayer;
 	}
 
-	public void setCurPlayer(Player curPlayer) {
-		this.curPlayer = curPlayer;
+	public boolean isGameEnded() {
+		return gameEnded;
 	}
 
 	private void commitTurn() {
@@ -110,14 +110,29 @@ public class GameState {
 		curPlayer = players.get(curPlayerIndex);
 
 		turnIndex++;
+		
+		if(isGameOver()) {
+			gameEnded = true;
+			
+			
+		}
 	}
 
-	private void checkAndEndGame() {
-
+	private boolean isGameOver() {
+		for (Camel c : camels) {
+			if(track.getCamelPos(c) > 15) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	// Commit Turn Methods
 	public void moveCamel() {
+		if (gameEnded) {
+			throw new IllegalStateException("Game has ended");
+		}
+
 		curPlayer.setMoney(curPlayer.getMoney() + 1);
 		Die d = pyramid.getRandomDie();
 		int index = -1;
@@ -132,6 +147,10 @@ public class GameState {
 	}
 
 	public void placeWinBet(Color c) {
+		if (gameEnded) {
+			throw new IllegalStateException("Game has ended");
+		}
+
 		for (RaceBettingCard rbc : curPlayer.getRaceBets()) {
 			if (rbc.getColor().equals(c)) {
 				curPlayer.removeRaceBet(rbc);
@@ -143,6 +162,10 @@ public class GameState {
 	}
 
 	public void placeLoseBet(Color c) {
+		if (gameEnded) {
+			throw new IllegalStateException("Game has ended");
+		}
+
 		for (RaceBettingCard rbc : curPlayer.getRaceBets()) {
 			if (rbc.getColor().equals(c)) {
 				curPlayer.removeRaceBet(rbc);
@@ -154,6 +177,10 @@ public class GameState {
 	}
 
 	public void placeRoundBet(Color c) {
+		if (gameEnded) {
+			throw new IllegalStateException("Game has ended");
+		}
+
 		if (roundBets.containsKey(c) && !roundBets.get(c).isEmpty()) {
 			Player p = this.curPlayer;
 			int index = -1;
@@ -171,16 +198,16 @@ public class GameState {
 	}
 
 	public void placeDesertCard(boolean isOasis, int tileNum) {
+		if (gameEnded) {
+			throw new IllegalStateException("Game has ended");
+		}
+
 		System.out.println(tileNum + " " + track.canPlaceCard(tileNum));
 		if (track.canPlaceCard(tileNum)) {
 			curPlayer.setDesertCard(isOasis);
 			track.placeDesertCard(curPlayer.getDesertCard().get(), tileNum);
-			
+
 			this.commitTurn();
 		}
-	}
-
-	public boolean isGameEnded() {
-		return false;
 	}
 }

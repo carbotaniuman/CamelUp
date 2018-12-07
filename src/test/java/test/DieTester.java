@@ -1,3 +1,4 @@
+package test;
 import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
@@ -34,5 +35,13 @@ public class DieTester {
 		assertTrue(die.getIfRolled());
 		die.resetIfRolled();
 		assertFalse(die.getIfRolled());
+	}
+	
+	@Test
+	public void rollTest() {
+		for(int i = 0; i < 100; i++) {
+			die.roll();
+			assertTrue(die.getLastRoll() >= 1 && die.getLastRoll() <= 3);
+		}
 	}
 }

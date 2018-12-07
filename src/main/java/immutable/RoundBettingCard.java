@@ -3,16 +3,16 @@ package immutable;
 import java.awt.Color;
 
 public class RoundBettingCard implements Comparable<RoundBettingCard> {
-    private final Color camelColor;
+    private final Color color;
     private final int points;
 
     public RoundBettingCard(Color c, int p) {
-    	camelColor = c;
+    	color = c;
     	points = p;
     }
 
-    public Color getCamelColor() {
-        return camelColor;
+    public Color getColor() {
+        return color;
     }
 
     public int getPoints() {
