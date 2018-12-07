@@ -19,7 +19,7 @@ public class BoardDrawer {
 	public static void drawBoard(Graphics g, Map<Color,TreeSet<RoundBettingCard>> cards/*, Queue<RaceBettingCard> winRaces, Queue<RaceBettingCard> loseRaces, ArrayList<Die> dice*/)
 	{
 		//draws the board outline
-		g.setColor(Color.ORANGE);
+		g.setColor(new Color(255, 153, 0));
 		g.fillRect(800, 0, 1120, 800);
 		g.setColor(Color.BLACK);
 		g.drawRect(800, 0, 1120, 800);
