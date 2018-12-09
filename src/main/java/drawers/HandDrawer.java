@@ -49,20 +49,20 @@ public class HandDrawer
 		}
 		// Balance
 		g.setColor(new Color(51, 204, 255));
-		g.fillRoundRect(250, 825, 500, 50, 30, 30);
+		g.fillRect(180, 800, 570, 100);
 		g.setColor(Color.BLACK);
-		g.drawRoundRect(250, 825, 500, 50, 30, 30);
+		g.drawRect(180, 800, 570, 100);
 		g.setFont(new Font("Serif", Font.ITALIC, 30));
 		FontMetrics fm = g.getFontMetrics();
 		Rectangle2D textSize = fm.getStringBounds(p.getName() + "'s Balance = " + p.getMoney() + ".00E£", g);
-		int xPos = (500 - (int) textSize.getWidth()) / 2;
+		int xPos = (570 - (int) textSize.getWidth()) / 2;
 		int yPos = (100 - (int) textSize.getHeight()) / 2 + fm.getAscent();
-		g.drawString(p.getName() + "'s Balance = " + p.getMoney() + ".00E£", 250 + xPos, 800 + yPos);
+		g.drawString(p.getName() + "'s Balance = " + p.getMoney() + ".00E£", 180 + xPos, 800 + yPos);
 		
 		// Players Data
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("TimesRoman", Font.ITALIC, 35));
-		g.drawString("Player data", 770, 830);
+		g.drawString("Player Data", 770, 830);
 		g.setFont(new Font("Monospaced", Font.BOLD, 15));
 		String st = String.format("%-15s %-8s %-10s %-6s", "Name", "RaceBets", "RoundBets", "Money");
 		g.drawString(st, 770, 830 + 20 * (1));
