@@ -12,6 +12,7 @@ import java.util.TreeSet;
 
 import game.Die;
 import gamestate.GameState;
+import gamestate.Player;
 import immutable.RaceBettingCard;
 import immutable.RoundBettingCard;
 
@@ -20,7 +21,7 @@ public class BoardDrawer {
 	 * Queue<RaceBettingCard> winRaces, Queue<RaceBettingCard> loseRaces,
 	 * ArrayList<Die> dice
 	 */
-	public static void drawBoard(Graphics g, Map<Color, TreeSet<RoundBettingCard>> cards) {
+	public static void drawBoard(Graphics g, Map<Color, TreeSet<RoundBettingCard>> cards, Player pl, ArrayList<Die> dice) {
 		// draws the board outline
 		g.setColor(new Color(255, 153, 0));
 		g.fillRect(800, 0, 1120, 800);
@@ -84,11 +85,18 @@ public class BoardDrawer {
 
 		// draws the die
 		int d = 0;
+		int da = 0;
 		for (int y = 50; y <= 750; y += 150) {
-			g.setColor(GameState.CAMELCOLORS.get(d++));
+			g.setColor(GameState.CAMELCOLORS.get(d));
 			g.fillRect(870, y, 100, 80);
 			g.setColor(Color.BLACK);
 			g.drawRect(870, y, 100, 80);
+			if ( da < dice.size())
+			{
+				if ( dice.get(da).getColor() == GameState.CAMELCOLORS.get(d))
+					drawDie(g, dice.get(da++), 890, y + 10);
+			}
+			d++;
 		}
 		
 		g.setFont(currentFont);
@@ -124,8 +132,25 @@ public class BoardDrawer {
 		}
 	}
 
-	public void drawDie(Graphics g, ArrayList<Die> dice) {
-
+	public static void drawDie(Graphics g, Die die, int x, int y) 
+	{
+		g.setColor(die.getColor());
+		g.fillRect(x, y, 60, 60);
+		g.setColor(Color.BLACK);
+		g.drawRect(x, y, 60, 60); 
+			if ( die.getLastRoll() == 1) 
+				g.fillOval(x + 25, y + 25, 10, 10);
+			if ( die.getLastRoll() == 2) 
+			{
+				g.fillOval(x + 10, y + 10, 10, 10);
+				g.fillOval(x + 40, y + 40, 10, 10);
+			}
+			if ( die.getLastRoll() == 3) 
+			{
+				g.fillOval(x + 25, y + 25, 10, 10);
+				g.fillOval(x + 10, y + 10, 10, 10);
+				g.fillOval(x + 40, y + 40, 10, 10);
+			}
 	}
 
 }

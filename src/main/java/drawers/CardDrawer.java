@@ -98,6 +98,14 @@ public class CardDrawer {
 		int xPos = (150 - (int) textSize.getWidth()) / 2;
 		int yPos = (180 - (int) textSize.getHeight()) / 2 + fm.getAscent();
 		g.drawString("?", x + xPos, y + yPos);
+		
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+		fm = g.getFontMetrics();
+		textSize = fm.getStringBounds(p.getName(), g);
+		xPos = (150 - (int) textSize.getWidth()) / 2;
+		yPos = (180 - (int) textSize.getHeight()) / 2 + fm.getAscent();
+		g.drawString(p.getName(), x + xPos, y + yPos + 50);
+		
 		g.setFont(oldFont);
 	}
 }
