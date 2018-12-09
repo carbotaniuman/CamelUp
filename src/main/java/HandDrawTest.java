@@ -78,8 +78,7 @@ public class HandDrawTest extends JPanel
 		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
 		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));
 		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
-		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));
-		
+		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));		
 		Queue<RaceBettingCard> loseQue = new LinkedList<RaceBettingCard>();
 		loseQue.offer ( new RaceBettingCard(Color.GREEN, pl));
 		loseQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
@@ -103,5 +102,7 @@ public class HandDrawTest extends JPanel
 		BoardDrawer.drawBoard(g, roundBets, pl, dice);
 		BoardDrawer.drawWinBets(g, winQue);
 		BoardDrawer.drawLoseBets(g, loseQue);
+		
+		requestFocus();
 	}
 }

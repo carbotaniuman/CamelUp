@@ -13,7 +13,7 @@ import gamestate.Player;
 import immutable.RoundBettingCard;
 
 public class CardDrawer {
-	public static void drawDesertCard(Graphics g, int x, int y, String plusOrMinus) {
+	public static void drawDesertCard(Graphics g, int x, int y, String plusOrMinus, boolean fill) {
 		g.setColor(Color.YELLOW);
 		g.fillRect(x, y, 180, 100);
 		g.setColor(Color.BLACK);

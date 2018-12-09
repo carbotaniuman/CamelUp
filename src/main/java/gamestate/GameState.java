@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Queue;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 import com.google.common.collect.ImmutableBiMap;
@@ -79,13 +80,17 @@ public class GameState {
 	public Track getTrack() {
 		return track;
 	}
+	
+	public Map<Color, TreeSet<RoundBettingCard>> getRoundBets() {
+		return Collections.unmodifiableMap(roundBets);
+	}
 
 	public Queue<RaceBettingCard> getWinBets() {
-		return winBets;
+		return new ArrayDeque<>(winBets);
 	}
 
 	public Queue<RaceBettingCard> getLoseBets() {
-		return loseBets;
+		return new ArrayDeque<>(loseBets);
 	}
 
 	public long getTurnIndex() {
@@ -96,7 +101,7 @@ public class GameState {
 		return curPlayer;
 	}
 
-	public List<Player> getAllPlayers() {
+	public List<Player> getPlayers() {
 		return Collections.unmodifiableList(players);
 	}
 
