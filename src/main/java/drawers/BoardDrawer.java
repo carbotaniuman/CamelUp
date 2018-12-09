@@ -26,7 +26,7 @@ public class BoardDrawer {
 		g.fillRect(800, 0, 1120, 800);
 
 		// Green for win, red for lose
-		g.setColor(Color.GREEN);
+		g.setColor(new Color(120, 255, 120));
 		g.fillRect(1300, 40, 620, 360);
 
 		g.setColor(Color.RED);
