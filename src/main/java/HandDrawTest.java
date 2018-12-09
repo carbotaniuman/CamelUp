@@ -68,31 +68,6 @@ public class HandDrawTest extends JPanel
 			roundBets.put(GameState.CAMELCOLORS.get(i), tree);
 		}
 		Queue<RaceBettingCard> winQue = new LinkedList<RaceBettingCard>();
-//		winQue.offer ( new RaceBettingCard(Color.GREEN, pl));
-//		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
-//		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));
-//		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
-//		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));
-//		winQue.offer ( new RaceBettingCard(Color.GREEN, pl));
-//		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
-//		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));
-//		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
-//		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));
-//		winQue.offer ( new RaceBettingCard(Color.GREEN, pl));
-//		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
-//		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));
-//		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
-//		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));
-//		winQue.offer ( new RaceBettingCard(Color.GREEN, pl));
-//		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
-//		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));
-//		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
-//		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));
-//		winQue.offer ( new RaceBettingCard(Color.GREEN, pl));
-//		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
-//		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));
-//		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
-//		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));
 		
 		Queue<RaceBettingCard> loseQue = new LinkedList<RaceBettingCard>();
 		loseQue.offer ( new RaceBettingCard(Color.GREEN, pl));
@@ -124,5 +99,7 @@ public class HandDrawTest extends JPanel
 		BoardDrawer.drawBoard(g, roundBets);
 		BoardDrawer.drawWinBets(g, winQue);
 		BoardDrawer.drawLoseBets(g, loseQue);
+		
+		requestFocus();
 	}
 }

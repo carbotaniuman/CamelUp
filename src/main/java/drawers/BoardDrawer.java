@@ -90,7 +90,7 @@ public class BoardDrawer {
 		while (!cards.isEmpty()) {
 			if (c == 5 || c == 10 || c == 15 || c == 20) {
 				y += 40;
-				x = 1760 + (int)(c/5) * -10;
+				x = 1760 + (int) (c / 5) * -10;
 			}
 			CardDrawer.drawPlacedRaceBettingCard(g, x, y, cards.peek().getColor(), cards.poll().getPlayer());
 			c++;
@@ -105,7 +105,7 @@ public class BoardDrawer {
 		while (!cards.isEmpty()) {
 			if (c == 5 || c == 10 || c == 15 || c == 20) {
 				y += 40;
-				x = 1760 + (int)(c/5) * -10;
+				x = 1760 + (int) (c / 5) * -10;
 			}
 			CardDrawer.drawPlacedRaceBettingCard(g, x, y, cards.peek().getColor(), cards.poll().getPlayer());
 			c++;
