@@ -1,7 +1,7 @@
-package ai;
+package ai.actions;
 
 import gamestate.GameState;
 
-public interface IAIAction {
+public interface AIAction {
 	void act(GameState g);
 }

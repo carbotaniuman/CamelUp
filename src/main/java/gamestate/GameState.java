@@ -123,19 +123,14 @@ public class GameState {
 
 		turnIndex++;
 
-		if (isGameOver()) {
+		if (track.hasCamelWon()) {
 			gameEnded = true;
 
 		}
 	}
-
-	private boolean isGameOver() {
-		for (Camel c : camels) {
-			if (track.getCamelPos(c) > 15) {
-				return true;
-			}
-		}
-		return false;
+	
+	public List<Camel> getCamelRankings() {
+		return track.getCamelRankings();
 	}
 
 	// Commit Turn Methods
@@ -146,14 +141,8 @@ public class GameState {
 
 		curPlayer.giveRollCard();
 		Die d = pyramid.getRandomDie();
-		int index = -1;
-		for (int i = 0; i < camels.size(); i++) {
-			if (camels.get(i).getColor().equals(d.getColor())) {
-				index = i;
-				break;
-			}
-		}
-		track.moveCamel(camels.get(index), d.getLastRoll());
+
+		track.moveCamel(d.getColor(), d.getLastRoll());
 		this.commitTurn();
 	}
 

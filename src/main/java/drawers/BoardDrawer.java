@@ -48,7 +48,7 @@ public class BoardDrawer {
 		yPos = (360 - (int) textSize.getHeight()) / 2 + fm.getAscent();
 		g.drawString("Lose Bets", 1300 + xPos, 440 + yPos);
 
-		g.setFont(currentFont);
+		
 
 		g.drawRect(800, 0, 1120, 800);
 		g.drawLine(1300, 0, 1300, 800);
@@ -62,15 +62,24 @@ public class BoardDrawer {
 		}
 		// draws the buttons for the raceBettingCards
 		int i = 0;
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 60));
 		for (int x = 1300; x < 1920; x += 124) {
 			g.setColor(GameState.CAMELCOLORS.get(i++));
 			g.fillRect(x, 0, 124, 40);
 			g.fillRect(x, 400, 124, 40);
 			g.setColor(Color.BLACK);
 			g.drawRect(x, 0, 124, 40);
-			g.drawString("+", x + 45, 40);
 			g.drawRect(x, 400, 124, 40);
-			g.drawString("-", x + 53, 435);
+			
+			fm = g.getFontMetrics();
+			textSize = fm.getStringBounds("+", g);
+			xPos = (124 - (int) textSize.getWidth()) / 2;
+			yPos = (40 - (int) textSize.getHeight()) / 2 + fm.getAscent();
+			g.drawString("+", x + xPos, yPos);
+			textSize = fm.getStringBounds("-", g);
+			xPos = (124 - (int) textSize.getWidth()) / 2;
+			yPos = (40 - (int) textSize.getHeight()) / 2 + fm.getAscent();
+			g.drawString("-", x + xPos, 395 + yPos);
 		}
 
 		// draws the die
@@ -81,6 +90,8 @@ public class BoardDrawer {
 			g.setColor(Color.BLACK);
 			g.drawRect(870, y, 100, 80);
 		}
+		
+		g.setFont(currentFont);
 	}
 
 	public static void drawWinBets(Graphics g, Queue<RaceBettingCard> cards) {

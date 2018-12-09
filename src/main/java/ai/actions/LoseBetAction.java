@@ -1,10 +1,10 @@
-package ai;
+package ai.actions;
 
 import java.awt.Color;
 
 import gamestate.GameState;
 
-public class LoseBetAction implements IAIAction {
+public class LoseBetAction implements AIAction {
 	private Color c;
 	
 	public LoseBetAction(Color c) {

@@ -1,6 +1,8 @@
 package gamestate;
 
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,26 +13,84 @@ import immutable.Camel;
 import immutable.DesertCard;
 
 public class Track {
-	private final Tile[] tiles;
-	private final Map<Camel, Integer> camelsPos;
+	static class CamelComparator implements Comparator<Camel> {
+		private final Map<Camel, Integer> camelPos;
+		private final Tile[] tiles;
+		
+		public CamelComparator(Map<Camel, Integer> camelPos, Tile[] tiles) {
+			this.camelPos = camelPos;
+			this.tiles = tiles;
+		}
 
-	public Track(int size, ArrayList<Camel> camels) {
+		@Override
+		public int compare(Camel c1, Camel c2) {
+			if(camelPos.get(c1) != camelPos.get(c2)) {
+				return Integer.compare(camelPos.get(c2), camelPos.get(c1));
+			}
+			
+			return Integer.compare(tiles[camelPos.get(c1)].getCamelStackPos(c1), tiles[camelPos.get(c2)].getCamelStackPos(c2));
+		}
+	}
+	
+	protected final Tile[] tiles;
+	protected final Map<Camel, Integer> camelPos;
+	protected final Map<Color, Camel> camels;
+	protected final CamelComparator compare;
+
+	public Track(int size, ArrayList<Camel> camelList) {
 		tiles = new Tile[size];
 		for (int i = 0; i < tiles.length; i++) {
 			tiles[i] = new Tile();
 		}
 
-		camelsPos = new HashMap<Camel, Integer>();
-		for (Camel c : camels) {
+		camelPos = new HashMap<>();
+		camels = new HashMap<>();
+
+		for (Camel c : camelList) {
+			camels.put(c.getColor(), c);
 			int startPos = ThreadLocalRandom.current().nextInt(1, 4);
-			camelsPos.put(c, startPos);
+			camelPos.put(c, startPos);
 			tiles[startPos].addCamelBot(c);
 		}
+		
+		compare = new CamelComparator(camelPos, tiles);
 	}
 
-	public void moveCamel(Camel c, int rolled) {
-		int oldPos = camelsPos.get(c);
-		int cPosOnTile = tiles[oldPos].getCamelPos(c);
+	//AI Constructor
+	protected Track(Track t) {
+		tiles = new Tile[t.tiles.length];
+
+		for (int i = 0; i < tiles.length; i++) {
+			tiles[i] = new Tile(t.tiles[i]);
+		}
+
+		camelPos = new HashMap<>(t.camelPos);
+		camels = new HashMap<>(t.camels);
+		
+		compare = new CamelComparator(camelPos, tiles);
+	}
+
+	public List<Camel> getCamelRankings() {
+		List<Camel> rank = new ArrayList<>(camels.values());
+		rank.sort(compare);
+		
+		return rank;
+	}
+	
+	public boolean hasCamelWon() {
+		for (Map.Entry<Camel, Integer> entry : camelPos.entrySet()) {
+			if (entry.getValue() > 15) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void moveCamel(Color color, int rolled) {
+		Camel c = camels.get(color);
+
+		int oldPos = camelPos.get(c);
+		int cPosOnTile = tiles[oldPos].getCamelStackPos(c);
 		List<Camel> list = tiles[oldPos].getCamels().subList(0, cPosOnTile + 1);
 
 		Tile newTile = tiles[(oldPos + rolled) % 16];
@@ -38,14 +98,14 @@ public class Track {
 		if (newTile.getDesertCard().isPresent()) {
 			Player trapper = newTile.getDesertCard().get().getPlayer();
 			trapper.setMoney(trapper.getMoney() + 1);
-			
+
 			if (newTile.getDesertCard().get().getMoveNum() == 1) {
 				newTile = tiles[(oldPos + rolled + 1) % 16];
 
 				newTile.addCamelsTop(list);
 
 				for (Camel camel : list) {
-					camelsPos.put(camel, oldPos + rolled + 1);
+					camelPos.put(camel, oldPos + rolled + 1);
 				}
 			} else {
 				newTile = tiles[(oldPos + rolled - 1) % 16];
@@ -53,14 +113,14 @@ public class Track {
 				newTile.addCamelsBot(list);
 
 				for (Camel camel : list) {
-					camelsPos.put(camel, oldPos + rolled - 1);
+					camelPos.put(camel, oldPos + rolled - 1);
 				}
 			}
 		} else {
 			newTile.addCamelsTop(list);
 
 			for (Camel camel : list) {
-				camelsPos.put(camel, oldPos + rolled);
+				camelPos.put(camel, oldPos + rolled);
 			}
 		}
 
@@ -68,7 +128,7 @@ public class Track {
 	}
 
 	public int getCamelPos(Camel c) {
-		return camelsPos.getOrDefault(c, -1);
+		return camelPos.getOrDefault(c, -1);
 	}
 
 	public boolean canPlaceCard(int tileNum) {
@@ -83,15 +143,15 @@ public class Track {
 
 		if (tileNum == 15)
 			return true;
-		
+
 		return !tiles[tileNum + 1].getDesertCard().isPresent();
 	}
 
 	public void placeDesertCard(Optional<DesertCard> old, DesertCard d, int tileNum) {
-		if(old.isPresent()) {
+		if (old.isPresent()) {
 			tiles[old.get().getTile()].removeDesertCard();
 		}
-		
+
 		tiles[tileNum].addDesertCard(d);
 	}
 
@@ -109,7 +169,7 @@ public class Track {
 			sb.append(i);
 			sb.append(" ");
 			sb.append(tiles[i]);
-			if(i != tiles.length - 1) {
+			if (i != tiles.length - 1) {
 				sb.append("\n");
 			}
 		}
