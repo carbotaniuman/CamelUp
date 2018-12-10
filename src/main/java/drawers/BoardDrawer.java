@@ -49,9 +49,10 @@ public class BoardDrawer {
 		// draws the RoundBettingCards
 		int c = 0;
 		for (int y = 50; y <= 750; y += 150) {
-			if (cards.get(GameState.CAMELCOLORS.get(c)) != null) {
-				CardDrawer.drawRoundBettingCard(g, 1050, y, cards.get(GameState.CAMELCOLORS.get(c++)).first());
+			if (!cards.get(GameState.CAMELCOLORS.get(c)).isEmpty()) {
+				CardDrawer.drawRoundBettingCard(g, 1050, y, cards.get(GameState.CAMELCOLORS.get(c)).first());
 			}
+			c++;
 		}
 		
 		// draws the buttons for the raceBettingCards

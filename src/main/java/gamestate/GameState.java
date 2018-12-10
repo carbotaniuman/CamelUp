@@ -176,6 +176,7 @@ public class GameState {
 	}
 
 	public void placeRoundBet(Color c) {
+		System.out.println(c);
 		if (gameEnded) {
 			throw new IllegalStateException("Game has ended");
 		}
