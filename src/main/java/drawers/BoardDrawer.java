@@ -74,10 +74,10 @@ public class BoardDrawer {
 			xPos = (124 - (int) textSize.getWidth()) / 2;
 			yPos = (40 - (int) textSize.getHeight()) / 2 + fm.getAscent();
 			g.drawString("+", x + xPos, yPos);
-			textSize = fm.getStringBounds("-", g);
+			textSize = fm.getStringBounds("_", g);
 			xPos = (124 - (int) textSize.getWidth()) / 2;
 			yPos = (40 - (int) textSize.getHeight()) / 2 + fm.getAscent();
-			g.drawString("-", x + xPos, 35 + yPos);
+			g.drawString("_", x + xPos, 10 + yPos);
 		}
 
 		// draws the die
