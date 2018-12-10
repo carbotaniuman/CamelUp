@@ -1,5 +1,6 @@
 package graphics;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
@@ -15,7 +16,11 @@ public class GraphicsPanel extends JPanel {
 	private GameState gamestate = new GameState();
 	public GraphicsPanel() {
 	}
-	
+	public void addRoundBetToPlayer(Color color)
+	{
+		gamestate.placeRoundBet(color);
+		repaint();
+	}
 	@Override
 	protected void paintComponent(Graphics g) {
 		HandDrawer.drawHand(g, gamestate.getCurPlayer());
