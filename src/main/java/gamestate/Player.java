@@ -24,6 +24,7 @@ public class Player {
 			raceBets.add(new RaceBettingCard(GameState.CAMELCOLORS.get(i), this));
 		roundBets = new ArrayList<>();
 		op = Optional.empty();
+		money = 3;
 		name = n;
 	}
 
@@ -49,7 +50,6 @@ public class Player {
 
 	public void giveRollCard() {
 		rollCards++;
-		money++;
 	}
 
 	public void resetRollCards() {

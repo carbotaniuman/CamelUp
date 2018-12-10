@@ -20,11 +20,7 @@ import immutable.RaceBettingCard;
 import immutable.RoundBettingCard;
 
 public class BoardDrawer {
-	/*
-	 * Queue<RaceBettingCard> winRaces, Queue<RaceBettingCard> loseRaces,
-	 * ArrayList<Die> dice
-	 */
-	public static void drawBoard(Graphics g, Map<Color, TreeSet<RoundBettingCard>> cards, Player pl, List<Die> dice, List<Player> players) {
+	public static void drawBoard(Graphics g, Map<Color, TreeSet<RoundBettingCard>> cards, Player pl, List<Die> dice) {
 		// draws the board outline
 		g.setColor(new Color(255, 213, 93));
 		g.fillRect(800, 0, 1120, 800);
@@ -51,18 +47,16 @@ public class BoardDrawer {
 		g.drawLine(1300, 330, 1920, 330);
 
 		// draws the RoundBettingCards
-		int c = 0;
-		for (int y = 50; y <= 750; y += 150) {
-			if (cards.get(GameState.CAMELCOLORS.get(c)) != null) {
-				CardDrawer.drawRoundBettingCard(g, 1050, y, cards.get(GameState.CAMELCOLORS.get(c++)).first());
+		for (int y = 50, c = 0; y <= 750; y += 150, c++) {
+			if (!cards.get(GameState.CAMELCOLORS.get(c)).isEmpty()) {
+				CardDrawer.drawRoundBettingCard(g, 1050, y, cards.get(GameState.CAMELCOLORS.get(c)).first());
 			}
 		}
-		
+
 		// draws the buttons for the raceBettingCards
-		int i = 0;
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 60));
-		for (int x = 1300; x < 1920; x += 124) {
-			g.setColor(GameState.CAMELCOLORS.get(i++));
+		for (int x = 1300, count = 0; x < 1920; x += 124, count++) {
+			g.setColor(GameState.CAMELCOLORS.get(count));
 			g.fillRect(x, 0, 124, 40);
 			g.fillRect(x, 40, 124, 40);
 			g.setColor(Color.BLACK);
@@ -77,31 +71,38 @@ public class BoardDrawer {
 			textSize = fm.getStringBounds("_", g);
 			xPos = (124 - (int) textSize.getWidth()) / 2;
 			yPos = (40 - (int) textSize.getHeight()) / 2 + fm.getAscent();
-			g.drawString("_", x + xPos, 10 + yPos);
+			g.drawString("_", x + xPos, 8 + yPos);
 		}
 
 		// draws the die
-		int d = 0;
-		int da = 0;
-		for (int y = 50; y <= 750; y += 150) {
-			g.setColor(GameState.CAMELCOLORS.get(d));
+		
+		for (int y = 50, c = 0; y <= 750; y += 150, c++) {
+			g.setColor(GameState.CAMELCOLORS.get(c));
 			g.fillRect(870, y, 100, 80);
 			g.setColor(Color.BLACK);
 			g.drawRect(870, y, 100, 80);
-			if (da < dice.size()) {
-				if (dice.get(da).getColor() == GameState.CAMELCOLORS.get(d))
-					drawDie(g, dice.get(da++), 890, y + 10);
-			}
-			d++;
 		}
-		drawPlayerData(g, players);
+
+		for (int i = 0; i < dice.size(); i++) {
+			Die d = dice.get(i);
+			if (d.getColor().equals(GameState.CAMELCOLORS.get(0))) // WHITE
+				drawDie(g, d, 890, 50 + 10);
+			else if (d.getColor().equals((GameState.CAMELCOLORS.get(1))))// ORANGE
+				drawDie(g, d, 890, 200 + 10);
+			else if (d.getColor().equals((GameState.CAMELCOLORS.get(2))))// YELLOW
+				drawDie(g, d, 890, 350 + 10);
+			else if (d.getColor().equals((GameState.CAMELCOLORS.get(3)))) // GREEN
+				drawDie(g, d, 890, 500 + 10);
+			else if (d.getColor().equals((GameState.CAMELCOLORS.get(4))))// BLUE
+				drawDie(g, d, 890, 650 + 10);
+		}
 		g.setFont(currentFont);
 	}
 
 	public static void drawWinBets(Graphics g, Queue<RaceBettingCard> cards) {
 		int y = 80 + 35;
 		int x = 1300 + 80;
-		
+
 		while (!cards.isEmpty()) {
 			CardDrawer.drawPlacedRaceBettingCard(g, x, y, cards.peek().getColor(), cards.poll().getPlayer());
 		}
@@ -136,22 +137,19 @@ public class BoardDrawer {
 			g.fillOval(x + 40, y + 40, 10, 10);
 		}
 	}
-	public static void drawPlayerData(Graphics g, List<Player> players)
-	{
-		// Players Data
+
+	public static void drawPlayerData(Graphics g, List<Player> players) {
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("TimesRoman", Font.ITALIC, 40));
 		g.drawString("Player Data", 1530, 380);
 		g.setFont(new Font("Monospaced", Font.BOLD, 24));
 		String st = String.format("%-15s %-8s %-10s %-6s", "Name", "RaceBets", "RoundBets", "Money");
 		g.drawString(st, 1320, 410 + 33);
-		for (int i1 = 0; i1 < players.size(); i1++) 
-		{
+		for (int i1 = 0; i1 < players.size(); i1++) {
 			Player player = players.get(i1);
-			//System.out.println(pl.getName().length());
 			g.setFont(new Font("Monospaced", Font.BOLD, 24));
-			String s = String.format("%-15s %-8d %-10d %-5s", player.getName(), player.getRaceBets().size(), player.getRoundBets().size(),
-			player.getMoney() + " E£");
+			String s = String.format("%-15s %-8d %-10d %-5s", player.getName(), player.getRaceBets().size(),
+					player.getRoundBets().size(), player.getMoney() + " E£");
 			g.drawString(s, 1320, 410 + 33 * (i1 + 2));
 		}
 	}

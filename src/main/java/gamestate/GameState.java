@@ -5,11 +5,11 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Queue;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 import com.google.common.collect.ImmutableBiMap;
@@ -64,7 +64,7 @@ public class GameState {
 			TreeSet<RoundBettingCard> tree = new TreeSet<RoundBettingCard>();
 			tree.add(new RoundBettingCard(CAMELCOLORS.get(i), 5));
 			tree.add(new RoundBettingCard(CAMELCOLORS.get(i), 3));
-			tree.add(new RoundBettingCard(CAMELCOLORS.get(i), 2));
+			tree.add(new RoundBettingCard(CAMELCOLORS.get(i), 1));
 			roundBets.put(CAMELCOLORS.get(i), tree);
 		}
 
@@ -80,7 +80,7 @@ public class GameState {
 	public Track getTrack() {
 		return track;
 	}
-	
+
 	public Map<Color, TreeSet<RoundBettingCard>> getRoundBets() {
 		return Collections.unmodifiableMap(roundBets);
 	}
@@ -115,10 +115,17 @@ public class GameState {
 			track.removeAllDesertCards();
 			for (Player p : players) {
 				p.removeDesertCard();
+
+//				Iterator<RoundBettingCard> i = p.getRoundBets().iterator();
+//				while (i.hasNext()) {
+//					RoundBettingCard rbc = i.next();
+//					roundBets.get(rbc.getColor()).add(rbc);
+//					i.remove();
+//				}
 			}
 		}
 
-		curPlayerIndex = (curPlayerIndex + 1) % 5;
+		curPlayerIndex = (curPlayerIndex + 1) % players.size();
 		curPlayer = players.get(curPlayerIndex);
 
 		turnIndex++;
@@ -128,7 +135,7 @@ public class GameState {
 
 		}
 	}
-	
+
 	public List<Camel> getCamelRankings() {
 		return track.getCamelRankings();
 	}
@@ -182,16 +189,7 @@ public class GameState {
 		}
 
 		if (roundBets.containsKey(c) && !roundBets.get(c).isEmpty()) {
-			Player p = this.curPlayer;
-			int index = -1;
-			for (int i = 0; i < players.size(); i++) // change if no name for player
-			{
-				if (p.getName().equals(players.get(i).getName())) {
-					index = i;
-					break;
-				}
-			}
-			players.get(index).addRoundBet(roundBets.get(c).last());
+			curPlayer.addRoundBet(roundBets.get(c).pollFirst());
 
 			this.commitTurn();
 		}

@@ -9,7 +9,6 @@ public class GraphicsRunner {
 	{
 		JFrame f = new JFrame();
 		f.add(new GraphicsPanel());
-		f.addMouseListener(new MouseTool());
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		f.setUndecorated(true);

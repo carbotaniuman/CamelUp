@@ -55,6 +55,7 @@ public class TextRunner {
 			} while (turnIndex == game.getTurnIndex());
 			System.out.println();
 		}
+		scanner.close();
 	}
 
 	public static String toUpperCase(String s) {

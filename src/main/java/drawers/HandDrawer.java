@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
 import java.util.List;
 
 import gamestate.GameState;
@@ -45,10 +44,8 @@ public class HandDrawer {
 			else if (r.getColor().equals((GameState.CAMELCOLORS.get(4))))// BLUE
 				CardDrawer.drawRoundBettingCard(g, (1920 - 750), 800 + numBlu++ * 80, r);
 		}
+		
 		// Balance
-//		g.setColor(new Color(51, 204, 255));
-//		g.fillRect(180, 800, 570, 100);
-//		g.setColor(Color.BLACK);
 		g.drawRect(180, 800, 570, 100);
 		g.setFont(new Font("Serif", Font.ITALIC, 30));
 		FontMetrics fm = g.getFontMetrics();
@@ -57,7 +54,6 @@ public class HandDrawer {
 		int yPos = (100 - (int) textSize.getHeight()) / 2 + fm.getAscent();
 		g.drawString(p.getName() + "'s Balance: " + p.getMoney() + " E£", 180 + xPos, 800 + yPos);
 
-		
 		g.setFont(oldFont);
 	}
 }
