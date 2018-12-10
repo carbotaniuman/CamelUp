@@ -97,7 +97,7 @@ public class BoardDrawer {
 		// Players Data
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("TimesRoman", Font.ITALIC, 35));
-		g.drawString("Player Data", 770, 880);
+		g.drawString("Player Data", 1600, 450);
 		g.setFont(new Font("Monospaced", Font.BOLD, 15));
 		String st = String.format("%-15s %-8s %-10s %-6s", "Name", "RaceBets", "RoundBets", "Money");
 		g.drawString(st, 770, 880 + 20);
