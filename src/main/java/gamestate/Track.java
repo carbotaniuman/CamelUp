@@ -55,6 +55,11 @@ public class Track {
 		
 		compare = new CamelComparator(camelPos, tiles);
 	}
+	
+	public Tile getTile ( int i )
+	{
+		return tiles[i];
+	}
 
 	//AI Constructor
 	protected Track(Track t) {

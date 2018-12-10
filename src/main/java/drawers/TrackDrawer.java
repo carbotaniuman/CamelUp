@@ -39,6 +39,8 @@ public class TrackDrawer {
 					drawPlus(g, x1, i1);
 				}
 			}
+			else
+				drawMiniDesert(g,track.getTile(i-1).getDesertCard().get().getMoveNum(),x1,i1);
 		}
 		for (int i2 = x1; i2 > 0; i2 -= 160) {
 			g.setColor(new Color(221, 129, 65));
@@ -51,6 +53,8 @@ public class TrackDrawer {
 					drawPlus(g, i2, y1);
 				}
 			}
+			else
+				drawMiniDesert(g,track.getTile(i-1).getDesertCard().get().getMoveNum(),i2,y1);
 		}
 		for (int i3 = 640; i3 > 0; i3 -= 160) {
 			g.setColor(new Color(221, 129, 65));
@@ -63,6 +67,8 @@ public class TrackDrawer {
 					drawPlus(g, x2, i3);
 				}
 			}
+			else
+				drawMiniDesert(g,track.getTile(i-1).getDesertCard().get().getMoveNum(),x2,i3);
 		}
 		for (int i4 = 0; i4 < 640; i4 += 160) {
 			g.setColor(new Color(221, 129, 65));
@@ -75,6 +81,8 @@ public class TrackDrawer {
 					drawPlus(g, i4, y2);
 				}
 			}
+			else
+				drawMiniDesert(g,track.getTile(i-1).getDesertCard().get().getMoveNum(),i4,y2);
 		}
 		for (int i5 = 0; i5 < 320; i5 += 160) {
 			g.setColor(new Color(221, 129, 65));
@@ -87,6 +95,8 @@ public class TrackDrawer {
 					drawPlus(g, x1, i5);
 				}
 			}
+			else
+				drawMiniDesert(g,track.getTile(i-1).getDesertCard().get().getMoveNum(),x1,i5);
 		}
 	}
 
@@ -100,5 +110,13 @@ public class TrackDrawer {
 		g.drawString("+", x + 5, y + 17);
 		g.drawString("-", x + 7, y + 36);
 	}
-
+	
+	private static void drawMiniDesert(Graphics g, int val, int x, int y) {
+		g.setColor(Color.YELLOW);
+		g.fillRect(x, y, 30, 20);
+		g.setColor(Color.BLACK);
+		g.drawRect(x, y, 30, 20);
+		g.setFont(new Font("Serif", Font.PLAIN, 20));
+		g.drawString(val+"", x+10, y+20);
+	}
 }
