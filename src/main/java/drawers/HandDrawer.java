@@ -14,7 +14,7 @@ import immutable.RaceBettingCard;
 import immutable.RoundBettingCard;
 
 public class HandDrawer {
-	public static void drawHand(Graphics g, Player p, List<Player> players) {
+	public static void drawHand(Graphics g, Player p) {
 		Font oldFont = g.getFont();
 		// WholeHand
 		g.setColor(new Color(255, 153, 0));
@@ -57,21 +57,7 @@ public class HandDrawer {
 		int yPos = (100 - (int) textSize.getHeight()) / 2 + fm.getAscent();
 		g.drawString(p.getName() + "'s Balance: " + p.getMoney() + " E£", 180 + xPos, 800 + yPos);
 
-		// Players Data
-		g.setColor(Color.BLACK);
-		g.setFont(new Font("TimesRoman", Font.ITALIC, 35));
-		g.drawString("Player Data", 770, 880);
-		g.setFont(new Font("Monospaced", Font.BOLD, 15));
-		String st = String.format("%-15s %-8s %-10s %-6s", "Name", "RaceBets", "RoundBets", "Money");
-		g.drawString(st, 770, 880 + 20);
-		for (int i = 0; i < players.size(); i++) {
-			Player pl = players.get(i);
-			System.out.println(pl.getName().length());
-			g.setFont(new Font("Monospaced", Font.BOLD, 15));
-			String s = String.format("%-15s %-8d %-10d %-5s", pl.getName(), pl.getRaceBets().size(), pl.getRoundBets().size(),
-					pl.getMoney() + " E£");
-			g.drawString(s, 770, 880 + 20 * (i + 2));
-		}
+		
 		g.setFont(oldFont);
 	}
 }
