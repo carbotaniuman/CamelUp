@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Queue;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 import com.google.common.collect.ImmutableBiMap;
@@ -80,7 +79,7 @@ public class GameState {
 	public Track getTrack() {
 		return track;
 	}
-	
+
 	public Map<Color, TreeSet<RoundBettingCard>> getRoundBets() {
 		return Collections.unmodifiableMap(roundBets);
 	}
@@ -118,7 +117,7 @@ public class GameState {
 			}
 		}
 
-		curPlayerIndex = (curPlayerIndex + 1) % 5;
+		curPlayerIndex = (curPlayerIndex + 1) % players.size();
 		curPlayer = players.get(curPlayerIndex);
 
 		turnIndex++;
@@ -128,7 +127,7 @@ public class GameState {
 
 		}
 	}
-	
+
 	public List<Camel> getCamelRankings() {
 		return track.getCamelRankings();
 	}
