@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Pyramid {
-	private final List<Die> notRolledDice;
-	private final List<Die> rolledDice;
+	private final ArrayList<Die> notRolledDice;
+	private final ArrayList<Die> rolledDice;
 	
 	private Die lastDie;
 
@@ -52,8 +52,9 @@ public class Pyramid {
 	public int getNumDiceNotRolled() {
 		return notRolledDice.size();
 	}
-	
-	public List<Die> getNotRolledDice() {
-		return Collections.unmodifiableList(notRolledDice);
+
+	public ArrayList<Die> getRolledDice()
+	{
+		return rolledDice;
 	}
 }
