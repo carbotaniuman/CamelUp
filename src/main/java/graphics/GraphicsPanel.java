@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import drawers.BoardDrawer;
 import drawers.HandDrawer;
+import drawers.TrackDrawer;
 import game.Die;
 import gamestate.GameState;
 
@@ -27,6 +28,7 @@ public class GraphicsPanel extends JPanel {
 		BoardDrawer.drawBoard(g, gamestate.getRoundBets(), gamestate.getCurPlayer(), gamestate.getPyramid().getRolledDice());
 		BoardDrawer.drawWinBets(g, gamestate.getWinBets());
 		BoardDrawer.drawLoseBets(g, gamestate.getLoseBets());
+		TrackDrawer.drawTrack(g, gamestate.getTrack(), gamestate.getCurPlayer());
 	}
 	
 	@Override
