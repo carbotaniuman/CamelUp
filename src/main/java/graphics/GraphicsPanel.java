@@ -3,6 +3,8 @@ package graphics;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
@@ -17,12 +19,9 @@ public class GraphicsPanel extends JPanel {
 
 	public GraphicsPanel() {
 		gamestate = new GameState();
+		addMouseListener(new GameListener());
 	}
-	public void addRoundBetToPlayer(Color color)
-	{
-		gamestate.placeRoundBet(color);
-		repaint();
-	}
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		HandDrawer.drawHand(g, gamestate.getCurPlayer());
@@ -37,5 +36,23 @@ public class GraphicsPanel extends JPanel {
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(1920, 1080);
+	}
+	
+	class GameListener extends MouseAdapter {
+		@Override
+		public void mousePressed(MouseEvent e) 
+		{
+			int x = e.getX();
+			int y = e.getY();
+			for(int i = 50; i <= 750; i +=150)
+			{
+				if(x > 1050 && x < 1250 && y >i && y < i+150)
+				{
+					gamestate.placeRoundBet(GameState.CAMELCOLORS.get((i-49)/150));
+					repaint();
+				}
+			}
+			
+		}
 	}
 }
