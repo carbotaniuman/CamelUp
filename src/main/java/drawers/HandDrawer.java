@@ -15,6 +15,7 @@ import immutable.RoundBettingCard;
 
 public class HandDrawer {
 	public static void drawHand(Graphics g, Player p, List<Player> players) {
+		Font oldFont = g.getFont();
 		// WholeHand
 		g.setColor(new Color(255, 153, 0));
 		g.fillRect(0, 800, 1920, 280);
@@ -71,5 +72,6 @@ public class HandDrawer {
 					pl.getMoney() + " E£");
 			g.drawString(s, 770, 880 + 20 * (i + 2));
 		}
+		g.setFont(oldFont);
 	}
 }

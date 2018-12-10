@@ -13,9 +13,15 @@ public class Tile {
 	private Optional<DesertCard> trapCard;
 
 	public Tile() {
-		super();
 		camels = new ArrayList<>();
 		trapCard = Optional.empty();
+	}
+	
+	
+	//AI Constructor
+	public Tile(Tile t) {
+		camels = new ArrayList<>(t.camels);
+		trapCard = t.trapCard;
 	}
 
 	public void addDesertCard(DesertCard d) {
@@ -61,7 +67,7 @@ public class Tile {
 	}
 	
 	//-1 no exist, else 0 is top of stack
-	public int getCamelPos(Camel c) {
+	public int getCamelStackPos(Camel c) {
 		return camels.indexOf(c);
 	}
 	

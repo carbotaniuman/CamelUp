@@ -12,6 +12,7 @@ public class TextRunner {
 		while (!game.isGameEnded()) {
 			long turnIndex = game.getTurnIndex();
 			System.out.println("Track:\n" + game.getTrack() + "\n");
+			System.out.println("Camel Rankings:\n" + game.getCamelRankings() + "\n");
 			System.out.println("Played Win Bets:\n" + game.getWinBets() + "\n");
 			System.out.println("Played Lose Bets:\n" + game.getLoseBets() +  "\n");
 			System.out.println("Players:\n" + collectionToString(game.getPlayers()));

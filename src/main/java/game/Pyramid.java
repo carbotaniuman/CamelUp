@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Pyramid {
-	private final ArrayList<Die> notRolledDice;
-	private final ArrayList<Die> rolledDice;
+	private final List<Die> notRolledDice;
+	private final List<Die> rolledDice;
 	
 	private Die lastDie;
 
@@ -20,6 +20,11 @@ public class Pyramid {
 		for (Color c : colors)
 			notRolledDice.add(new Die(c));
 		resetDice();
+	}
+	
+	public Pyramid(Pyramid p) {
+		notRolledDice = new ArrayList<>(p.notRolledDice);
+		rolledDice = new ArrayList<>(p.rolledDice);
 	}
 
 	public Die getRandomDie() {
@@ -43,7 +48,7 @@ public class Pyramid {
 		notRolledDice.forEach(Die::roll);
 	}
 
-	public int getNumNotRolledDice() {
+	public int getNumDiceNotRolled() {
 		return notRolledDice.size();
 	}
 }
