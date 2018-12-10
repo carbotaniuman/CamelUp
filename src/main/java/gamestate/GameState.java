@@ -63,7 +63,7 @@ public class GameState {
 			TreeSet<RoundBettingCard> tree = new TreeSet<RoundBettingCard>();
 			tree.add(new RoundBettingCard(CAMELCOLORS.get(i), 5));
 			tree.add(new RoundBettingCard(CAMELCOLORS.get(i), 3));
-			tree.add(new RoundBettingCard(CAMELCOLORS.get(i), 2));
+			tree.add(new RoundBettingCard(CAMELCOLORS.get(i), 1));
 			roundBets.put(CAMELCOLORS.get(i), tree);
 		}
 
@@ -190,8 +190,8 @@ public class GameState {
 					break;
 				}
 			}
-			players.get(index).addRoundBet(roundBets.get(c).last());
-
+			players.get(index).addRoundBet(roundBets.get(c).first());
+			
 			this.commitTurn();
 		}
 	}
