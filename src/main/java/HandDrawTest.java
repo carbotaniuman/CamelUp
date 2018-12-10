@@ -61,7 +61,7 @@ public class HandDrawTest extends JPanel
 			Player p = new Player(GameState.names[i], GameState.CAMELCOLORS);
 			plyrs.add(p);
 		}
-		HandDrawer.drawHand(g, pl, plyrs);
+		//HandDrawer.drawHand(g, pl, plyrs);
 		Map<Color,TreeSet<RoundBettingCard>> roundBets = new HashMap<Color, TreeSet<RoundBettingCard>>();
 		for (int i = 0; i < 5; i++) {
 			TreeSet<RoundBettingCard> tree = new TreeSet<RoundBettingCard>();
@@ -105,10 +105,10 @@ public class HandDrawTest extends JPanel
 		dice.add( new Die(Color.ORANGE));
 		for( int d = 0; d < dice.size(); d++ )
 			dice.get(d).roll();
-		BoardDrawer.drawBoard(g, roundBets, pl, dice);
+		//BoardDrawer.drawBoard(g, roundBets, pl, dice);
 		BoardDrawer.drawWinBets(g, winQue);
 		BoardDrawer.drawLoseBets(g, loseQue);
-		HandDrawer.drawHand(g, pl, plyrs);
+		//HandDrawer.drawHand(g, pl, plyrs);
 		requestFocus();
 	}
 }
