@@ -94,24 +94,8 @@ public class BoardDrawer {
 			}
 			d++;
 		}
-		// Players Data
-		g.setColor(Color.BLACK);
-		g.setFont(new Font("TimesRoman", Font.ITALIC, 35));
-		g.drawString("Player Data", 1530, 370);
-		g.setFont(new Font("Monospaced", Font.BOLD, 15));
-		String st = String.format("%-15s %-8s %-10s %-6s", "Name", "RaceBets", "RoundBets", "Money");
-		g.drawString(st, 1400, 390 + 20);
-		for (int i1 = 0; i1 < players.size(); i1++) {
-			Player player = players.get(i1);
-			//System.out.println(pl.getName().length());
-			g.setFont(new Font("Monospaced", Font.BOLD, 15));
-			String s = String.format("%-15s %-8d %-10d %-5s", player.getName(), player.getRaceBets().size(), player.getRoundBets().size(),
-					player.getMoney() + " E£");
-			g.drawString(s, 1400, 390 + 20 * (i1 + 2));
-		}
+		drawPlayerData(g, players);
 		g.setFont(currentFont);
-		
-		
 	}
 
 	public static void drawWinBets(Graphics g, Queue<RaceBettingCard> cards) {
@@ -152,5 +136,23 @@ public class BoardDrawer {
 			g.fillOval(x + 40, y + 40, 10, 10);
 		}
 	}
-
+	public static void drawPlayerData(Graphics g, List<Player> players)
+	{
+		// Players Data
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("TimesRoman", Font.ITALIC, 40));
+		g.drawString("Player Data", 1530, 380);
+		g.setFont(new Font("Monospaced", Font.BOLD, 24));
+		String st = String.format("%-15s %-8s %-10s %-6s", "Name", "RaceBets", "RoundBets", "Money");
+		g.drawString(st, 1320, 410 + 33);
+		for (int i1 = 0; i1 < players.size(); i1++) 
+		{
+			Player player = players.get(i1);
+			//System.out.println(pl.getName().length());
+			g.setFont(new Font("Monospaced", Font.BOLD, 24));
+			String s = String.format("%-15s %-8d %-10d %-5s", player.getName(), player.getRaceBets().size(), player.getRoundBets().size(),
+			player.getMoney() + " E£");
+			g.drawString(s, 1320, 410 + 33 * (i1 + 2));
+		}
+	}
 }
