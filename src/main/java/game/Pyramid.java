@@ -2,6 +2,7 @@ package game;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -50,5 +51,9 @@ public class Pyramid {
 
 	public int getNumDiceNotRolled() {
 		return notRolledDice.size();
+	}
+	
+	public List<Die> getNotRolledDice() {
+		return Collections.unmodifiableList(notRolledDice);
 	}
 }

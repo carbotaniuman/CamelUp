@@ -20,7 +20,7 @@ public class GraphicsPanel extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		HandDrawer.drawHand(g, gamestate.getCurPlayer(), gamestate.getPlayers());
-		BoardDrawer.drawBoard(g, gamestate.getRoundBets());
+		BoardDrawer.drawBoard(g, gamestate.getRoundBets(), gamestate.getCurPlayer(), gamestate.getPyramid().getNotRolledDice());
 		BoardDrawer.drawWinBets(g, gamestate.getWinBets());
 		BoardDrawer.drawLoseBets(g, gamestate.getLoseBets());
 	}

@@ -25,6 +25,7 @@ public class HandDrawTest extends JPanel
 	public static void main(String[] args)
 	{
 		JFrame f = new JFrame();
+		f.setBackground(new Color(255, 213, 93));
 		f.add(new HandDrawTest());
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -71,27 +72,27 @@ public class HandDrawTest extends JPanel
 		}
 		Queue<RaceBettingCard> winQue = new LinkedList<RaceBettingCard>();
 		winQue.offer ( new RaceBettingCard(Color.GREEN, pl));
-		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
-		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));
-		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
-		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));
-		winQue.offer ( new RaceBettingCard(Color.GREEN, pl));
-		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
-		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));
-		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
-		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));		
+//		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
+//		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));
+//		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
+//		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));
+//		winQue.offer ( new RaceBettingCard(Color.GREEN, pl));
+//		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
+//		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));
+//		winQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
+//		winQue.offer ( new RaceBettingCard(Color.WHITE, pl));		
 		Queue<RaceBettingCard> loseQue = new LinkedList<RaceBettingCard>();
 		loseQue.offer ( new RaceBettingCard(Color.GREEN, pl));
-		loseQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
-		loseQue.offer ( new RaceBettingCard(Color.WHITE, pl));
-		loseQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
-		loseQue.offer ( new RaceBettingCard(Color.WHITE, pl));
-		loseQue.offer ( new RaceBettingCard(Color.GREEN, pl));
-		loseQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
-		loseQue.offer ( new RaceBettingCard(Color.WHITE, pl));
-		loseQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
-		loseQue.offer ( new RaceBettingCard(Color.WHITE, pl));
-		loseQue.offer ( new RaceBettingCard(Color.GREEN, pl));
+//		loseQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
+//		loseQue.offer ( new RaceBettingCard(Color.WHITE, pl));
+//		loseQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
+//		loseQue.offer ( new RaceBettingCard(Color.WHITE, pl));
+//		loseQue.offer ( new RaceBettingCard(Color.GREEN, pl));
+//		loseQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
+//		loseQue.offer ( new RaceBettingCard(Color.WHITE, pl));
+//		loseQue.offer ( new RaceBettingCard(Color.YELLOW, pl));
+//		loseQue.offer ( new RaceBettingCard(Color.WHITE, pl));
+//		loseQue.offer ( new RaceBettingCard(Color.GREEN, pl));
 		ArrayList<Die> dice = new ArrayList<Die>();
 		//dice.add( new Die(new Color(51, 153, 255)));
 		//whenever I add this line in it causes nothing to be drawn
@@ -107,6 +108,7 @@ public class HandDrawTest extends JPanel
 		BoardDrawer.drawBoard(g, roundBets, pl, dice);
 		BoardDrawer.drawWinBets(g, winQue);
 		BoardDrawer.drawLoseBets(g, loseQue);
+		HandDrawer.drawHand(g, pl, plyrs);
 		requestFocus();
 	}
 }

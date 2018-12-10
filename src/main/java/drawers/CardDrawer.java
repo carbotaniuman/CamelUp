@@ -61,11 +61,17 @@ public class CardDrawer {
 
 	public static void drawRaceBettingCard(Graphics g, int x, int y, Color c, Player p) {
 		Font oldFont = g.getFont();
-		g.setColor(Color.LIGHT_GRAY);
+		g.setColor(new Color(144, 92, 70));
 		g.fillRect(x, y, 150, 180);
 		g.setColor(Color.BLACK);
 		g.drawRect(x, y, 150, 180);
-
+		
+		Graphics2D g2 = (Graphics2D)g;
+		Stroke oldStroke = g2.getStroke();
+		g2.setStroke(new BasicStroke(4));
+		g.drawOval(x + (150 - 140) / 2, y + (180 - 140) / 2, 140, 140);
+		g2.setStroke(oldStroke);
+		
 		g.setColor(c);
 		g.fillOval(x + (150 - 140) / 2, y + (180 - 140) / 2, 140, 140);
 
@@ -82,13 +88,13 @@ public class CardDrawer {
 	
 	public static void drawPlacedRaceBettingCard(Graphics g, int x, int y, Color c, Player p) {
 		Font oldFont = g.getFont();
-		g.setColor(new Color(138, 85, 69));
+		g.setColor(new Color(144, 92, 70));
 		g.fillRect(x, y, 150, 180);
 		g.setColor(Color.BLACK);
 		
 		Graphics2D g2 = (Graphics2D)g;
 		Stroke oldStroke = g2.getStroke();
-		g2.setStroke(new BasicStroke(5));
+		g2.setStroke(new BasicStroke(2));
 		g.drawRect(x, y, 150, 180);
 		g2.setStroke(oldStroke);
 

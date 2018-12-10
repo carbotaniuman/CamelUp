@@ -12,7 +12,7 @@ public class AITrack extends Track {
 	public AITrack(Track t) {
 		super(t);
 	}
-	
+
 	public void moveCamel(Color color, int rolled) {
 		Camel c = camels.get(color);
 
