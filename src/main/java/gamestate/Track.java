@@ -146,6 +146,22 @@ public class Track {
 
 		return !tiles[tileNum + 1].getDesertCard().isPresent();
 	}
+	
+	public boolean canMoveCard(int origNum, int newNum) {
+		if (newNum <= 0)
+			return false;
+
+		if (!tiles[newNum].getCamels().isEmpty() || tiles[newNum].getDesertCard().isPresent())
+			return false;
+
+		if (newNum - 1 != origNum && tiles[newNum - 1].getDesertCard().isPresent())
+			return false;
+
+		if (newNum == 15)
+			return true;
+
+		return !(newNum - 1 != origNum && tiles[newNum + 1].getDesertCard().isPresent());
+	}
 
 	public void placeDesertCard(Optional<DesertCard> old, DesertCard d, int tileNum) {
 		if (old.isPresent()) {
