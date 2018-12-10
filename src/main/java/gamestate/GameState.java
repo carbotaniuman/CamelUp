@@ -5,6 +5,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -114,6 +115,13 @@ public class GameState {
 			track.removeAllDesertCards();
 			for (Player p : players) {
 				p.removeDesertCard();
+
+//				Iterator<RoundBettingCard> i = p.getRoundBets().iterator();
+//				while (i.hasNext()) {
+//					RoundBettingCard rbc = i.next();
+//					roundBets.get(rbc.getColor()).add(rbc);
+//					i.remove();
+//				}
 			}
 		}
 
@@ -176,7 +184,6 @@ public class GameState {
 	}
 
 	public void placeRoundBet(Color c) {
-		System.out.println(c);
 		if (gameEnded) {
 			throw new IllegalStateException("Game has ended");
 		}

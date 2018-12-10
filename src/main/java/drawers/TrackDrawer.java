@@ -12,7 +12,7 @@ public class TrackDrawer {
 	public static void drawTrack(Graphics g, Track track, Player player) {
 		// drawing the pyramid
 		g.setColor(Color.ORANGE);
-		g.fillRect(160, 160, 640, 640);
+		g.fillRect(160, 160, 480, 480);
 		g.setColor(Color.BLACK);
 		g.drawLine(160, 160, 640, 640);
 		g.drawLine(640, 160, 160, 640);
@@ -20,7 +20,7 @@ public class TrackDrawer {
 		g.drawRect(200, 200, 400, 400);
 		g.drawRect(280, 280, 240, 240);
 		g.drawRect(320, 320, 160, 160);
-		g.setColor(Color.ORANGE);
+		g.setColor(new Color(135, 206, 235));
 		g.fillRect(321, 321, 159, 159);
 		// drawing the track
 		int x1 = 640;
@@ -88,6 +88,7 @@ public class TrackDrawer {
 				}
 			}
 		}
+		
 	}
 
 	private static void drawPlus(Graphics g, int x, int y) {

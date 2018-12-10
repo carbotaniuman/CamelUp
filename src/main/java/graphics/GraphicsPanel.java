@@ -1,6 +1,5 @@
 package graphics;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
@@ -41,6 +40,10 @@ public class GraphicsPanel extends JPanel {
 	class GameListener extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {
+			if(gamestate.isGameEnded()) {
+				return;
+			}
+			
 			int x = e.getX();
 			int y = e.getY();
 			for (int i = 50; i <= 750; i += 150) {
@@ -49,7 +52,11 @@ public class GraphicsPanel extends JPanel {
 					repaint();
 				}
 			}
-
+			
+			if (x > 160 && x < 640 && y > 160 && y < 640) {
+				gamestate.moveCamel();
+				repaint();
+			}
 		}
 	}
 }
