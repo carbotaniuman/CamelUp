@@ -20,11 +20,7 @@ import immutable.RaceBettingCard;
 import immutable.RoundBettingCard;
 
 public class BoardDrawer {
-	/*
-	 * Queue<RaceBettingCard> winRaces, Queue<RaceBettingCard> loseRaces,
-	 * ArrayList<Die> dice
-	 */
-	public static void drawBoard(Graphics g, Map<Color, TreeSet<RoundBettingCard>> cards, Player pl, List<Die> dice, List<Player> players) {
+	public static void drawBoard(Graphics g, Map<Color, TreeSet<RoundBettingCard>> cards, Player pl, List<Die> dice) {
 		// draws the board outline
 		g.setColor(new Color(255, 213, 93));
 		g.fillRect(800, 0, 1120, 800);
@@ -77,7 +73,7 @@ public class BoardDrawer {
 			textSize = fm.getStringBounds("_", g);
 			xPos = (124 - (int) textSize.getWidth()) / 2;
 			yPos = (40 - (int) textSize.getHeight()) / 2 + fm.getAscent();
-			g.drawString("_", x + xPos, 10 + yPos);
+			g.drawString("_", x + xPos, 8 + yPos);
 		}
 
 		// draws the die
@@ -94,7 +90,6 @@ public class BoardDrawer {
 			}
 			d++;
 		}
-		drawPlayerData(g, players);
 		g.setFont(currentFont);
 	}
 
