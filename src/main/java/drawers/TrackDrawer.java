@@ -34,9 +34,9 @@ public class TrackDrawer {
 			g.setColor(Color.BLACK);
 			g.drawRect(x1, i1, 160, 160);
 			player.getDesertCard();
-			if (Optional.empty().isPresent()) {
+			if (!Optional.empty().isPresent()) {
 				if (track.canPlaceCard(i++)) {
-					drawPlus(g, i, x1, i1, player, track);
+					drawPlus(g, i, x1, i1);
 				}
 			}
 		}
@@ -46,9 +46,9 @@ public class TrackDrawer {
 			g.setColor(Color.BLACK);
 			g.drawRect(i2, y1, 160, 160);
 			player.getDesertCard();
-			if (Optional.empty().isPresent()) {
+			if (!Optional.empty().isPresent()) {
 				if (track.canPlaceCard(i++)) {
-					drawPlus(g, i, i2, y1, player, track);
+					drawPlus(g, i, i2, y1);
 				}
 			}
 		}
@@ -58,9 +58,9 @@ public class TrackDrawer {
 			g.setColor(Color.BLACK);
 			g.drawRect(x2, i3, 160, 160);
 			player.getDesertCard();
-			if (Optional.empty().isPresent()) {
+			if (!Optional.empty().isPresent()) {
 				if (track.canPlaceCard(i++)) {
-					drawPlus(g, i, x2, i3, player, track);
+					drawPlus(g, i, x2, i3);
 				}
 			}
 		}
@@ -70,9 +70,9 @@ public class TrackDrawer {
 			g.setColor(Color.BLACK);
 			g.drawRect(i4, y2, 160, 160);
 			player.getDesertCard();
-			if (Optional.empty().isPresent()) {
+			if (!Optional.empty().isPresent()) {
 				if (track.canPlaceCard(i++)) {
-					drawPlus(g, i, 14, y2, player, track);
+					drawPlus(g, i, i4, y2);
 				}
 			}
 		}
@@ -82,28 +82,23 @@ public class TrackDrawer {
 			g.setColor(Color.BLACK);
 			g.drawRect(x1, i5, 160, 160);
 			player.getDesertCard();
-			if (Optional.empty().isPresent()) {
+			if (!Optional.empty().isPresent()) {
 				if (track.canPlaceCard(i++)) {
-					drawPlus(g, i, x1, i5, player, track);
+					drawPlus(g, i, x1, i5);
 				}
 			}
 		}
 	}
 
-	private static void drawPlus(Graphics g, int i, int x, int y, Player pl, Track track) {
-		pl.getDesertCard();
-		if (Optional.empty().isPresent()) {
-			if (track.canPlaceCard(i++)) {
-				g.setColor(Color.YELLOW);
-				g.fillRect(x, y, 20, 40);
-				g.setColor(Color.BLACK);
-				g.drawRect(x, y, 20, 40);
-				g.drawLine(x, y + 20, x + 20, y + 20);
-				g.setFont(new Font("Serif", Font.PLAIN, 20));
-				g.drawString("+", x + 5, y + 17);
-				g.drawString("-", x + 7, y + 36);
-			}
-		}
+	private static void drawPlus(Graphics g, int i, int x, int y) {
+		g.setColor(Color.YELLOW);
+		g.fillRect(x, y, 20, 40);
+		g.setColor(Color.BLACK);
+		g.drawRect(x, y, 20, 40);
+		g.drawLine(x, y + 20, x + 20, y + 20);
+		g.setFont(new Font("Serif", Font.PLAIN, 20));
+		g.drawString(i+"", x + 5, y + 17);
+		g.drawString("-", x + 7, y + 36);
 	}
 
 }
