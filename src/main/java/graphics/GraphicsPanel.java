@@ -2,10 +2,6 @@ package graphics;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -29,7 +25,8 @@ public class GraphicsPanel extends JPanel {
 		TrackDrawer.drawTrack(g, gamestate.getTrack(), gamestate.getCurPlayer());
 	}
 	@Override
-	public Dimension getPreferredSize() {
+	public Dimension getPreferredSize() 
+	{
 		return new Dimension(1920, 1080);
 	}
 }
