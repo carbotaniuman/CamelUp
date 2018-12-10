@@ -1,4 +1,4 @@
-package drawers;
+package graphics.drawers;
 
 import java.awt.Color;
 import java.awt.Font;

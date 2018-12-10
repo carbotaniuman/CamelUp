@@ -1,0 +1,104 @@
+package graphics;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.geom.Rectangle2D;
+
+import javax.swing.AbstractAction;
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
+
+public class MenuPanel extends JPanel {
+
+	private static final long serialVersionUID = -58760937816298343L;
+	private JPanel curShow;
+	private MenuListener listener;
+
+	public MenuPanel() {
+		listener = new MenuListener();
+		addMouseListener(listener);
+
+		getInputMap().put(KeyStroke.getKeyStroke("ESCAPE"), "BackToMenu");
+		getActionMap().put("BackToMenu", new AbstractAction() {
+			private static final long serialVersionUID = 7596895278099231841L;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(curShow != null) {
+					remove(curShow);
+					curShow = null;
+					revalidate();
+					addMouseListener(listener);
+					repaint();
+				}
+			}
+		});
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		g.setColor(new Color(255, 213, 93));
+		g.fillRect(0, 0, 1920, 1080);
+
+		g.setColor(Color.BLACK);
+
+		Font oldFont = g.getFont();
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 90));
+		FontMetrics fm = g.getFontMetrics();
+		Rectangle2D textSize = fm.getStringBounds("Camel Up", g);
+		int xPos = (1920 - (int) textSize.getWidth()) / 2;
+		g.drawString("Camel Up", xPos, 300);
+
+		g.drawRect((1920 - 300) / 2, 400, 300, 100);
+		g.drawRect((1920 - 300) / 2, 550, 300, 100);
+		g.drawRect((1920 - 300) / 2, 700, 300, 100);
+
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 50));
+		fm = g.getFontMetrics();
+		textSize = fm.getStringBounds("Play Game", g);
+		xPos = (300 - (int) textSize.getWidth()) / 2;
+		int yPos = (100 - (int) textSize.getHeight()) / 2 + fm.getAscent();
+		g.drawString("Play Game", (1920 - 300) / 2 + xPos, 400 + yPos);
+
+		textSize = fm.getStringBounds("Credits", g);
+		xPos = (300 - (int) textSize.getWidth()) / 2;
+		yPos = (100 - (int) textSize.getHeight()) / 2 + fm.getAscent();
+		g.drawString("Credits", (1920 - 300) / 2 + xPos, 550 + yPos);
+
+		textSize = fm.getStringBounds("Exit", g);
+		xPos = (300 - (int) textSize.getWidth()) / 2;
+		yPos = (100 - (int) textSize.getHeight()) / 2 + fm.getAscent();
+		g.drawString("Exit", (1920 - 300) / 2 + xPos, 700 + yPos);
+
+		g.setFont(oldFont);
+	}
+
+	@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(1920, 1080);
+	}
+
+	private class MenuListener extends MouseAdapter {
+		@Override
+		public void mousePressed(MouseEvent e) {
+			int x = e.getX();
+			int y = e.getY();
+			if (x > (1920 - 300) / 2 && x < (1920 - 300) / 2 + 300 && y > 400 && y < 500) {
+				removeMouseListener(listener);
+				curShow = new GameStartPanel();
+				add(curShow);
+				revalidate();
+				repaint();
+			}
+			
+			if (x > (1920 - 300) / 2 && x < (1920 - 300) / 2 + 300 && y > 700 && y < 800) {
+				System.exit(0);
+			}
+		}
+	}
+}

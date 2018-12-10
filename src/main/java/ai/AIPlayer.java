@@ -41,7 +41,6 @@ public class AIPlayer extends Player {
 			roundSec.put(rank.get(1), roundSec.getOrDefault(rank.get(1), 0) + 1);
 		}
 
-//		Map<Color, TreeSet<RoundBettingCard>>
 		for (Camel c : roundWin.keySet()) {
 			int roundVMax = g.getRoundBets().get(c.getColor()).first().getPoints();
 

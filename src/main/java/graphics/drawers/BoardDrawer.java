@@ -1,4 +1,4 @@
-package drawers;
+package graphics.drawers;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
