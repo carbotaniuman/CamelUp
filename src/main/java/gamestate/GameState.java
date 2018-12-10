@@ -181,16 +181,7 @@ public class GameState {
 		}
 
 		if (roundBets.containsKey(c) && !roundBets.get(c).isEmpty()) {
-			Player p = this.curPlayer;
-			int index = -1;
-			for (int i = 0; i < players.size(); i++) // change if no name for player
-			{
-				if (p.getName().equals(players.get(i).getName())) {
-					index = i;
-					break;
-				}
-			}
-			players.get(index).addRoundBet(roundBets.get(c).last());
+			curPlayer.addRoundBet(roundBets.get(c).pollFirst());
 
 			this.commitTurn();
 		}
