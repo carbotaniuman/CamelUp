@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import drawers.BoardDrawer;
 import drawers.HandDrawer;
 import drawers.TrackDrawer;
-import game.Die;
 import gamestate.GameState;
 
 public class GraphicsPanel extends JPanel {

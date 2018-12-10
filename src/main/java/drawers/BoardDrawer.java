@@ -26,8 +26,8 @@ public class BoardDrawer {
 	 */
 	public static void drawBoard(Graphics g, Map<Color, TreeSet<RoundBettingCard>> cards, Player pl, List<Die> dice) {
 		// draws the board outline
-		g.drawRect(0, 0, 1920, 1080);
-
+		g.setColor(new Color(255, 213, 93));
+		g.fillRect(800, 0, 1120, 800);
 		g.setColor(Color.BLACK);
 		g.drawRect(1300, 80, 310, 250);
 		g.drawRect(1300 + 310, 80, 310, 250);
