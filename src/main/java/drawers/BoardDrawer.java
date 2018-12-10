@@ -54,28 +54,45 @@ public class BoardDrawer {
 		}
 
 		// draws the buttons for the raceBettingCards
-		g.setFont(new Font("TimesRoman", Font.PLAIN, 60));
-		for (int x = 1300, count = 0; x < 1920; x += 124, count++) {
-			g.setColor(GameState.CAMELCOLORS.get(count));
-			g.fillRect(x, 0, 124, 40);
-			g.fillRect(x, 40, 124, 40);
-			g.setColor(Color.BLACK);
-			g.drawRect(x, 0, 124, 40);
-			g.drawRect(x, 40, 124, 40);
+		for(int x = 1300; x <= 1796; x += 124) {
+			drawRaceBetButton(g, Color.GRAY, x);
+			drawRaceBetButton(g, Color.GRAY, x);
+			drawRaceBetButton(g, Color.GRAY, x);
+			drawRaceBetButton(g, Color.GRAY, x);
+			drawRaceBetButton(g, Color.GRAY, x);
+		}
+		
+		for (int i = 0; i < pl.getRaceBets().size(); i++) {
+			RaceBettingCard rbc = pl.getRaceBets().get(i);
 
-			fm = g.getFontMetrics();
-			textSize = fm.getStringBounds("+", g);
-			xPos = (124 - (int) textSize.getWidth()) / 2;
-			yPos = (40 - (int) textSize.getHeight()) / 2 + fm.getAscent();
-			g.drawString("+", x + xPos, yPos);
-			textSize = fm.getStringBounds("_", g);
-			xPos = (124 - (int) textSize.getWidth()) / 2;
-			yPos = (40 - (int) textSize.getHeight()) / 2 + fm.getAscent();
-			g.drawString("_", x + xPos, 8 + yPos);
+			if (rbc.getColor().equals(GameState.CAMELCOLORS.get(0))) // WHITE
+				drawRaceBetButton(g, rbc.getColor(), 1300);
+			else if (rbc.getColor().equals((GameState.CAMELCOLORS.get(1))))// ORANGE
+				drawRaceBetButton(g, rbc.getColor(), 1424);
+			else if (rbc.getColor().equals((GameState.CAMELCOLORS.get(2))))// YELLOW
+				drawRaceBetButton(g, rbc.getColor(), 1548);
+			else if (rbc.getColor().equals((GameState.CAMELCOLORS.get(3)))) // GREEN
+				drawRaceBetButton(g, rbc.getColor(), 1672);
+			else if (rbc.getColor().equals((GameState.CAMELCOLORS.get(4))))// BLUE
+				drawRaceBetButton(g, rbc.getColor(), 1796);
+		}
+
+		for (int i = 0; i < dice.size(); i++) {
+			Die d = dice.get(i);
+			if (d.getColor().equals(GameState.CAMELCOLORS.get(0))) // WHITE
+				drawDie(g, d, 890, 50 + 10);
+			else if (d.getColor().equals((GameState.CAMELCOLORS.get(1))))// ORANGE
+				drawDie(g, d, 890, 200 + 10);
+			else if (d.getColor().equals((GameState.CAMELCOLORS.get(2))))// YELLOW
+				drawDie(g, d, 890, 350 + 10);
+			else if (d.getColor().equals((GameState.CAMELCOLORS.get(3)))) // GREEN
+				drawDie(g, d, 890, 500 + 10);
+			else if (d.getColor().equals((GameState.CAMELCOLORS.get(4))))// BLUE
+				drawDie(g, d, 890, 650 + 10);
 		}
 
 		// draws the die
-		
+
 		for (int y = 50, c = 0; y <= 750; y += 150, c++) {
 			g.setColor(GameState.CAMELCOLORS.get(c));
 			g.fillRect(870, y, 100, 80);
@@ -116,7 +133,29 @@ public class BoardDrawer {
 		}
 	}
 
-	public static void drawDie(Graphics g, Die die, int x, int y) {
+	private static void drawRaceBetButton(Graphics g, Color c, int x) {
+		Font oldFont = g.getFont();
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 60));
+		g.setColor(c);
+		g.fillRect(x, 0, 124, 40);
+		g.fillRect(x, 40, 124, 40);
+		g.setColor(Color.BLACK);
+		g.drawRect(x, 0, 124, 40);
+		g.drawRect(x, 40, 124, 40);
+
+		FontMetrics fm = g.getFontMetrics();
+		Rectangle2D textSize = fm.getStringBounds("+", g);
+		int xPos = (124 - (int) textSize.getWidth()) / 2;
+		int yPos = (40 - (int) textSize.getHeight()) / 2 + fm.getAscent();
+		g.drawString("+", x + xPos, yPos);
+		textSize = fm.getStringBounds("_", g);
+		xPos = (124 - (int) textSize.getWidth()) / 2;
+		yPos = (40 - (int) textSize.getHeight()) / 2 + fm.getAscent();
+		g.drawString("_", x + xPos, 8 + yPos);
+		g.setFont(oldFont);
+	}
+
+	private static void drawDie(Graphics g, Die die, int x, int y) {
 		g.setColor(die.getColor());
 		g.fillRect(x, y, 60, 60);
 		g.setColor(Color.BLACK);

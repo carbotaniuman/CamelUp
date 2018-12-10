@@ -1,8 +1,6 @@
-package graphics;
-
 import javax.swing.JFrame;
 
-import gamestate.GameState;
+import graphics.GraphicsPanel;
 
 public class GraphicsRunner {
 	public static void main(String[] args)
