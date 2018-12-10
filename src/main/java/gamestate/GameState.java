@@ -115,16 +115,19 @@ public class GameState {
 			track.removeAllDesertCards();
 			for (Player p : players) {
 				p.removeDesertCard();
-
-//				Iterator<RoundBettingCard> i = p.getRoundBets().iterator();
-//				while (i.hasNext()) {
-//					RoundBettingCard rbc = i.next();
-//					roundBets.get(rbc.getColor()).add(rbc);
-//					i.remove();
-//				}
 			}
 		}
-
+		boolean flag = false;
+		for(Player p : players) {
+			for(RoundBettingCard r : p.getRoundBets()) {
+				if(r.getColor().equals(getCamelRankings().get(0).getColor())) {
+					p.setMoney(p.getMoney() + r.getPoints());
+					flag = true;
+				}
+				if(!flag && p.getRoundBets().size() > 0)
+					p.setMoney(p.getMoney() -1);
+			}
+		}
 		curPlayerIndex = (curPlayerIndex + 1) % players.size();
 		curPlayer = players.get(curPlayerIndex);
 
