@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import drawers.BoardDrawer;
 import drawers.HandDrawer;
+import drawers.TrackDrawer;
 import game.Die;
 import gamestate.GameState;
 import gamestate.Player;
@@ -93,6 +94,10 @@ public class HandDrawTest extends JPanel
 		loseQue.offer ( new RaceBettingCard(Color.GREEN, pl));
 		ArrayList<Die> dice = new ArrayList<Die>();
 		//dice.add( new Die(new Color(51, 153, 255)));
+		//whenever I add this line in it causes nothing to be drawn
+		//for whatever reason it works fine when the color is Color.BLUE here and in GameState.CAMELCOLORS 
+		//I think it's linked to the new Color(51, 153, 255)
+		//Other than that the rest of the die print out right
 		dice.add( new Die(Color.GREEN));
 		dice.add( new Die(Color.YELLOW));
 		dice.add( new Die(Color.WHITE));
@@ -102,7 +107,6 @@ public class HandDrawTest extends JPanel
 		BoardDrawer.drawBoard(g, roundBets, pl, dice);
 		BoardDrawer.drawWinBets(g, winQue);
 		BoardDrawer.drawLoseBets(g, loseQue);
-		
 		requestFocus();
 	}
 }
