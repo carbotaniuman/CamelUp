@@ -132,7 +132,7 @@ public class Track {
 	}
 
 	public boolean canPlaceCard(int tileNum) {
-		if (tileNum <= 0)
+		if (tileNum <= 1)
 			return false;
 
 		if (!tiles[tileNum].getCamels().isEmpty() || tiles[tileNum].getDesertCard().isPresent())
