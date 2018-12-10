@@ -44,7 +44,7 @@ public class GraphicsPanel extends JPanel {
 			int x = e.getX();
 			int y = e.getY();
 			for (int i = 50; i <= 750; i += 150) {
-				if (x > 1050 && x < 1250 && y > i && y < i + 150) {
+				if (x > 1050 && x < 1250 && y > i && y < i + 80) {
 					gamestate.placeRoundBet(GameState.CAMELCOLORS.get((i - 49) / 150));
 					repaint();
 				}
