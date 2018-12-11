@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Rectangle2D;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -17,6 +18,7 @@ import drawers.BoardDrawer;
 import drawers.HandDrawer;
 import drawers.TrackDrawer;
 import gamestate.GameState;
+import gamestate.Player;
 import gamestate.GameListener;
 
 public class GamePanel extends JPanel implements MouseListener, GameListener {
@@ -48,6 +50,21 @@ public class GamePanel extends JPanel implements MouseListener, GameListener {
 			Rectangle2D textSize = fm.getStringBounds("Game Over", g);
 			int xPos = (1920 - (int) textSize.getWidth()) / 2;
 			g.drawString("Game Over", xPos, 500);
+			
+			List<Player> players = gamestate.getPlayers();
+			g.setColor(Color.BLACK);
+			g.setFont(new Font("TimesRoman", Font.ITALIC, 40));
+			g.drawString("Player Data", 1130, 500); // 1530 , 380
+			g.setFont(new Font("Monospaced", Font.BOLD, 24));
+			String st = String.format("%-15s %-8s %-10s %-6s", "Name", "RaceBets", "RoundBets", "Money");
+			g.drawString(st, 920, 530 + 33);
+			for (int i1 = 0; i1 < players.size(); i1++) {
+				Player player = players.get(i1);
+				g.setFont(new Font("Monospaced", Font.BOLD, 24));
+				String s = String.format("%-15s %-8d %-10d %-5s", player.getName(), player.getRaceBets().size(),
+						player.getRoundBets().size(), player.getMoney() + " EP");
+				g.drawString(s, 920, 530 + 33 * (i1 + 2));
+			}
 			
 		}
 		else {
