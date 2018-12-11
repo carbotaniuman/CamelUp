@@ -9,6 +9,8 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Rectangle2D;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -52,16 +54,18 @@ public class GamePanel extends JPanel implements MouseListener, GameListener {
 			g.drawString("Game Over", xPos, 500);
 			
 			List<Player> players = gamestate.getPlayers();
-			g.setColor(Color.BLACK);
-			g.setFont(new Font("Monospaced", Font.BOLD, 24));
-			String st = String.format("%-15s %-7s", "Name", "Money");
-			g.drawString(st, 820, 580 + 33);
+			int max = Integer.MIN_VALUE;
+			Player winner = null;
 			for (int i1 = 0; i1 < players.size(); i1++) {
 				Player player = players.get(i1);
-				g.setFont(new Font("Monospaced", Font.BOLD, 24));
-				String s = String.format("%-15s %-8s", player.getName(), player.getMoney() + " EP");
-				g.drawString(s, 820, 580 + 33 * (i1 + 2));
+				if(player.getMoney() > max) {
+					max = player.getMoney();
+					winner = player;
+				}
 			}
+			g.setFont(new Font("Monospaced", Font.BOLD, 50));
+			String s = "WINNER: " + winner.getName() + " " + winner.getMoney() + " EP";
+			g.drawString(s, 560, 580 + 33 * (0 + 2));
 			g.setFont(oldFont);
 		}
 		else {
