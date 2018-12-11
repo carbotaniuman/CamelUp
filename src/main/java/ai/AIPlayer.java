@@ -131,7 +131,7 @@ public class AIPlayer extends Player {
 	}
 
 	private static class GameSimulator {
-		private Track track;
+		private AITrack track;
 		private Pyramid pyramid;
 
 		public GameSimulator(Track t, Pyramid p) {

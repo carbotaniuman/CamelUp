@@ -20,7 +20,7 @@ public class AITrack extends Track {
 		int oldPos = camelPos.get(c);
 		int cPosOnTile = tiles[oldPos % 16].getCamelStackPos(c);
 		List<Camel> list = tiles[oldPos % 16].getCamels().subList(0, cPosOnTile + 1);
-
+		System.out.println("!!!!!!!!!!!!!!!!!" + Thread.currentThread().getName());
 		Tile newTile = tiles[(oldPos + rolled) % 16];
 
 		if (newTile.getDesertCard().isPresent()) {
@@ -36,7 +36,8 @@ public class AITrack extends Track {
 				newTile = tiles[(oldPos + rolled - 1) % 16];
 
 				newTile.addCamelsBot(list);
-
+				System.out.println("!!!!!!!!!!!!!!!!!" + Thread.currentThread().getName());
+				System.out.println(list);
 				for (Camel camel : list) {
 					camelPos.put(camel, oldPos + rolled - 1);
 				}
