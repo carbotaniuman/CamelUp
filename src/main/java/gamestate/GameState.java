@@ -101,11 +101,8 @@ public class GameState {
 	}
 	
 	private synchronized void processAITurn() {
-		System.out.println("U");
 		if(curPlayer instanceof AIPlayer) {
-			System.out.println("E");
 			AIAction act = ((AIPlayer)curPlayer).getAction();
-			System.out.println(act);
 			long turn = turnIndex;
 			act.act(this);
 			if(turnIndex != turn + 1) {
@@ -293,7 +290,6 @@ public class GameState {
 			throw new IllegalStateException("Game has ended");
 		}
 
-		System.out.println(tileNum + " " + track.canPlaceCard(tileNum));
 		if (track.canPlaceCard(tileNum)) {
 			Optional<DesertCard> old = curPlayer.getDesertCard();
 			curPlayer.setDesertCard(isOasis, tileNum);
