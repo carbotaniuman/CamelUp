@@ -97,20 +97,20 @@ public class GamePanel extends JPanel implements MouseListener, TurnListener {
 			}
 		}
 		//checking for tile 2
-		if ( x > 640 && x < 680 && y > 480 && y < 500){
+		if ( x > 640 && x < 660 && y > 480 && y < 500){
 			gamestate.placeDesertCard(true, 1);
 			repaint();
 		}
-		else if ( x > 640 && x < 680 && y > 500 && y < 520){
+		else if ( x > 640 && x < 660 && y > 500 && y < 520){
 			gamestate.placeDesertCard(false, 1);
 			repaint();
 		} 
 		//checking for tile 16
-		if ( x > 640 && x < 680 && y > 160 && y < 180){
+		if ( x > 640 && x < 660 && y > 160 && y < 180){
 			gamestate.placeDesertCard(true, 15);
 			repaint();
 		}
-		else if ( x > 640 && x < 680 && y > 180 && y < 200){
+		else if ( x > 640 && x < 660 && y > 180 && y < 200){
 			gamestate.placeDesertCard(false, 15);
 			repaint();
 		} 
