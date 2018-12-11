@@ -26,7 +26,7 @@ public class GameStartPanel extends JPanel implements ChangeListener, MouseListe
 	public GameStartPanel() {
 		setLayout(null);
 		
-		SpinnerModel sm = new SpinnerNumberModel(5, 1, 8, 1);
+		SpinnerModel sm = new SpinnerNumberModel(5, 2, 8, 1);
 		spinner = new JSpinner(sm) {
 			private static final long serialVersionUID = 8916717439253552751L;
 
@@ -147,28 +147,12 @@ public class GameStartPanel extends JPanel implements ChangeListener, MouseListe
 	public Dimension getPreferredSize() {
 		return new Dimension(1920, 1080);
 	}
-
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
+	public void mouseClicked(MouseEvent e) {}
 	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
+	public void mouseEntered(MouseEvent e) {}
 	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
+	public void mouseExited(MouseEvent e) {}
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
+	public void mouseReleased(MouseEvent e) {}
 }

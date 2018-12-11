@@ -50,6 +50,7 @@ public class GameState {
 	private int curPlayerIndex;
 	private long turnIndex;
 	private boolean gameStarted, gameEnded;
+	private boolean isSleeping;
 
 	private final Set<GameListener> listeners;
 
@@ -113,6 +114,10 @@ public class GameState {
 				throw new AssertionError("AI Played on another person's turn");
 			}
 		}
+	}
+
+	public boolean isSleeping() {
+		return isSleeping;
 	}
 
 	public Pyramid getPyramid() {
@@ -204,6 +209,7 @@ public class GameState {
 			tl.gameChanged();
 		}
 		
+		isSleeping = true;
 		Timer timer = new Timer(500, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -224,6 +230,7 @@ public class GameState {
 					timer.setRepeats(false);
 					timer.start();
 				}
+				isSleeping = false;
 			}
 		});
 		timer.setRepeats(false);
