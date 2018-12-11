@@ -5,16 +5,19 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Queue;
+import java.util.Set;
 import java.util.TreeSet;
 
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableList;
 
+import ai.AIPlayer;
+import ai.actions.AIAction;
 import game.Die;
 import game.Pyramid;
 import immutable.Camel;
@@ -42,9 +45,11 @@ public class GameState {
 	private Player curPlayer;
 	private int curPlayerIndex;
 	private long turnIndex;
-	private boolean gameEnded;
+	private boolean gameStarted, gameEnded;
+	
+	private final Set<TurnListener> listeners;
 
-	public GameState() {
+	public GameState(boolean... b) {
 		camels = new ArrayList<Camel>();
 		for (int i = 0; i < CAMELCOLORS.size(); i++) {
 			camels.add(new Camel(CAMELCOLORS.get(i)));
@@ -52,8 +57,12 @@ public class GameState {
 
 		players = new ArrayList<Player>();
 
-		for (String name : names) {
-			players.add(new Player(name, CAMELCOLORS));
+		for(int i = 0; i < b.length; i++) {
+			if(b[i]) {
+				players.add(new AIPlayer(names[i], CAMELCOLORS, this));
+			} else {
+				players.add(new Player(names[i], CAMELCOLORS));
+			}
 		}
 
 		winBets = new ArrayDeque<>();
@@ -71,6 +80,38 @@ public class GameState {
 		track = new Track(16, camels);
 		curPlayer = players.get(curPlayerIndex);
 		pyramid = new Pyramid(CAMELCOLORS);
+		
+		listeners = new LinkedHashSet<>();
+	}
+	
+	public void startGame() {
+		gameStarted = true;
+		new Thread(() -> {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			processAITurn();
+		}).start();
+	}
+	
+	public void addTurnListener(TurnListener tl) {
+		listeners.add(tl);
+	}
+	
+	private synchronized void processAITurn() {
+		System.out.println("U");
+		if(curPlayer instanceof AIPlayer) {
+			System.out.println("E");
+			AIAction act = ((AIPlayer)curPlayer).getAction();
+			System.out.println(act);
+			long turn = turnIndex;
+			act.act(this);
+			if(turnIndex != turn + 1) {
+				throw new AssertionError("AI Played on another person's turn");
+			}
+		}
 	}
 
 	public Pyramid getPyramid() {
@@ -107,6 +148,10 @@ public class GameState {
 
 	public boolean isGameEnded() {
 		return gameEnded;
+	}
+	
+	public boolean isGameStarted() {
+		return gameStarted;
 	}
 
 	private void commitTurn() {
@@ -155,7 +200,18 @@ public class GameState {
 
 		turnIndex++;
 
-		
+		for(TurnListener tl : listeners) {
+			tl.turnPassed();
+		}
+
+		new Thread(() -> {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			processAITurn();
+		}).start();
 	}
 
 	public List<Camel> getCamelRankings() {
@@ -163,7 +219,10 @@ public class GameState {
 	}
 
 	// Commit Turn Methods
-	public void moveCamel() {
+	public synchronized void moveCamel() {
+		if (!gameStarted) {
+			throw new IllegalStateException("Game has not started");
+		}
 		if (gameEnded) {
 			throw new IllegalStateException("Game has ended");
 		}
@@ -175,7 +234,10 @@ public class GameState {
 		this.commitTurn();
 	}
 
-	public void placeWinBet(Color c) {
+	public synchronized void placeWinBet(Color c) {
+		if (!gameStarted) {
+			throw new IllegalStateException("Game has not started");
+		}
 		if (gameEnded) {
 			throw new IllegalStateException("Game has ended");
 		}
@@ -190,7 +252,10 @@ public class GameState {
 		}
 	}
 
-	public void placeLoseBet(Color c) {
+	public synchronized void placeLoseBet(Color c) {
+		if (!gameStarted) {
+			throw new IllegalStateException("Game has not started");
+		}
 		if (gameEnded) {
 			throw new IllegalStateException("Game has ended");
 		}
@@ -205,7 +270,10 @@ public class GameState {
 		}
 	}
 
-	public void placeRoundBet(Color c) {
+	public synchronized void placeRoundBet(Color c) {
+		if (!gameStarted) {
+			throw new IllegalStateException("Game has not started");
+		}
 		if (gameEnded) {
 			throw new IllegalStateException("Game has ended");
 		}
@@ -217,7 +285,10 @@ public class GameState {
 		}
 	}
 
-	public void placeDesertCard(boolean isOasis, int tileNum) {
+	public synchronized void placeDesertCard(boolean isOasis, int tileNum) {
+		if (!gameStarted) {
+			throw new IllegalStateException("Game has not started");
+		}
 		if (gameEnded) {
 			throw new IllegalStateException("Game has ended");
 		}

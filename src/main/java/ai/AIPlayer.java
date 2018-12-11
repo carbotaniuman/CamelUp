@@ -15,6 +15,7 @@ import gamestate.GameState;
 import gamestate.Player;
 import gamestate.Track;
 import immutable.Camel;
+import immutable.RaceBettingCard;
 
 public class AIPlayer extends Player {
 	private GameState g;
@@ -23,13 +24,13 @@ public class AIPlayer extends Player {
 		super(n, colors);
 		this.g = g;
 	}
-	
+
 	public AIAction getAction() {
 		double eValue = 1;
 		AIAction bestAction = new RollAction();
 
-		HashMap<Camel, Integer> roundWin = new HashMap<>();
-		HashMap<Camel, Integer> roundSec = new HashMap<>();
+		HashMap<Color, Integer> roundWin = new HashMap<>();
+		HashMap<Color, Integer> roundSec = new HashMap<>();
 
 		for (int i = 0; i < 1000; i++) {
 			GameSimulator rs = new GameSimulator(g.getTrack(), g.getPyramid());
@@ -37,26 +38,28 @@ public class AIPlayer extends Player {
 				rs.moveCamel();
 			}
 			List<Camel> rank = rs.getCamelRankings();
-			roundWin.put(rank.get(0), roundWin.getOrDefault(rank.get(0), 0) + 1);
-			roundSec.put(rank.get(1), roundSec.getOrDefault(rank.get(1), 0) + 1);
+			roundWin.put(rank.get(0).getColor(), roundWin.getOrDefault(rank.get(0), 0) + 1);
+			roundSec.put(rank.get(1).getColor(), roundSec.getOrDefault(rank.get(1), 0) + 1);
 		}
 
-		for (Camel c : roundWin.keySet()) {
-			int roundVMax = g.getRoundBets().get(c.getColor()).first().getPoints();
+		for (Color c : roundWin.keySet()) {
+			if (!g.getRoundBets().get(c).isEmpty()) {
+				int roundVMax = g.getRoundBets().get(c).first().getPoints();
 
-			double chanceFirst = roundWin.get(c) / 1000.0;
-			double chanceSecond = roundSec.get(c) / 1000.0;
-			double chanceElse = 1 - chanceFirst - chanceSecond;
+				double chanceFirst = roundWin.getOrDefault(c, 0) / 1000.0;
+				double chanceSecond = roundSec.getOrDefault(c, 0) / 1000.0;
+				double chanceElse = 1 - chanceFirst - chanceSecond;
 
-			double roundV = roundVMax * chanceFirst + 1 * chanceSecond - 1 * chanceElse;
-			if (roundV > eValue) {
-				eValue = roundV;
-				bestAction = new RoundBetAction(c.getColor());
+				double roundV = (roundVMax * chanceFirst + 1 * chanceSecond - 1 * chanceElse) * dieRolledRoundMult(g.getPyramid().getRolledDice().size());
+				if (roundV > eValue) {
+					eValue = roundV;
+					bestAction = new RoundBetAction(c);
+				}
 			}
 		}
 
-		HashMap<Camel, Integer> gameWin = new HashMap<>();
-		HashMap<Camel, Integer> gameLose = new HashMap<>();
+		HashMap<Color, Integer> gameWin = new HashMap<>();
+		HashMap<Color, Integer> gameLose = new HashMap<>();
 
 		for (int i = 0; i < 1000; i++) {
 			GameSimulator rs = new GameSimulator(g.getTrack(), g.getPyramid());
@@ -68,32 +71,60 @@ public class AIPlayer extends Player {
 			}
 
 			List<Camel> rank = rs.getCamelRankings();
-			gameWin.put(rank.get(0), roundWin.getOrDefault(rank.get(0), 0) + 1);
-			gameLose.put(rank.get(rs.getCamelRankings().size() - 1),
+			gameWin.put(rank.get(0).getColor(), roundWin.getOrDefault(rank.get(0), 0) + 1);
+			gameLose.put(rank.get(rs.getCamelRankings().size() - 1).getColor(),
 					roundSec.getOrDefault(rank.get(rs.getCamelRankings().size() - 1), 0) + 1);
 		}
 
-		for (Camel c : gameWin.keySet()) {
+		for (RaceBettingCard rbc : getRaceBets()) {
+			Color c = rbc.getColor();
 			double chanceWin = gameWin.get(c) / 1000.0;
 			double chanceLose = gameLose.get(c) / 1000.0;
 
 			double chanceFirstWinPlace = (1.0 / 625.0) * Math.pow(g.getWinBets().size() - 25, 2);
 			double chanceFirstLosePlace = (1.0 / 625.0) * Math.pow(g.getLoseBets().size() - 25, 2);
 
-			double winEV = chanceFirstWinPlace * chanceWin * 8 - 1 * (1 - chanceWin);
+			double winEV = chanceFirstWinPlace * chanceWin * 8 - 1 * (1 - chanceWin) * raceWinMult(g.getTrack().getCamelPos(g.getCamelRankings().get(0)));
 			if (winEV > eValue) {
 				eValue = winEV;
-				bestAction = new WinBetAction(c.getColor());
+				bestAction = new WinBetAction(c);
 			}
-			
-			double loseEv = chanceFirstLosePlace * chanceLose * 8 - 1 * (1 - chanceLose);
+
+			double loseEv = chanceFirstLosePlace * chanceLose * 8 - 1 * (1 - chanceLose) * raceLoseMult(g.getTrack().getCamelPos(g.getCamelRankings().get(g.getCamelRankings().size() - 2)), g.getTrack().getCamelPos(g.getCamelRankings().get(g.getCamelRankings().size() - 1)));
 			if (loseEv > eValue) {
 				eValue = loseEv;
-				bestAction = new LoseBetAction(c.getColor());
+				bestAction = new LoseBetAction(c);
 			}
 		}
 
 		return bestAction;
+	}
+
+	public double dieRolledRoundMult(int i) {
+		switch (i) {
+		case 0:
+			return 0;
+		case 1:
+			return 0.3;
+		case 2:
+			return 0.5;
+		case 3:
+			return 0.8;
+		case 4:
+			return 0.9;
+		case 5:
+			return 1;
+		default:
+			throw new IllegalArgumentException("0 - 5 dice rolled");
+		}
+	}
+	
+	public double raceWinMult(int firstCamelPos) {
+		return Math.min(1, firstCamelPos / 10);
+	}
+	
+	public double raceLoseMult(int secondToLastCamelPos, int lastCamelPos) {
+		return Math.min(1, (secondToLastCamelPos - lastCamelPos) / 6);
 	}
 
 	private static class GameSimulator {

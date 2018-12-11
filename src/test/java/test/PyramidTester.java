@@ -41,16 +41,16 @@ public class PyramidTester {
 	
 	@Test
 	public void pyramidRollTest() {
-		assertEquals(pyramid.getNumDiceNotRolled(), CAMELCOLORS.size());
+		assertEquals(pyramid.getDiceNotRolled().size(), CAMELCOLORS.size());
 		assertFalse(pyramid.areAllDiceRolled());
 		while(!pyramid.areAllDiceRolled()) {
 			pyramid.getRandomDie();
 		}
-		assertEquals(pyramid.getNumDiceNotRolled(), 0);
+		assertEquals(pyramid.getDiceNotRolled().size(), 0);
 		assertTrue(pyramid.areAllDiceRolled());
 		
 		pyramid.resetDice();
-		assertEquals(pyramid.getNumDiceNotRolled(), CAMELCOLORS.size());
+		assertEquals(pyramid.getDiceNotRolled().size(), CAMELCOLORS.size());
 		assertFalse(pyramid.areAllDiceRolled());
 	}
 	

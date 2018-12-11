@@ -8,7 +8,7 @@ import gamestate.GameState;
 public class TextRunner {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		GameState game = new GameState();
+		GameState game = new GameState(false, false, false, false, false);
 		while (!game.isGameEnded()) {
 			long turnIndex = game.getTurnIndex();
 			System.out.println("Track:\n" + game.getTrack() + "\n");

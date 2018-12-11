@@ -49,11 +49,11 @@ public class Pyramid {
 		notRolledDice.forEach(Die::roll);
 	}
 
-	public int getNumDiceNotRolled() {
-		return notRolledDice.size();
+	public List<Die> getDiceNotRolled() {
+		return notRolledDice;
 	}
 
-	public ArrayList<Die> getRolledDice()
+	public List<Die> getRolledDice()
 	{
 		return rolledDice;
 	}
