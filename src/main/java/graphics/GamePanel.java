@@ -1,9 +1,14 @@
 package graphics;
 
+
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.Rectangle2D;
 
 import javax.swing.JPanel;
 
@@ -32,13 +37,28 @@ public class GamePanel extends JPanel implements MouseListener, TurnListener {
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		HandDrawer.drawHand(g, gamestate.getCurPlayer());
-		BoardDrawer.drawBoard(g, gamestate.getRoundBets(), gamestate.getCurPlayer(),
-				gamestate.getPyramid().getRolledDice());
-		BoardDrawer.drawPlayerData(g, gamestate.getPlayers());
-		BoardDrawer.drawWinBets(g, gamestate.getWinBets());
-		BoardDrawer.drawLoseBets(g, gamestate.getLoseBets());
-		TrackDrawer.drawTrack(g, gamestate.getTrack(), gamestate.getCurPlayer());
+		if(gamestate.isGameEnded()) {
+			g.setColor(new Color(255, 213, 93));
+			g.fillRect(0, 0, 1920, 1080);
+			
+			g.setColor(Color.BLACK);
+			Font oldFont = g.getFont();
+			g.setFont(new Font("TimesRoman", Font.PLAIN, 40));
+			FontMetrics fm = g.getFontMetrics();
+			Rectangle2D textSize = fm.getStringBounds("Game Over", g);
+			int xPos = (1920 - (int) textSize.getWidth()) / 2;
+			g.drawString("Game Over", xPos, 250);
+			
+		}
+		else {
+			HandDrawer.drawHand(g, gamestate.getCurPlayer());
+			BoardDrawer.drawBoard(g, gamestate.getRoundBets(), gamestate.getCurPlayer(),
+					gamestate.getPyramid().getRolledDice());
+			BoardDrawer.drawPlayerData(g, gamestate.getPlayers());
+			BoardDrawer.drawWinBets(g, gamestate.getWinBets());
+			BoardDrawer.drawLoseBets(g, gamestate.getLoseBets());
+			TrackDrawer.drawTrack(g, gamestate.getTrack(), gamestate.getCurPlayer());
+		}
 	}
 
 	@Override
@@ -131,22 +151,14 @@ public class GamePanel extends JPanel implements MouseListener, TurnListener {
 			gamestate.moveCamel();
 		}
 	}
-
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
-	}
-
+	public void mouseClicked(MouseEvent arg0) {}
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
-	}
-
+	public void mouseEntered(MouseEvent arg0) {}
 	@Override
-	public void mouseExited(MouseEvent arg0) {
-	}
-
+	public void mouseExited(MouseEvent arg0) {}
 	@Override
-	public void mouseReleased(MouseEvent arg0) {
-	}
+	public void mouseReleased(MouseEvent arg0) {}
 
 	@Override
 	public void turnPassed() {
