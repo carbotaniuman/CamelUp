@@ -136,7 +136,7 @@ public class GameStartPanel extends JPanel implements ChangeListener, MouseListe
 		}
 		
 		if(x > (1920 - 300) / 2 && x < (1920 - 300) / 2 + 300 && y > 150 && y < 250) {
-			System.out.println("EEE");
+			//System.out.println("EEE");
 			removeMouseListener(this);
 			GamePanel game = new GamePanel(Arrays.copyOf(choices, (int) spinner.getValue()));
 			game.setBounds(0, 0, 1920, 1080);
