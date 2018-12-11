@@ -128,14 +128,14 @@ public class BoardDrawer {
 		g.drawRect(x, 40, 124, 40);
 
 		FontMetrics fm = g.getFontMetrics();
-		Rectangle2D textSize = fm.getStringBounds("+", g);
+		Rectangle2D textSize = fm.getStringBounds("W", g);
 		int xPos = (124 - (int) textSize.getWidth()) / 2;
 		int yPos = (40 - (int) textSize.getHeight()) / 2 + fm.getAscent();
-		g.drawString("+", x + xPos, yPos);
-		textSize = fm.getStringBounds("_", g);
+		g.drawString("W", x + xPos, yPos);
+		textSize = fm.getStringBounds("L", g);
 		xPos = (124 - (int) textSize.getWidth()) / 2;
 		yPos = (40 - (int) textSize.getHeight()) / 2 + fm.getAscent();
-		g.drawString("_", x + xPos, 8 + yPos);
+		g.drawString("L", x + xPos, 40 + yPos);
 		g.setFont(oldFont);
 	}
 

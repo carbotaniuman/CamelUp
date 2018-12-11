@@ -186,8 +186,17 @@ public class GameState {
 					gameEnded = true;
 					int[] amount = { 5, 3, 2, 1 };
 					int count = 0;
-					for (RaceBettingCard r : this.winBets) {
-						if (r.getColor().equals(this.getCamelRankings().get(0).getColor())) {
+					for (RaceBettingCard r : winBets) {
+						if (r.getColor().equals(getCamelRankings().get(0).getColor())) {
+							tally = amount[count];
+							if (count + 1 != amount.length) {
+								count++;
+							}
+						}
+					}
+					count = 0;
+					for (RaceBettingCard r : loseBets) {
+						if (r.getColor().equals(getCamelRankings().get(getCamelRankings().size() - 1).getColor())) {
 							tally = amount[count];
 							if (count + 1 != amount.length) {
 								count++;
@@ -320,7 +329,7 @@ public class GameState {
 			throw new IllegalStateException("Game has ended");
 		}
 
-		if (track.canPlaceCard(tileNum)) {
+		if (track.canPlaceCard(tileNum) || (curPlayer.getDesertCard().isPresent() && track.canMoveCard(curPlayer.getDesertCard().get().getTile(), tileNum))) {
 			Optional<DesertCard> old = curPlayer.getDesertCard();
 			curPlayer.setDesertCard(isOasis, tileNum);
 			track.placeDesertCard(old, curPlayer.getDesertCard().get(), tileNum);

@@ -71,27 +71,27 @@ public class AIPlayer extends Player {
 			}
 
 			List<Camel> rank = rs.getCamelRankings();
-			gameWin.put(rank.get(0).getColor(), roundWin.getOrDefault(rank.get(0), 0) + 1);
+			gameWin.put(rank.get(0).getColor(), roundWin.getOrDefault(rank.get(0).getColor(), 0) + 1);
 			gameLose.put(rank.get(rs.getCamelRankings().size() - 1).getColor(),
-					roundSec.getOrDefault(rank.get(rs.getCamelRankings().size() - 1), 0) + 1);
+					roundSec.getOrDefault(rank.get(rs.getCamelRankings().size() - 1).getColor(), 0) + 1);
 		}
-
+		
 		for (RaceBettingCard rbc : getRaceBets()) {
 			Color c = rbc.getColor();
-			double chanceWin = gameWin.getOrDefault(c, 0) / 1000.0 * 100;
-			double chanceLose = gameLose.getOrDefault(c, 0) / 1000.0 * 100;
+			double chanceWin = gameWin.getOrDefault(c, 0) / 1000.0;
+			double chanceLose = gameLose.getOrDefault(c, 0) / 1000.0;
 
 			double chanceFirstWinPlace = (1.0 / 625.0) * Math.pow(g.getWinBets().size() - 25, 2);
 			double chanceFirstLosePlace = (1.0 / 625.0) * Math.pow(g.getLoseBets().size() - 25, 2);
-
-			double winEV = chanceFirstWinPlace * chanceWin * 8
-					- 1 * (1 - chanceWin) * raceWinMult(g.getTrack().getCamelPos(g.getCamelRankings().get(0)));
+			
+			double winEV = (chanceFirstWinPlace * chanceWin * 8
+					- 1 * (1 - chanceWin)) * raceWinMult(g.getTrack().getCamelPos(g.getCamelRankings().get(0)));
 			if (winEV > eValue) {
 				eValue = winEV;
 				bestAction = new WinBetAction(c);
 			}
 
-			double loseEv = chanceFirstLosePlace * chanceLose * 8 - 1 * (1 - chanceLose)
+			double loseEv = (chanceFirstLosePlace * chanceLose * 8 - 1 * (1 - chanceLose))
 					* raceLoseMult(g.getTrack().getCamelPos(g.getCamelRankings().get(g.getCamelRankings().size() - 2)),
 							g.getTrack().getCamelPos(g.getCamelRankings().get(g.getCamelRankings().size() - 1)));
 			if (loseEv > eValue) {
@@ -99,7 +99,6 @@ public class AIPlayer extends Player {
 				bestAction = new LoseBetAction(c);
 			}
 		}
-		System.out.println(bestAction + "!!!!\n\n");
 		return bestAction;
 	}
 
@@ -123,11 +122,11 @@ public class AIPlayer extends Player {
 	}
 
 	public double raceWinMult(int firstCamelPos) {
-		return Math.min(1, firstCamelPos / 10);
+		return Math.pow((firstCamelPos - 4)/ 9.0, 2);
 	}
 
 	public double raceLoseMult(int secondToLastCamelPos, int lastCamelPos) {
-		return Math.min(1, (secondToLastCamelPos - lastCamelPos) / 6);
+		return Math.pow(Math.min(1, (secondToLastCamelPos - lastCamelPos) / 6.0), 2);
 	}
 
 	private static class GameSimulator {

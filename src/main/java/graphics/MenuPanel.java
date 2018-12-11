@@ -58,7 +58,7 @@ public class MenuPanel extends JPanel {
 		g.drawString("Camel Up", xPos, 300);
 
 		g.drawRect((1920 - 300) / 2, 400, 300, 100);
-//		g.drawRect((1920 - 300) / 2, 550, 300, 100);
+		g.drawRect((1920 - 300) / 2, 550, 300, 100);
 		g.drawRect((1920 - 300) / 2, 700, 300, 100);
 
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 50));
@@ -68,10 +68,10 @@ public class MenuPanel extends JPanel {
 		int yPos = (100 - (int) textSize.getHeight()) / 2 + fm.getAscent();
 		g.drawString("Play Game", (1920 - 300) / 2 + xPos, 400 + yPos);
 
-//		textSize = fm.getStringBounds("Credits", g);
-//		xPos = (300 - (int) textSize.getWidth()) / 2;
-//		yPos = (100 - (int) textSize.getHeight()) / 2 + fm.getAscent();
-//		g.drawString("Credits", (1920 - 300) / 2 + xPos, 550 + yPos);
+		textSize = fm.getStringBounds("Credits", g);
+		xPos = (300 - (int) textSize.getWidth()) / 2;
+		yPos = (100 - (int) textSize.getHeight()) / 2 + fm.getAscent();
+		g.drawString("Credits", (1920 - 300) / 2 + xPos, 550 + yPos);
 		textSize = fm.getStringBounds("Exit", g);
 		xPos = (300 - (int) textSize.getWidth()) / 2;
 		yPos = (100 - (int) textSize.getHeight()) / 2 + fm.getAscent();
@@ -96,6 +96,10 @@ public class MenuPanel extends JPanel {
 				add(curShow);
 				revalidate();
 				repaint();
+			}
+			
+			if (x > (1920 - 300) / 2 && x < (1920 - 300) / 2 + 300 && y > 550 && y < 650) {
+				removeMouseListener(listener);
 			}
 			
 			if (x > (1920 - 300) / 2 && x < (1920 - 300) / 2 + 300 && y > 700 && y < 800) {

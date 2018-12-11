@@ -49,7 +49,7 @@ public class Track {
 
 		for (Camel c : camelList) {
 			camels.put(c.getColor(), c);
-			int startPos = ThreadLocalRandom.current().nextInt(1, 4);
+			int startPos = ThreadLocalRandom.current().nextInt(0, 3);
 			camelPos.put(c, startPos);
 			tiles[startPos].addCamelBot(c);
 		}
@@ -96,7 +96,7 @@ public class Track {
 
 		int oldPos = camelPos.get(c);
 		int cPosOnTile = tiles[oldPos % 16].getCamelStackPos(c);
-		List<Camel> list = tiles[oldPos % 16].getCamels().subList(0, cPosOnTile + 1);
+		List<Camel> list = new ArrayList<>(tiles[oldPos % 16].getCamels().subList(0, cPosOnTile + 1));
 
 		Tile newTile = tiles[(oldPos + rolled) % 16];
 
@@ -112,24 +112,32 @@ public class Track {
 				for (Camel camel : list) {
 					camelPos.put(camel, oldPos + rolled + 1);
 				}
+				tiles[oldPos % 16].removeCamels(list);
 			} else {
-				newTile = tiles[(oldPos + rolled - 1) % 16];
+				if(rolled == 1) {
+					newTile = tiles[oldPos % 16];
+					tiles[oldPos % 16].removeCamels(list);
+					newTile.addCamelsBot(list);
+				} else {
+					newTile = tiles[(oldPos + rolled - 1) % 16];
 
-				newTile.addCamelsBot(list);
+					newTile.addCamelsBot(list);
 
-				for (Camel camel : list) {
-					camelPos.put(camel, oldPos + rolled - 1);
+					for (Camel camel : list) {
+						camelPos.put(camel, oldPos + rolled - 1);
+					}
+					tiles[oldPos % 16].removeCamels(list);
 				}
 			}
+			
 		} else {
 			newTile.addCamelsTop(list);
 
 			for (Camel camel : list) {
 				camelPos.put(camel, oldPos + rolled);
 			}
+			tiles[oldPos % 16].removeCamels(list);
 		}
-
-		tiles[oldPos % 16].removeCamels(list); // Must be last command
 	}
 
 	public int getCamelPos(Camel c) {
@@ -159,13 +167,20 @@ public class Track {
 		if (!tiles[newNum].getCamels().isEmpty() || tiles[newNum].getDesertCard().isPresent())
 			return false;
 
-		if (newNum - 1 != origNum && tiles[newNum - 1].getDesertCard().isPresent())
+		if (newNum - 1 == origNum)
+			return true;
+		
+		if(tiles[newNum - 1].getDesertCard().isPresent())
 			return false;
 
 		if (newNum == 15)
 			return true;
 
-		return !(newNum - 1 != origNum && tiles[newNum + 1].getDesertCard().isPresent());
+		if(newNum + 1 == origNum) {
+			return true;
+		} else {
+			return !tiles[newNum + 1].getDesertCard().isPresent();
+		}
 	}
 
 	public void placeDesertCard(Optional<DesertCard> old, DesertCard d, int tileNum) {

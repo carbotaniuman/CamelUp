@@ -3,8 +3,6 @@ package game;
 import java.awt.Color;
 import java.util.concurrent.ThreadLocalRandom;
 
-import gamestate.GameState;
-
 public class Die {
 
 	private final Color camelColor;

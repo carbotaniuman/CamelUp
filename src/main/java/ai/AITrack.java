@@ -1,9 +1,8 @@
 package ai;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import gamestate.Tile;
 import gamestate.Track;
 import immutable.Camel;
@@ -19,8 +18,7 @@ public class AITrack extends Track {
 
 		int oldPos = camelPos.get(c);
 		int cPosOnTile = tiles[oldPos % 16].getCamelStackPos(c);
-		List<Camel> list = tiles[oldPos % 16].getCamels().subList(0, cPosOnTile + 1);
-		System.out.println("!!!!!!!!!!!!!!!!!" + Thread.currentThread().getName());
+		List<Camel> list = new ArrayList<>(tiles[oldPos % 16].getCamels().subList(0, cPosOnTile + 1));
 		Tile newTile = tiles[(oldPos + rolled) % 16];
 
 		if (newTile.getDesertCard().isPresent()) {
@@ -32,14 +30,19 @@ public class AITrack extends Track {
 				for (Camel camel : list) {
 					camelPos.put(camel, oldPos + rolled + 1);
 				}
+				tiles[oldPos % 16].removeCamels(list);
 			} else {
-				newTile = tiles[(oldPos + rolled - 1) % 16];
+				if(rolled == 1) {
+					tiles[oldPos % 16].removeCamels(list);
+					newTile.addCamelsBot(list);
+				} else {
+					newTile = tiles[(oldPos + rolled - 1) % 16];
 
-				newTile.addCamelsBot(list);
-				System.out.println("!!!!!!!!!!!!!!!!!" + Thread.currentThread().getName());
-				System.out.println(list);
-				for (Camel camel : list) {
-					camelPos.put(camel, oldPos + rolled - 1);
+					newTile.addCamelsBot(list);
+
+					for (Camel camel : list) {
+						camelPos.put(camel, oldPos + rolled - 1);
+					}
 				}
 			}
 		} else {
@@ -48,8 +51,8 @@ public class AITrack extends Track {
 			for (Camel camel : list) {
 				camelPos.put(camel, oldPos + rolled);
 			}
+			
+			tiles[oldPos % 16].removeCamels(list);
 		}
-
-		tiles[oldPos % 16].removeCamels(list); // Must be last command
 	}
 }

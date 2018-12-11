@@ -74,7 +74,7 @@ public class TrackDrawer {
 						track.getTile(i).getCamels().size() - 1 - track.getTile(i).getCamelStackPos(c));
 			}
 			
-			if (track.canPlaceCard(i)) 
+			if (track.canPlaceCard(i) || (player.getDesertCard().isPresent() && track.canMoveCard(player.getDesertCard().get().getTile(), i))) 
 				drawPlus(g, x1, i1);
 			else if(track.getTile(i).getDesertCard().isPresent())
 				drawMiniDesert(g, track.getTile(i).getDesertCard().get().getMoveNum(), x1, i1, track.getTile(i).getDesertCard().get().getPlayer());
@@ -96,7 +96,7 @@ public class TrackDrawer {
 						track.getTile(i).getCamels().size() - 1 - track.getTile(i).getCamelStackPos(c));
 			}
 			
-			if (track.canPlaceCard(i)) 
+			if (track.canPlaceCard(i) || (player.getDesertCard().isPresent() && track.canMoveCard(player.getDesertCard().get().getTile(), i)) || (player.getDesertCard().isPresent() && track.canMoveCard(player.getDesertCard().get().getTile(), i))) 
 				drawPlus(g, i2, y1);
 			else if(track.getTile(i).getDesertCard().isPresent())
 				drawMiniDesert(g, track.getTile(i).getDesertCard().get().getMoveNum(), i2, y1, track.getTile(i).getDesertCard().get().getPlayer());
@@ -118,7 +118,7 @@ public class TrackDrawer {
 			int yPos = (160 - (int) textSize.getHeight()) / 2 + fm.getAscent();
 			g.drawString(String.valueOf(i + 1), x2 + xPos, i3 + yPos);
 			
-			if (track.canPlaceCard(i)) 
+			if (track.canPlaceCard(i) || (player.getDesertCard().isPresent() && track.canMoveCard(player.getDesertCard().get().getTile(), i))) 
 				drawPlus(g, x2, i3);
 			else if(track.getTile(i).getDesertCard().isPresent())
 				drawMiniDesert(g, track.getTile(i).getDesertCard().get().getMoveNum(), x2, i3, track.getTile(i).getDesertCard().get().getPlayer());
@@ -140,7 +140,7 @@ public class TrackDrawer {
 			int yPos = (160 - (int) textSize.getHeight()) / 2 + fm.getAscent();
 			g.drawString(String.valueOf(i + 1), i4 + xPos, y2 + yPos);
 			
-			if (track.canPlaceCard(i)) 
+			if (track.canPlaceCard(i) || (player.getDesertCard().isPresent() && track.canMoveCard(player.getDesertCard().get().getTile(), i))) 
 				drawPlus(g, i4, y2);
 			else if(track.getTile(i).getDesertCard().isPresent())
 				drawMiniDesert(g, track.getTile(i).getDesertCard().get().getMoveNum(), i4, y2, track.getTile(i).getDesertCard().get().getPlayer());
@@ -170,7 +170,7 @@ public class TrackDrawer {
 			int yPos = (160 - (int) textSize.getHeight()) / 2 + fm.getAscent();
 			g.drawString(String.valueOf(i + 1), x1 + xPos, i5 + yPos);
 			
-			if (track.canPlaceCard(i)) 
+			if (track.canPlaceCard(i) || (player.getDesertCard().isPresent() && track.canMoveCard(player.getDesertCard().get().getTile(), i))) 
 				drawPlus(g, x1, i5);
 			else if(track.getTile(i).getDesertCard().isPresent())
 				drawMiniDesert(g, track.getTile(i).getDesertCard().get().getMoveNum(), x1, i5, track.getTile(i).getDesertCard().get().getPlayer());
