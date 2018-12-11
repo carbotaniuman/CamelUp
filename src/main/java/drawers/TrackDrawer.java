@@ -53,14 +53,6 @@ public class TrackDrawer {
 			g.setColor(Color.BLACK);
 			g.drawRect(x1, i1, 160, 160);
 
-			if (!player.getDesertCard().isPresent()) {
-				if (track.canPlaceCard(i)) {
-					drawPlus(g, x1, i1);
-				}
-			} else {
-				drawMiniDesert(g, track.getTile(i).getDesertCard().get().getMoveNum(), x1, i1);
-			}
-			
 			if (i == 0) {
 				FontMetrics fm = g.getFontMetrics();
 				Rectangle2D textSize = fm.getStringBounds("Start", g);
@@ -79,20 +71,17 @@ public class TrackDrawer {
 				drawCamel(g, c.getColor(), x1, i1,
 						track.getTile(i).getCamels().size() - 1 - track.getTile(i).getCamelStackPos(c));
 			}
+			
+			if (track.canPlaceCard(i)) 
+				drawPlus(g, x1, i1);
+			else if(track.getTile(i).getDesertCard().isPresent())
+				drawMiniDesert(g, track.getTile(i).getDesertCard().get().getMoveNum(), x1, i1, track.getTile(i).getDesertCard().get().getPlayer());
 		}
 		for (int i2 = 640; i2 > 0; i2 -= 160, i++) {
 			g.setColor(new Color(255, 245, 175));
 			g.fillRect(i2, y1, 160, 160);
 			g.setColor(Color.BLACK);
 			g.drawRect(i2, y1, 160, 160);
-
-			if (!player.getDesertCard().isPresent()) {
-				if (track.canPlaceCard(i)) {
-					drawPlus(g, i2, y1);
-				}
-			} else {
-				drawMiniDesert(g, track.getTile(i).getDesertCard().get().getMoveNum(), i2, y1);
-			}
 			
 			FontMetrics fm = g.getFontMetrics();
 			Rectangle2D textSize = fm.getStringBounds(String.valueOf(i + 1), g);
@@ -104,20 +93,17 @@ public class TrackDrawer {
 				drawCamel(g, c.getColor(), i2, y1,
 						track.getTile(i).getCamels().size() - 1 - track.getTile(i).getCamelStackPos(c));
 			}
+			
+			if (track.canPlaceCard(i)) 
+				drawPlus(g, i2, y1);
+			else if(track.getTile(i).getDesertCard().isPresent())
+				drawMiniDesert(g, track.getTile(i).getDesertCard().get().getMoveNum(), i2, y1, track.getTile(i).getDesertCard().get().getPlayer());
 		}
 		for (int i3 = 640; i3 > 0; i3 -= 160, i++) {
 			g.setColor(new Color(255, 245, 175));
 			g.fillRect(x2, i3, 160, 160);
 			g.setColor(Color.BLACK);
 			g.drawRect(x2, i3, 160, 160);
-
-			if (!player.getDesertCard().isPresent()) {
-				if (track.canPlaceCard(i)) {
-					drawPlus(g, x2, i3);
-				}
-			} else {
-				drawMiniDesert(g, track.getTile(i).getDesertCard().get().getMoveNum(), x2, i3);
-			}
 
 			for (Camel c : track.getTile(i).getCamels()) {
 				drawCamel(g, c.getColor(), x2, i3,
@@ -129,20 +115,17 @@ public class TrackDrawer {
 			int xPos = (160 - (int) textSize.getWidth()) / 2;
 			int yPos = (160 - (int) textSize.getHeight()) / 2 + fm.getAscent();
 			g.drawString(String.valueOf(i + 1), x2 + xPos, i3 + yPos);
+			
+			if (track.canPlaceCard(i)) 
+				drawPlus(g, x2, i3);
+			else if(track.getTile(i).getDesertCard().isPresent())
+				drawMiniDesert(g, track.getTile(i).getDesertCard().get().getMoveNum(), x2, i3, track.getTile(i).getDesertCard().get().getPlayer());
 		}
 		for (int i4 = 0; i4 < 640; i4 += 160, i++) {
 			g.setColor(new Color(255, 245, 175));
 			g.fillRect(i4, y2, 160, 160);
 			g.setColor(Color.BLACK);
 			g.drawRect(i4, y2, 160, 160);
-
-			if (!player.getDesertCard().isPresent()) {
-				if (track.canPlaceCard(i)) {
-					drawPlus(g, i4, y2);
-				}
-			} else {
-				drawMiniDesert(g, track.getTile(i).getDesertCard().get().getMoveNum(), i4, y2);
-			}
 
 			for (Camel c : track.getTile(i).getCamels()) {
 				drawCamel(g, c.getColor(), i4, y2,
@@ -154,20 +137,17 @@ public class TrackDrawer {
 			int xPos = (160 - (int) textSize.getWidth()) / 2;
 			int yPos = (160 - (int) textSize.getHeight()) / 2 + fm.getAscent();
 			g.drawString(String.valueOf(i + 1), i4 + xPos, y2 + yPos);
+			
+			if (track.canPlaceCard(i)) 
+				drawPlus(g, i4, y2);
+			else if(track.getTile(i).getDesertCard().isPresent())
+				drawMiniDesert(g, track.getTile(i).getDesertCard().get().getMoveNum(), i4, y2, track.getTile(i).getDesertCard().get().getPlayer());
 		}
 		for (int i5 = 0; i5 < 320; i5 += 160, i++) {
 			g.setColor(new Color(255, 245, 175));
 			g.fillRect(x1, i5, 160, 160);
 			g.setColor(Color.BLACK);
 			g.drawRect(x1, i5, 160, 160);
-
-			if (!player.getDesertCard().isPresent()) {
-				if (track.canPlaceCard(i)) {
-					drawPlus(g, x1, i5);
-				}
-			} else {
-				drawMiniDesert(g, track.getTile(i).getDesertCard().get().getMoveNum(), x1, i5);
-			}
 
 			for (Camel c : track.getTile(i).getCamels()) {
 				drawCamel(g, c.getColor(), x1, i5,
@@ -187,6 +167,11 @@ public class TrackDrawer {
 			int xPos = (160 - (int) textSize.getWidth()) / 2;
 			int yPos = (160 - (int) textSize.getHeight()) / 2 + fm.getAscent();
 			g.drawString(String.valueOf(i + 1), x1 + xPos, i5 + yPos);
+			
+			if (track.canPlaceCard(i)) 
+				drawPlus(g, x1, i5);
+			else if(track.getTile(i).getDesertCard().isPresent())
+				drawMiniDesert(g, track.getTile(i).getDesertCard().get().getMoveNum(), x1, i5, track.getTile(i).getDesertCard().get().getPlayer());
 		}
 	}
 
@@ -235,14 +220,14 @@ public class TrackDrawer {
 		g.setFont(oldFont);
 	}
 
-	private static void drawMiniDesert(Graphics g, int val, int x, int y) {
+	private static void drawMiniDesert(Graphics g, int val, int x, int y, Player pl) {
 		Font oldFont = g.getFont();
 		g.setColor(Color.YELLOW);
-		g.fillRect(x, y, 30, 20);
+		g.fillRect(x, y, 160, 20);
 		g.setColor(Color.BLACK);
-		g.drawRect(x, y, 30, 20);
+		g.drawRect(x, y, 160, 20);
 		g.setFont(new Font("Serif", Font.PLAIN, 20));
-		g.drawString(val + "", x + 10, y + 20);
+		g.drawString(" " + val + ":" +  pl.getName(), x , y+18);
 		g.setFont(oldFont);
 	}
 }
