@@ -64,6 +64,59 @@ public class GamePanel extends JPanel implements MouseListener {
 				repaint();
 			}
 		}
+		
+		for ( int i = 640, count = 2; i > 0; i -= 160, count++ ){
+			if ( x > i && x < i + 20 && y > 640 && y < 660){
+				gamestate.placeDesertCard(true, count);
+				repaint();
+			}
+			else if ( x > i && x < i + 20 && y > 660 && y < 680){
+				gamestate.placeDesertCard(false, count);
+				repaint();
+			}	
+		}
+		
+		for ( int i = 0, count = 10; i < 640; i += 160, count++)
+		{
+			if ( x > i && x < i + 20 && y > 0 && y < 20){
+				gamestate.placeDesertCard(true, count);
+				repaint();
+			}
+			else if ( x > i && x < i + 20 && y > 20 && y < 40){
+				gamestate.placeDesertCard(false, count);
+				repaint();
+			}
+		}
+		//checking for tile 2
+		if ( x > 640 && x < 680 && y > 480 && y < 500){
+			gamestate.placeDesertCard(true, 1);
+			repaint();
+		}
+		else if ( x > 640 && x < 680 && y > 500 && y < 520){
+			gamestate.placeDesertCard(false, 1);
+			repaint();
+		} 
+		//checking for tile 16
+		if ( x > 640 && x < 680 && y > 160 && y < 180){
+			gamestate.placeDesertCard(true, 15);
+			repaint();
+		}
+		else if ( x > 640 && x < 680 && y > 180 && y < 200){
+			gamestate.placeDesertCard(false, 15);
+			repaint();
+		} 
+		
+		for ( int i = 480, count = 7; i < 160; i -= 160, count++)
+		{
+			if ( x > 0 && x < 20 && y > i && y < i + 20){
+				gamestate.placeDesertCard(true, count);
+				repaint();
+			}
+			else if ( x > 0 && x < 20 && y >  i + 20 && y < i + 40){
+				gamestate.placeDesertCard(false, count);
+				repaint();
+			}
+		}
 
 		if (x > 160 && x < 640 && y > 160 && y < 640) {
 			gamestate.moveCamel();

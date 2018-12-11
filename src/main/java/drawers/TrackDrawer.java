@@ -33,13 +33,9 @@ public class TrackDrawer {
 			g.fillRect(x1, i1, 160, 160);
 			g.setColor(Color.BLACK);
 			g.drawRect(x1, i1, 160, 160);
-			player.getDesertCard();
-			if (!Optional.empty().isPresent()) {
-				if (track.canPlaceCard(i++)) {
-					drawPlus(g, x1, i1);
-				}
-			}
-			else
+			if (track.canPlaceCard(i++)) 
+				drawPlus(g, x1, i1);
+			else if( track.getTile(i-1).getDesertCard().isPresent())
 				drawMiniDesert(g,track.getTile(i-1).getDesertCard().get().getMoveNum(),x1,i1);
 		}
 		for (int i2 = x1; i2 > 0; i2 -= 160) {
@@ -47,13 +43,9 @@ public class TrackDrawer {
 			g.fillRect(i2, y1, 160, 160);
 			g.setColor(Color.BLACK);
 			g.drawRect(i2, y1, 160, 160);
-			player.getDesertCard();
-			if (!Optional.empty().isPresent()) {
-				if (track.canPlaceCard(i++)) {
-					drawPlus(g, i2, y1);
-				}
-			}
-			else
+			if (track.canPlaceCard(i++)) 
+				drawPlus(g, i2, y1);
+			else if( track.getTile(i-1).getDesertCard().isPresent())
 				drawMiniDesert(g,track.getTile(i-1).getDesertCard().get().getMoveNum(),i2,y1);
 		}
 		for (int i3 = 640; i3 > 0; i3 -= 160) {
@@ -61,13 +53,9 @@ public class TrackDrawer {
 			g.fillRect(x2, i3, 160, 160);
 			g.setColor(Color.BLACK);
 			g.drawRect(x2, i3, 160, 160);
-			player.getDesertCard();
-			if (!Optional.empty().isPresent()) {
-				if (track.canPlaceCard(i++)) {
-					drawPlus(g, x2, i3);
-				}
-			}
-			else
+			if (track.canPlaceCard(i++)) 
+				drawPlus(g, x2, i3);
+			else if( track.getTile(i-1).getDesertCard().isPresent())
 				drawMiniDesert(g,track.getTile(i-1).getDesertCard().get().getMoveNum(),x2,i3);
 		}
 		for (int i4 = 0; i4 < 640; i4 += 160) {
@@ -75,13 +63,9 @@ public class TrackDrawer {
 			g.fillRect(i4, y2, 160, 160);
 			g.setColor(Color.BLACK);
 			g.drawRect(i4, y2, 160, 160);
-			player.getDesertCard();
-			if (!Optional.empty().isPresent()) {
-				if (track.canPlaceCard(i++)) {
-					drawPlus(g, i4, y2);
-				}
-			}
-			else
+			if (track.canPlaceCard(i++)) 
+				drawPlus(g, i4, y2);
+			else if( track.getTile(i-1).getDesertCard().isPresent())
 				drawMiniDesert(g,track.getTile(i-1).getDesertCard().get().getMoveNum(),i4,y2);
 		}
 		for (int i5 = 0; i5 < 320; i5 += 160) {
@@ -89,13 +73,9 @@ public class TrackDrawer {
 			g.fillRect(x1, i5, 160, 160);
 			g.setColor(Color.BLACK);
 			g.drawRect(x1, i5, 160, 160);
-			player.getDesertCard();
-			if (!Optional.empty().isPresent()) {
-				if (track.canPlaceCard(i++)) {
-					drawPlus(g, x1, i5);
-				}
-			}
-			else
+			if (track.canPlaceCard(i++)) 
+				drawPlus(g, x1, i5);
+			else if( track.getTile(i-1).getDesertCard().isPresent())
 				drawMiniDesert(g,track.getTile(i-1).getDesertCard().get().getMoveNum(),x1,i5);
 		}
 		
