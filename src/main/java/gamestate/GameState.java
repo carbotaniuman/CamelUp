@@ -1,6 +1,8 @@
 package gamestate;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,6 +14,8 @@ import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
 import java.util.TreeSet;
+
+import javax.swing.Timer;
 
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableList;
@@ -86,21 +90,21 @@ public class GameState {
 
 	public void startGame() {
 		gameStarted = true;
-		new Thread(() -> {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		Timer timer = new Timer(1000, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				processAITurn();
 			}
-			processAITurn();
-		}).start();
+		});
+		timer.setRepeats(false);
+		timer.start();
 	}
 
 	public void addTurnListener(GameListener tl) {
 		listeners.add(tl);
 	}
 
-	private synchronized void processAITurn() {
+	private void processAITurn() {
 		if (curPlayer instanceof AIPlayer) {
 			AIAction act = ((AIPlayer) curPlayer).getAction();
 			long turn = turnIndex;
@@ -152,7 +156,7 @@ public class GameState {
 	}
 
 	private void commitTurn() {
-		if (pyramid.areAllDiceRolled()) {
+		if (pyramid.areAllDiceRolled() || track.hasCamelWon()) {
 			pyramid.resetDice();
 			track.removeAllDesertCards();
 			for (Player p : players) {
@@ -199,20 +203,32 @@ public class GameState {
 		for (GameListener tl : listeners) {
 			tl.gameChanged();
 		}
-
-		curPlayerIndex = (curPlayerIndex + 1) % players.size();
-		curPlayer = players.get(curPlayerIndex);
-
-		if(!gameEnded) {
-			new Thread(() -> {
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+		
+		Timer timer = new Timer(500, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				curPlayerIndex = (curPlayerIndex + 1) % players.size();
+				curPlayer = players.get(curPlayerIndex);
+				
+				for (GameListener tl : listeners) {
+					tl.gameChanged();
 				}
-				processAITurn();
-			}).start();
-		}
+				
+				if (!gameEnded) {
+					Timer timer = new Timer(1000, new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							processAITurn();
+						}
+					});
+					timer.setRepeats(false);
+					timer.start();
+				}
+			}
+		});
+		timer.setRepeats(false);
+		timer.start();
+		
 	}
 
 	public List<Camel> getCamelRankings() {
@@ -220,7 +236,7 @@ public class GameState {
 	}
 
 	// Commit Turn Methods
-	public synchronized void moveCamel() {
+	public void moveCamel() {
 		if (!gameStarted) {
 			throw new IllegalStateException("Game has not started");
 		}
@@ -232,11 +248,11 @@ public class GameState {
 		Die d = pyramid.getRandomDie();
 
 		track.moveCamel(d.getColor(), d.getLastRoll());
-		
+
 		this.commitTurn();
 	}
 
-	public synchronized void placeWinBet(Color c) {
+	public void placeWinBet(Color c) {
 		if (!gameStarted) {
 			throw new IllegalStateException("Game has not started");
 		}
@@ -248,14 +264,14 @@ public class GameState {
 			if (rbc.getColor().equals(c)) {
 				curPlayer.removeRaceBet(rbc);
 				winBets.add(rbc);
-				
+
 				this.commitTurn();
 				break;
 			}
 		}
 	}
 
-	public synchronized void placeLoseBet(Color c) {
+	public void placeLoseBet(Color c) {
 		if (!gameStarted) {
 			throw new IllegalStateException("Game has not started");
 		}
@@ -267,14 +283,14 @@ public class GameState {
 			if (rbc.getColor().equals(c)) {
 				curPlayer.removeRaceBet(rbc);
 				loseBets.add(rbc);
-				
+
 				this.commitTurn();
 				break;
 			}
 		}
 	}
 
-	public synchronized void placeRoundBet(Color c) {
+	public void placeRoundBet(Color c) {
 		if (!gameStarted) {
 			throw new IllegalStateException("Game has not started");
 		}
@@ -284,12 +300,12 @@ public class GameState {
 
 		if (roundBets.containsKey(c) && !roundBets.get(c).isEmpty()) {
 			curPlayer.addRoundBet(roundBets.get(c).pollFirst());
-			
+
 			this.commitTurn();
 		}
 	}
 
-	public synchronized void placeDesertCard(boolean isOasis, int tileNum) {
+	public void placeDesertCard(boolean isOasis, int tileNum) {
 		if (!gameStarted) {
 			throw new IllegalStateException("Game has not started");
 		}
@@ -301,7 +317,7 @@ public class GameState {
 			Optional<DesertCard> old = curPlayer.getDesertCard();
 			curPlayer.setDesertCard(isOasis, tileNum);
 			track.placeDesertCard(old, curPlayer.getDesertCard().get(), tileNum);
-			
+
 			this.commitTurn();
 		}
 	}

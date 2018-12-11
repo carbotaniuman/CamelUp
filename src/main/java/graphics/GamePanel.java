@@ -65,9 +65,10 @@ public class GamePanel extends JPanel implements MouseListener, GameListener {
 						player.getRoundBets().size(), player.getMoney() + " EP");
 				g.drawString(s, 920, 530 + 33 * (i1 + 2));
 			}
-			
+			g.setFont(oldFont);
 		}
 		else {
+			
 			HandDrawer.drawHand(g, gamestate.getCurPlayer());
 			BoardDrawer.drawBoard(g, gamestate.getRoundBets(), gamestate.getCurPlayer(),
 					gamestate.getPyramid().getRolledDice());
@@ -75,6 +76,17 @@ public class GamePanel extends JPanel implements MouseListener, GameListener {
 			BoardDrawer.drawWinBets(g, gamestate.getWinBets());
 			BoardDrawer.drawLoseBets(g, gamestate.getLoseBets());
 			TrackDrawer.drawTrack(g, gamestate.getTrack(), gamestate.getCurPlayer());
+			
+			Font oldFont = g.getFont();
+			if(gamestate.getCurPlayer() instanceof AIPlayer) {
+				g.setFont(new Font("TimesRoman", Font.ITALIC, 120));
+				FontMetrics fm = g.getFontMetrics();
+				Rectangle2D textSize = fm.getStringBounds("AI Player's Turn", g);
+				int xPos = (1920 - (int) textSize.getWidth()) / 2;
+				int yPos = (1080 - (int) textSize.getHeight()) / 2 + fm.getAscent();
+				g.drawString("AI Player's Turn", xPos, yPos);
+			}
+			g.setFont(oldFont);
 		}
 	}
 
