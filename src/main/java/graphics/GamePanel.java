@@ -53,17 +53,14 @@ public class GamePanel extends JPanel implements MouseListener, GameListener {
 			
 			List<Player> players = gamestate.getPlayers();
 			g.setColor(Color.BLACK);
-			g.setFont(new Font("TimesRoman", Font.ITALIC, 40));
-			g.drawString("Player Data", 1130, 500); // 1530 , 380
 			g.setFont(new Font("Monospaced", Font.BOLD, 24));
-			String st = String.format("%-15s %-8s %-10s %-6s", "Name", "RaceBets", "RoundBets", "Money");
-			g.drawString(st, 920, 530 + 33);
+			String st = String.format("%-15s %-7s", "Name", "Money");
+			g.drawString(st, 820, 580 + 33);
 			for (int i1 = 0; i1 < players.size(); i1++) {
 				Player player = players.get(i1);
 				g.setFont(new Font("Monospaced", Font.BOLD, 24));
-				String s = String.format("%-15s %-8d %-10d %-5s", player.getName(), player.getRaceBets().size(),
-						player.getRoundBets().size(), player.getMoney() + " EP");
-				g.drawString(s, 920, 530 + 33 * (i1 + 2));
+				String s = String.format("%-15s %-8s", player.getName(), player.getMoney() + " EP");
+				g.drawString(s, 820, 580 + 33 * (i1 + 2));
 			}
 			g.setFont(oldFont);
 		}
