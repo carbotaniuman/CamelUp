@@ -48,7 +48,6 @@ public class TrackDrawer {
 		for (int i1 = 320; i1 < 640; i1 += 160) {
 			g.setColor(new Color(255, 245, 175));
 			g.fillRect(x1, i1, 160, 160);
-			g.setColor(Color.BLACK);
 			g.drawRect(x1, i1, 160, 160);
 			player.getDesertCard();
 			if (!Optional.empty().isPresent()) {
