@@ -19,10 +19,12 @@ import immutable.Camel;
 
 public class TrackDrawer {
 	public static final BufferedImage camelImage;
+	public static final BufferedImage origImage;
 
 	static {
 		try {
 			camelImage = scale(ImageIO.read(new File("Camel.png")), 61, 40);
+			origImage = ImageIO.read(new File("Camel.png"));
 		} catch (IOException e) {
 			throw new AssertionError(e);
 		}
@@ -206,6 +208,11 @@ public class TrackDrawer {
 	private static void drawCamel(Graphics g, Color c, int x, int y, int stackPos) {
 		g.drawImage(blackToColor(camelImage, c), x + (160 - 49) / 2, y + 120 - 26 * stackPos, null);
 	}
+	
+	public static void drawCamel(BufferedImage img, Graphics g, Color c, int x, int y) {
+		g.drawImage(blackToColor(img, c), x, y, null);
+	}
+
 
 	private static void drawPlus(Graphics g, int x, int y) {
 		Font oldFont = g.getFont();

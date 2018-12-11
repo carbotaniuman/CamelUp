@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -64,8 +65,16 @@ public class GamePanel extends JPanel implements MouseListener, GameListener {
 				}
 			}
 			g.setFont(new Font("Monospaced", Font.BOLD, 50));
-			String s = "WINNER: " + winner.getName() + " " + winner.getMoney() + " EP";
+			String s = "PLAYER WINNER: " + winner.getName() + " " + winner.getMoney() + " EP"; /*+ "\n" +
+			 "CAMEL WINNER: " +gamestate.getCamelRankings().get(0).getColor() + "\n" +
+			 "CAMEL LOSER: " + gamestate.getCamelRankings().get(gamestate.getCamelRankings().size()-1);*/
 			g.drawString(s, 560, 580 + 33 * (0 + 2));
+			TrackDrawer.drawCamel(TrackDrawer.origImage, g, gamestate.getCamelRankings().get(0).getColor(), 1000 , 700);
+			g.setColor(Color.BLACK);
+			g.drawString("CAMEL WINNER", 1150, 950);
+			TrackDrawer.drawCamel(TrackDrawer.origImage, g, gamestate.getCamelRankings().get(gamestate.getCamelRankings().size()-1).getColor(), 160, 700);//1000 , 700
+			g.setColor(Color.BLACK);
+			g.drawString("CAMEL LOSER", 285, 950); // 1140, 950
 			g.setFont(oldFont);
 		}
 		else {
@@ -98,7 +107,7 @@ public class GamePanel extends JPanel implements MouseListener, GameListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if (!gamestate.isGameStarted() || gamestate.isGameEnded()) {
+		if (!gamestate.isGameStarted() || gamestate.isGameEnded() || gamestate.isSleeping()) {
 			return;
 		}
 
