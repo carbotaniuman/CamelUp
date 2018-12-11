@@ -1,3 +1,4 @@
+package gamestate;
 import javax.swing.JFrame;
 
 import graphics.MenuPanel;

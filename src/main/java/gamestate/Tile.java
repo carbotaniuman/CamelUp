@@ -5,21 +5,22 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import ai.LockableList;
 import immutable.Camel;
 import immutable.DesertCard;
 
 public class Tile {
-	private final List<Camel> camels;
+	private final LockableList<Camel> camels;
 	private Optional<DesertCard> trapCard;
 
 	public Tile() {
-		camels = new ArrayList<>();
+		camels = new LockableList<>(new ArrayList<>());
 		trapCard = Optional.empty();
 	}
 
 	// AI Constructor
 	public Tile(Tile t) {
-		camels = new ArrayList<>(t.camels);
+		camels = new LockableList<>(new ArrayList<>(t.camels));
 		trapCard = t.trapCard;
 	}
 
