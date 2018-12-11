@@ -2,6 +2,7 @@ package graphics;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -21,6 +22,8 @@ public class MenuPanel extends JPanel {
 	private MenuListener listener;
 
 	public MenuPanel() {
+		setLayout(new FlowLayout (FlowLayout.LEADING, 0, 0));
+		
 		listener = new MenuListener();
 		addMouseListener(listener);
 

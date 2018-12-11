@@ -28,7 +28,7 @@ public class Track {
 				return Integer.compare(camelPos.get(c2), camelPos.get(c1));
 			}
 			
-			return Integer.compare(tiles[camelPos.get(c1)].getCamelStackPos(c1), tiles[camelPos.get(c2)].getCamelStackPos(c2));
+			return Integer.compare(tiles[camelPos.get(c1) % 16].getCamelStackPos(c1), tiles[camelPos.get(c2) % 16].getCamelStackPos(c2));
 		}
 	}
 	
@@ -129,7 +129,7 @@ public class Track {
 			}
 		}
 
-		tiles[oldPos].removeCamels(list); // Must be last command
+		tiles[oldPos % 16].removeCamels(list); // Must be last command
 	}
 
 	public int getCamelPos(Camel c) {

@@ -1,13 +1,16 @@
 package graphics;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Rectangle2D;
+import java.util.Arrays;
 
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -26,6 +29,7 @@ public class GameStartPanel extends JPanel implements ChangeListener, MouseListe
 
 	public GameStartPanel() {
 		setLayout(null);
+		
 		SpinnerModel sm = new SpinnerNumberModel(5, 1, 8, 1);
 		spinner = new JSpinner(sm) {
 			private static final long serialVersionUID = 8916717439253552751L;
@@ -46,7 +50,7 @@ public class GameStartPanel extends JPanel implements ChangeListener, MouseListe
 
 	@Override
 	public void stateChanged(ChangeEvent e) {
-		int s = (int) (spinner.getValue());
+		
 		repaint();
 	}
 
@@ -129,6 +133,17 @@ public class GameStartPanel extends JPanel implements ChangeListener, MouseListe
 				choices[num] = !choices[num];
 				repaint();
 			}
+		}
+		
+		if(x > (1920 - 300) / 2 && x < (1920 - 300) / 2 + 300 && y > 150 && y < 250) {
+			System.out.println("EEE");
+			removeMouseListener(this);
+			GamePanel game = new GamePanel(Arrays.copyOf(choices, (int) spinner.getValue()));
+			game.setBounds(0, 0, 1920, 1080);
+			remove(spinner);
+			add(game);
+			revalidate();
+			repaint();
 		}
 	}
 

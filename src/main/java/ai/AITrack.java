@@ -17,8 +17,8 @@ public class AITrack extends Track {
 		Camel c = camels.get(color);
 
 		int oldPos = camelPos.get(c);
-		int cPosOnTile = tiles[oldPos].getCamelStackPos(c);
-		List<Camel> list = tiles[oldPos].getCamels().subList(0, cPosOnTile + 1);
+		int cPosOnTile = tiles[oldPos % 16].getCamelStackPos(c);
+		List<Camel> list = tiles[oldPos % 16].getCamels().subList(0, cPosOnTile + 1);
 
 		Tile newTile = tiles[(oldPos + rolled) % 16];
 
@@ -48,6 +48,6 @@ public class AITrack extends Track {
 			}
 		}
 
-		tiles[oldPos].removeCamels(list); // Must be last command
+		tiles[oldPos % 16].removeCamels(list); // Must be last command
 	}
 }
