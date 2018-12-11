@@ -22,7 +22,8 @@ public class HandDrawer {
 		g.drawRect(0, 800, 1920, 280);
 
 		// DesertCard
-		CardDrawer.drawDesertCard(g, 0, 800, "+/-", !p.getDesertCard().isPresent());
+		if ( !p.getDesertCard().isPresent())
+			CardDrawer.drawDesertCard(g, 0, 800, "+/-", !p.getDesertCard().isPresent());
 
 		// RaceBettingCards
 		List<RaceBettingCard> cards = p.getRaceBets();

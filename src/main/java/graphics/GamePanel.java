@@ -85,7 +85,7 @@ public class GamePanel extends JPanel implements MouseListener, TurnListener {
 			}	
 		}
 		
-		for ( int i = 0, count = 10; i < 640; i += 160, count++)
+		for ( int i = 0, count = 10; i < 800; i += 160, count++)
 		{
 			if ( x > i && x < i + 20 && y > 0 && y < 20){
 				gamestate.placeDesertCard(true, count);
@@ -115,7 +115,7 @@ public class GamePanel extends JPanel implements MouseListener, TurnListener {
 			repaint();
 		} 
 		
-		for ( int i = 480, count = 7; i < 160; i -= 160, count++)
+		for ( int i = 640, count = 6; i > 0; i -= 160, count++)
 		{
 			if ( x > 0 && x < 20 && y > i && y < i + 20){
 				gamestate.placeDesertCard(true, count);
