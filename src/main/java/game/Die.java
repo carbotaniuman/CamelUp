@@ -1,27 +1,29 @@
 package game;
 
 import java.awt.Color;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
+import gamestate.GameState;
 
 public class Die {
 
-	private final Random rand;
 	private final Color camelColor;
 	private boolean ifRolled;
 	private int lastRoll;
 
 	public Die(Color c) {
 		camelColor = c;
-		rand = new Random();
 	}
-
-	public Die(Color c, int seed) {
-		camelColor = c;
-		rand = new Random(seed);
+	
+	//AI Constructor
+	public Die(Die d) {
+		camelColor = d.camelColor;
+		ifRolled = d.ifRolled;
+		lastRoll = d.lastRoll;
 	}
 
 	public void roll() {
-		lastRoll = rand.nextInt(3) + 1;
+		lastRoll = ThreadLocalRandom.current().nextInt(1, 4);
 		ifRolled = true;
 	}
 	

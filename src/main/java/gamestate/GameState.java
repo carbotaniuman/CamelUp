@@ -46,8 +46,8 @@ public class GameState {
 	private int curPlayerIndex;
 	private long turnIndex;
 	private boolean gameStarted, gameEnded;
-	
-	private final Set<TurnListener> listeners;
+
+	private final Set<GameListener> listeners;
 
 	public GameState(boolean... b) {
 		camels = new ArrayList<Camel>();
@@ -57,8 +57,8 @@ public class GameState {
 
 		players = new ArrayList<Player>();
 
-		for(int i = 0; i < b.length; i++) {
-			if(b[i]) {
+		for (int i = 0; i < b.length; i++) {
+			if (b[i]) {
 				players.add(new AIPlayer(names[i], CAMELCOLORS, this));
 			} else {
 				players.add(new Player(names[i], CAMELCOLORS));
@@ -80,10 +80,10 @@ public class GameState {
 		track = new Track(16, camels);
 		curPlayer = players.get(curPlayerIndex);
 		pyramid = new Pyramid(CAMELCOLORS);
-		
+
 		listeners = new LinkedHashSet<>();
 	}
-	
+
 	public void startGame() {
 		gameStarted = true;
 		new Thread(() -> {
@@ -95,17 +95,17 @@ public class GameState {
 			processAITurn();
 		}).start();
 	}
-	
-	public void addTurnListener(TurnListener tl) {
+
+	public void addTurnListener(GameListener tl) {
 		listeners.add(tl);
 	}
-	
+
 	private synchronized void processAITurn() {
-		if(curPlayer instanceof AIPlayer) {
-			AIAction act = ((AIPlayer)curPlayer).getAction();
+		if (curPlayer instanceof AIPlayer) {
+			AIAction act = ((AIPlayer) curPlayer).getAction();
 			long turn = turnIndex;
 			act.act(this);
-			if(turnIndex != turn + 1) {
+			if (turnIndex != turn + 1) {
 				throw new AssertionError("AI Played on another person's turn");
 			}
 		}
@@ -146,7 +146,7 @@ public class GameState {
 	public boolean isGameEnded() {
 		return gameEnded;
 	}
-	
+
 	public boolean isGameStarted() {
 		return gameStarted;
 	}
@@ -178,7 +178,7 @@ public class GameState {
 					for (RaceBettingCard r : this.winBets) {
 						if (r.getColor().equals(this.getCamelRankings().get(0).getColor())) {
 							tally = amount[count];
-							if(count + 1 != amount.length) {
+							if (count + 1 != amount.length) {
 								count++;
 							}
 						}
@@ -192,23 +192,25 @@ public class GameState {
 			}
 		}
 
+		turnIndex++;
+
+		for (GameListener tl : listeners) {
+			tl.gameChanged();
+		}
+
 		curPlayerIndex = (curPlayerIndex + 1) % players.size();
 		curPlayer = players.get(curPlayerIndex);
 
-		turnIndex++;
-
-		for(TurnListener tl : listeners) {
-			tl.turnPassed();
+		if(!gameEnded) {
+			new Thread(() -> {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				processAITurn();
+			}).start();
 		}
-
-		new Thread(() -> {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			processAITurn();
-		}).start();
 	}
 
 	public List<Camel> getCamelRankings() {
@@ -228,6 +230,7 @@ public class GameState {
 		Die d = pyramid.getRandomDie();
 
 		track.moveCamel(d.getColor(), d.getLastRoll());
+		
 		this.commitTurn();
 	}
 
@@ -243,6 +246,7 @@ public class GameState {
 			if (rbc.getColor().equals(c)) {
 				curPlayer.removeRaceBet(rbc);
 				winBets.add(rbc);
+				
 				this.commitTurn();
 				break;
 			}
@@ -261,6 +265,7 @@ public class GameState {
 			if (rbc.getColor().equals(c)) {
 				curPlayer.removeRaceBet(rbc);
 				loseBets.add(rbc);
+				
 				this.commitTurn();
 				break;
 			}
@@ -277,7 +282,7 @@ public class GameState {
 
 		if (roundBets.containsKey(c) && !roundBets.get(c).isEmpty()) {
 			curPlayer.addRoundBet(roundBets.get(c).pollFirst());
-
+			
 			this.commitTurn();
 		}
 	}
@@ -294,7 +299,7 @@ public class GameState {
 			Optional<DesertCard> old = curPlayer.getDesertCard();
 			curPlayer.setDesertCard(isOasis, tileNum);
 			track.placeDesertCard(old, curPlayer.getDesertCard().get(), tileNum);
-
+			
 			this.commitTurn();
 		}
 	}

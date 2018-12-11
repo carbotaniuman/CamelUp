@@ -16,9 +16,8 @@ public class Tile {
 		camels = new ArrayList<>();
 		trapCard = Optional.empty();
 	}
-	
-	
-	//AI Constructor
+
+	// AI Constructor
 	public Tile(Tile t) {
 		camels = new ArrayList<>(t.camels);
 		trapCard = t.trapCard;
@@ -29,7 +28,7 @@ public class Tile {
 			throw new IllegalStateException("DesertCard exists!");
 		trapCard = Optional.of(d);
 	}
-	
+
 	public void addCamelTop(Camel c) {
 		camels.add(0, c);
 	}
@@ -37,11 +36,11 @@ public class Tile {
 	public void addCamelBot(Camel c) {
 		camels.add(c);
 	}
-	
+
 	public void addCamelsTop(List<Camel> c) {
 		camels.addAll(0, c);
 	}
-	
+
 	public void addCamelsBot(List<Camel> c) {
 		camels.addAll(c);
 	}
@@ -49,11 +48,11 @@ public class Tile {
 	public void removeCamel(Camel c) {
 		camels.remove(c);
 	}
-	
+
 	public void removeCamels(List<Camel> c) {
 		camels.removeAll(c);
 	}
-	
+
 	public List<Camel> getCamels() {
 		return Collections.unmodifiableList(camels);
 	}
@@ -65,14 +64,14 @@ public class Tile {
 	public void removeDesertCard() {
 		trapCard = Optional.empty();
 	}
-	
-	//-1 no exist, else 0 is top of stack
+
+	// -1 no exist, else 0 is top of stack
 	public int getCamelStackPos(Camel c) {
 		return camels.indexOf(c);
 	}
-	
+
 	public String toString() {
-		if(trapCard.isPresent()) {
+		if (trapCard.isPresent()) {
 			return "[" + trapCard.get().toString() + "]";
 		} else {
 			return camels.toString();

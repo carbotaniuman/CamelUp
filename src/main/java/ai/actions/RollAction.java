@@ -8,4 +8,8 @@ public class RollAction implements AIAction {
 	public void act(GameState g) {
 		g.moveCamel();
 	}
+	
+	public String toString() {
+		return "Roll";
+	}
 }

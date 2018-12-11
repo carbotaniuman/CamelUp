@@ -12,9 +12,9 @@ import drawers.BoardDrawer;
 import drawers.HandDrawer;
 import drawers.TrackDrawer;
 import gamestate.GameState;
-import gamestate.TurnListener;
+import gamestate.GameListener;
 
-public class GamePanel extends JPanel implements MouseListener, TurnListener {
+public class GamePanel extends JPanel implements MouseListener, GameListener {
 	private static final long serialVersionUID = -58760937816298343L;
 	private GameState gamestate;
 
@@ -149,7 +149,7 @@ public class GamePanel extends JPanel implements MouseListener, TurnListener {
 	}
 
 	@Override
-	public void turnPassed() {
+	public void gameChanged() {
 		repaint();
 	}
 }

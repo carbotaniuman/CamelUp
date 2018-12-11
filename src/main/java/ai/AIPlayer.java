@@ -28,7 +28,6 @@ public class AIPlayer extends Player {
 	public AIAction getAction() {
 		double eValue = 1;
 		AIAction bestAction = new RollAction();
-		System.out.println("1 roll");
 
 		HashMap<Color, Integer> roundWin = new HashMap<>();
 		HashMap<Color, Integer> roundSec = new HashMap<>();
@@ -50,10 +49,8 @@ public class AIPlayer extends Player {
 				double chanceFirst = roundWin.getOrDefault(c, 0) / 1000.0;
 				double chanceSecond = roundSec.getOrDefault(c, 0) / 1000.0;
 				double chanceElse = 1 - chanceFirst - chanceSecond;
-				System.out.println(chanceFirst + " " + chanceSecond);
 				double roundV = (roundVMax * chanceFirst + 1 * chanceSecond - 1 * chanceElse)
 						* dieRolledRoundMult(g.getPyramid().getRolledDice().size());
-				System.out.println(roundV + " round " + GameState.COLORBIMAP.inverse().get(c));
 				if (roundV > eValue) {
 					eValue = roundV;
 					bestAction = new RoundBetAction(c);
@@ -81,15 +78,14 @@ public class AIPlayer extends Player {
 
 		for (RaceBettingCard rbc : getRaceBets()) {
 			Color c = rbc.getColor();
-			double chanceWin = gameWin.get(c) / 1000.0 * 100;
-			double chanceLose = gameLose.get(c) / 1000.0 * 100;
+			double chanceWin = gameWin.getOrDefault(c, 0) / 1000.0 * 100;
+			double chanceLose = gameLose.getOrDefault(c, 0) / 1000.0 * 100;
 
 			double chanceFirstWinPlace = (1.0 / 625.0) * Math.pow(g.getWinBets().size() - 25, 2);
 			double chanceFirstLosePlace = (1.0 / 625.0) * Math.pow(g.getLoseBets().size() - 25, 2);
 
 			double winEV = chanceFirstWinPlace * chanceWin * 8
 					- 1 * (1 - chanceWin) * raceWinMult(g.getTrack().getCamelPos(g.getCamelRankings().get(0)));
-			System.out.println(winEV + " win " + GameState.COLORBIMAP.inverse().get(c));
 			if (winEV > eValue) {
 				eValue = winEV;
 				bestAction = new WinBetAction(c);
@@ -98,7 +94,6 @@ public class AIPlayer extends Player {
 			double loseEv = chanceFirstLosePlace * chanceLose * 8 - 1 * (1 - chanceLose)
 					* raceLoseMult(g.getTrack().getCamelPos(g.getCamelRankings().get(g.getCamelRankings().size() - 2)),
 							g.getTrack().getCamelPos(g.getCamelRankings().get(g.getCamelRankings().size() - 1)));
-			System.out.println(loseEv + " lose " + GameState.COLORBIMAP.inverse().get(c));
 			if (loseEv > eValue) {
 				eValue = loseEv;
 				bestAction = new LoseBetAction(c);
