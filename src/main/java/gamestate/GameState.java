@@ -170,6 +170,8 @@ public class GameState {
 					}
 					roundBets.get(rbc.getColor()).add(rbc);
 				}
+				tally += p.getRollCards();
+				p.resetRollCards();
 				p.clearRoundBets();
 				if (track.hasCamelWon()) {
 					gameEnded = true;
