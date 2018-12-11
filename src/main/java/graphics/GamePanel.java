@@ -43,11 +43,11 @@ public class GamePanel extends JPanel implements MouseListener, GameListener {
 			
 			g.setColor(Color.BLACK);
 			Font oldFont = g.getFont();
-			g.setFont(new Font("TimesRoman", Font.PLAIN, 40));
+			g.setFont(new Font("TimesRoman", Font.PLAIN, 250));
 			FontMetrics fm = g.getFontMetrics();
 			Rectangle2D textSize = fm.getStringBounds("Game Over", g);
 			int xPos = (1920 - (int) textSize.getWidth()) / 2;
-			g.drawString("Game Over", xPos, 250);
+			g.drawString("Game Over", xPos, 500);
 			
 		}
 		else {
