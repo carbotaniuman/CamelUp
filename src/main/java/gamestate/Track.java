@@ -16,7 +16,7 @@ public class Track {
 	static class CamelComparator implements Comparator<Camel> {
 		private final Map<Camel, Integer> camelPos;
 		private final Tile[] tiles;
-		
+
 		public CamelComparator(Map<Camel, Integer> camelPos, Tile[] tiles) {
 			this.camelPos = camelPos;
 			this.tiles = tiles;
@@ -24,14 +24,15 @@ public class Track {
 
 		@Override
 		public int compare(Camel c1, Camel c2) {
-			if(camelPos.get(c1) != camelPos.get(c2)) {
+			if (camelPos.get(c1) != camelPos.get(c2)) {
 				return Integer.compare(camelPos.get(c2), camelPos.get(c1));
 			}
-			
-			return Integer.compare(tiles[camelPos.get(c1) % 16].getCamelStackPos(c1), tiles[camelPos.get(c2) % 16].getCamelStackPos(c2));
+
+			return Integer.compare(tiles[camelPos.get(c1) % 16].getCamelStackPos(c1),
+					tiles[camelPos.get(c2) % 16].getCamelStackPos(c2));
 		}
 	}
-	
+
 	protected final Tile[] tiles;
 	protected final Map<Camel, Integer> camelPos;
 	protected final Map<Color, Camel> camels;
@@ -52,16 +53,15 @@ public class Track {
 			camelPos.put(c, startPos);
 			tiles[startPos].addCamelBot(c);
 		}
-		
+
 		compare = new CamelComparator(camelPos, tiles);
 	}
-	
-	public Tile getTile ( int i )
-	{
+
+	public Tile getTile(int i) {
 		return tiles[i];
 	}
 
-	//AI Constructor
+	// AI Constructor
 	protected Track(Track t) {
 		tiles = new Tile[t.tiles.length];
 
@@ -71,17 +71,17 @@ public class Track {
 
 		camelPos = new HashMap<>(t.camelPos);
 		camels = new HashMap<>(t.camels);
-		
+
 		compare = new CamelComparator(camelPos, tiles);
 	}
 
 	public List<Camel> getCamelRankings() {
 		List<Camel> rank = new ArrayList<>(camels.values());
 		rank.sort(compare);
-		
+
 		return rank;
 	}
-	
+
 	public boolean hasCamelWon() {
 		for (Map.Entry<Camel, Integer> entry : camelPos.entrySet()) {
 			if (entry.getValue() > 15) {
@@ -151,7 +151,7 @@ public class Track {
 
 		return !tiles[tileNum + 1].getDesertCard().isPresent();
 	}
-	
+
 	public boolean canMoveCard(int origNum, int newNum) {
 		if (newNum <= 0)
 			return false;

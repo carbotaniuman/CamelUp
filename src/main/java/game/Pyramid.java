@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 public class Pyramid {
-	private final ArrayList<Die> notRolledDice;
-	private final ArrayList<Die> rolledDice;
+	private final List<Die> notRolledDice;
+	private final List<Die> rolledDice;
 	
 	private Die lastDie;
 
@@ -24,8 +25,8 @@ public class Pyramid {
 	}
 	
 	public Pyramid(Pyramid p) {
-		notRolledDice = new ArrayList<>(p.notRolledDice);
-		rolledDice = new ArrayList<>(p.rolledDice);
+		notRolledDice = p.notRolledDice.stream().map(Die::new).collect(Collectors.toList());
+		rolledDice = p.rolledDice.stream().map(Die::new).collect(Collectors.toList());
 	}
 
 	public Die getRandomDie() {

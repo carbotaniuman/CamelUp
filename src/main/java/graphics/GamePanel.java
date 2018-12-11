@@ -17,9 +17,9 @@ import drawers.BoardDrawer;
 import drawers.HandDrawer;
 import drawers.TrackDrawer;
 import gamestate.GameState;
-import gamestate.TurnListener;
+import gamestate.GameListener;
 
-public class GamePanel extends JPanel implements MouseListener, TurnListener {
+public class GamePanel extends JPanel implements MouseListener, GameListener {
 	private static final long serialVersionUID = -58760937816298343L;
 	private GameState gamestate;
 
@@ -117,20 +117,20 @@ public class GamePanel extends JPanel implements MouseListener, TurnListener {
 			}
 		}
 		//checking for tile 2
-		if ( x > 640 && x < 680 && y > 480 && y < 500){
+		if ( x > 640 && x < 660 && y > 480 && y < 500){
 			gamestate.placeDesertCard(true, 1);
 			repaint();
 		}
-		else if ( x > 640 && x < 680 && y > 500 && y < 520){
+		else if ( x > 640 && x < 660 && y > 500 && y < 520){
 			gamestate.placeDesertCard(false, 1);
 			repaint();
 		} 
 		//checking for tile 16
-		if ( x > 640 && x < 680 && y > 160 && y < 180){
+		if ( x > 640 && x < 660 && y > 160 && y < 180){
 			gamestate.placeDesertCard(true, 15);
 			repaint();
 		}
-		else if ( x > 640 && x < 680 && y > 180 && y < 200){
+		else if ( x > 640 && x < 660 && y > 180 && y < 200){
 			gamestate.placeDesertCard(false, 15);
 			repaint();
 		} 
@@ -161,7 +161,7 @@ public class GamePanel extends JPanel implements MouseListener, TurnListener {
 	public void mouseReleased(MouseEvent arg0) {}
 
 	@Override
-	public void turnPassed() {
+	public void gameChanged() {
 		repaint();
 	}
 }

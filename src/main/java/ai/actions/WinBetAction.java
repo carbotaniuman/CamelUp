@@ -15,4 +15,8 @@ public class WinBetAction implements AIAction {
 	public void act(GameState g) {
 		g.placeWinBet(c);
 	}
+	
+	public String toString() {
+		return "WinBet: " + GameState.COLORBIMAP.inverse().get(c);
+	}
 }

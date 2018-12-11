@@ -15,4 +15,8 @@ public class RoundBetAction implements AIAction {
 	public void act(GameState g) {
 		g.placeRoundBet(c);
 	}
+	
+	public String toString() {
+		return "RoundBet: " + GameState.COLORBIMAP.inverse().get(c);
+	}
 }
