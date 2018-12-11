@@ -217,18 +217,18 @@ public class GameState {
 		for (GameListener tl : listeners) {
 			tl.gameChanged();
 		}
-		
+
 		isSleeping = true;
 		Timer timer = new Timer(500, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				curPlayerIndex = (curPlayerIndex + 1) % players.size();
 				curPlayer = players.get(curPlayerIndex);
-				
+
 				for (GameListener tl : listeners) {
 					tl.gameChanged();
 				}
-				
+
 				if (!gameEnded) {
 					Timer timer = new Timer(1000, new ActionListener() {
 						@Override
@@ -244,7 +244,7 @@ public class GameState {
 		});
 		timer.setRepeats(false);
 		timer.start();
-		
+
 	}
 
 	public List<Camel> getCamelRankings() {
@@ -329,7 +329,8 @@ public class GameState {
 			throw new IllegalStateException("Game has ended");
 		}
 
-		if (track.canPlaceCard(tileNum) || (curPlayer.getDesertCard().isPresent() && track.canMoveCard(curPlayer.getDesertCard().get().getTile(), tileNum))) {
+		if (track.canPlaceCard(tileNum) || (curPlayer.getDesertCard().isPresent()
+				&& track.canMoveCard(curPlayer.getDesertCard().get().getTile(), tileNum))) {
 			Optional<DesertCard> old = curPlayer.getDesertCard();
 			curPlayer.setDesertCard(isOasis, tileNum);
 			track.placeDesertCard(old, curPlayer.getDesertCard().get(), tileNum);
