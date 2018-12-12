@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GamePanel extends JPanel implements MouseListener, GameListener {
@@ -43,9 +44,9 @@ public class GamePanel extends JPanel implements MouseListener, GameListener {
             FontMetrics fm = g.getFontMetrics();
             Rectangle2D textSize = fm.getStringBounds("Game Over", g);
             int xPos = (1920 - (int) textSize.getWidth()) / 2;
-            g.drawString("Game Over", xPos, 300);
+            g.drawString("Game Over", xPos, 280);
 
-            List<Player> players = gamestate.getPlayers();
+            List<Player> players = new ArrayList<>(gamestate.getPlayers());
             int max = Integer.MIN_VALUE;
             Player winner = null;
             for (int i1 = 0; i1 < players.size(); i1++) {
@@ -60,19 +61,20 @@ public class GamePanel extends JPanel implements MouseListener, GameListener {
             fm = g.getFontMetrics();
             textSize = fm.getStringBounds(s, g);
             xPos = (1920 - (int) textSize.getWidth()) / 2;
-            g.drawString(s, xPos, 380 + 66);
+            g.drawString(s, xPos, 360 + 66);
+            players.remove(winner);
             for(int i= 0; i < players.size(); i++) {
             	Player plyr = players.get(i);
             	if(plyr.getMoney() == winner.getMoney())
-            		g.drawString("PLAYER WINNER "+ plyr.getName() + " " + plyr.getMoney() + " EP", xPos, 380+66 +100*(i+1));
+            		g.drawString("PLAYER WINNER: "+ plyr.getName() + " " + plyr.getMoney() + " EP", xPos, 360+66 +50*(i+1));
             }
             TrackDrawer.drawCamel(TrackDrawer.origImage, g, gamestate.getCamelRankings().get(0).getColor(), 1000, 700);
             g.setColor(Color.BLACK);
-            g.drawString("CAMEL WINNER", 1150, 950);
+            g.drawString("CAMEL WINNER", 1150, 930);
             TrackDrawer.drawCamel(TrackDrawer.origImage, g,
                     gamestate.getCamelRankings().get(gamestate.getCamelRankings().size() - 1).getColor(), 160, 700);
             g.setColor(Color.BLACK);
-            g.drawString("CAMEL LOSER", 285, 950); // 1140, 950
+            g.drawString("CAMEL LOSER", 285, 930); // 1140, 950
             g.setFont(oldFont);
         } else {
 
