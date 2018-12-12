@@ -137,41 +137,81 @@ public class GamePanel extends JPanel implements MouseListener, GameListener {
 			if (x > i && x < i + 124 && y > 40 && y < 80) {
 				gamestate.placeLoseBet(GameState.CAMELCOLORS.get(count));
 			}
+			
 		}
 
 		for (int i = 640, count = 2; i > 0; i -= 160, count++) {
-			if (x > i && x < i + 20 && y > 640 && y < 660) {
-				gamestate.placeDesertCard(true, count);
-			} else if (x > i && x < i + 20 && y > 660 && y < 680) {
-				gamestate.placeDesertCard(false, count);
+			if ( x > i && x < i + 160 && y > 640 && y < 680)
+			{
+				if( gamestate.getTrack().getTile(count).getDesertCard().isPresent()) {
+					if( gamestate.getCurPlayer() == gamestate.getTrack().getTile(count).getDesertCard().get().getPlayer()) {
+						if ( x > i && x < i + 160 && y > 660 && y < 680)
+							gamestate.flipDesertCard(gamestate.getTrack().getTile(count));
+					}
+				} else if (x > i && x < i + 20 && y > 640 && y < 660) {
+					gamestate.placeDesertCard(true, count);
+				} else if (x > i && x < i + 20 && y > 660 && y < 680) {
+					gamestate.placeDesertCard(false, count);
+				}
 			}
 		}
 
 		for (int i = 0, count = 10; i < 800; i += 160, count++) {
-			if (x > i && x < i + 20 && y > 0 && y < 20) {
-				gamestate.placeDesertCard(true, count);
-			} else if (x > i && x < i + 20 && y > 20 && y < 40) {
-				gamestate.placeDesertCard(false, count);
+			if ( x > i && x < i + 160 && y > 0 && y < 40)
+			{
+				if( gamestate.getTrack().getTile(count).getDesertCard().isPresent()) {
+					if( gamestate.getCurPlayer() == gamestate.getTrack().getTile(count).getDesertCard().get().getPlayer()) {
+						if ( x > i && x < i + 160 && y > 20 && y < 40)
+							gamestate.flipDesertCard(gamestate.getTrack().getTile(count));
+					}
+				} else if (x > i && x < i + 20 && y > 0 && y < 20) {
+					gamestate.placeDesertCard(true, count);
+				} else if (x > i && x < i + 20 && y > 20 && y < 40) {
+					gamestate.placeDesertCard(false, count);
+				}
 			}
 		}
 		// checking for tile 2
-		if (x > 640 && x < 660 && y > 480 && y < 500) {
-			gamestate.placeDesertCard(true, 1);
-		} else if (x > 640 && x < 660 && y > 500 && y < 520) {
-			gamestate.placeDesertCard(false, 1);
+		if ( x > 640 && x < 800 && y > 480 && y < 520)
+		{
+			if( gamestate.getTrack().getTile(1).getDesertCard().isPresent()) {
+				if( gamestate.getCurPlayer() == gamestate.getTrack().getTile(1).getDesertCard().get().getPlayer()) {
+					if ( x > 640 && x < 800 && y > 500 && y < 520)
+						gamestate.flipDesertCard(gamestate.getTrack().getTile(1));
+				}
+			} else if (x > 640 && x < 660 && y > 480 && y < 500) {
+				gamestate.placeDesertCard(true, 1);
+			} else if (x > 640 && x < 660 && y > 500 && y < 520) {
+				gamestate.placeDesertCard(false, 1);
+			}
 		}
 		// checking for tile 16
-		if (x > 640 && x < 660 && y > 160 && y < 180) {
-			gamestate.placeDesertCard(true, 15);
-		} else if (x > 640 && x < 660 && y > 180 && y < 200) {
-			gamestate.placeDesertCard(false, 15);
+		if ( x > 640 && x < 800 && y > 160 && y < 200)
+		{
+			if( gamestate.getTrack().getTile(15).getDesertCard().isPresent()) {
+				if( gamestate.getCurPlayer() == gamestate.getTrack().getTile(15).getDesertCard().get().getPlayer()) {
+					if ( x > 640 && x < 800 && y > 180 && y < 200)
+						gamestate.flipDesertCard(gamestate.getTrack().getTile(15));
+				}
+			} else if (x > 640 && x < 660 && y > 160 && y < 180) {
+				gamestate.placeDesertCard(true, 15);
+			} else if (x > 640 && x < 660 && y > 180 && y < 200) {
+				gamestate.placeDesertCard(false, 15);
+			}
 		}
-
 		for (int i = 640, count = 6; i > 0; i -= 160, count++) {
-			if (x > 0 && x < 20 && y > i && y < i + 20) {
-				gamestate.placeDesertCard(true, count);
-			} else if (x > 0 && x < 20 && y > i + 20 && y < i + 40) {
-				gamestate.placeDesertCard(false, count);
+			if ( x > 0 && x < 160 && y > i && y < i + 40)
+			{
+				if( gamestate.getTrack().getTile(count).getDesertCard().isPresent()) {
+					if( gamestate.getCurPlayer() == gamestate.getTrack().getTile(count).getDesertCard().get().getPlayer()) {
+						if (x > 0 && x < 160 && y > i + 20 && y < i + 40)
+							gamestate.flipDesertCard(gamestate.getTrack().getTile(count));
+					}
+				} else if (x > 0 && x < 20 && y > i && y < i + 20) {
+					gamestate.placeDesertCard(true, count);
+				} else if (x > 0 && x < 20 && y > i + 20 && y < i + 40) {
+					gamestate.placeDesertCard(false, count);
+				}
 			}
 		}
 

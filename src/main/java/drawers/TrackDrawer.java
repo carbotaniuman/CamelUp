@@ -230,11 +230,19 @@ public class TrackDrawer {
 	private static void drawMiniDesert(Graphics g, int val, int x, int y, Player pl) {
 		Font oldFont = g.getFont();
 		g.setColor(Color.YELLOW);
-		g.fillRect(x, y, 160, 20);
+		g.fillRect(x, y, 160, 40);
 		g.setColor(Color.BLACK);
 		g.drawRect(x, y, 160, 20);
+		g.drawRect(x, y+20, 160, 20);
+		g.drawRect(x + 50, y + 50, 70, 70);
 		g.setFont(new Font("Serif", Font.PLAIN, 20));
 		g.drawString(" " + val + ":" +  pl.getName(), x , y+18);
+		g.drawString("Flip",x + 60, y + 38);
+		if ( val > 0 )
+			g.setColor(Color.blue);
+		else
+			g.setColor(Color.RED);
+		g.fillRect(x + 50, y + 50, 70, 70);
 		g.setFont(oldFont);
 	}
 }
