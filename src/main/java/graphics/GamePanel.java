@@ -43,7 +43,7 @@ public class GamePanel extends JPanel implements MouseListener, GameListener {
             FontMetrics fm = g.getFontMetrics();
             Rectangle2D textSize = fm.getStringBounds("Game Over", g);
             int xPos = (1920 - (int) textSize.getWidth()) / 2;
-            g.drawString("Game Over", xPos, 500);
+            g.drawString("Game Over", xPos, 300);
 
             List<Player> players = gamestate.getPlayers();
             int max = Integer.MIN_VALUE;
@@ -60,7 +60,12 @@ public class GamePanel extends JPanel implements MouseListener, GameListener {
             fm = g.getFontMetrics();
             textSize = fm.getStringBounds(s, g);
             xPos = (1920 - (int) textSize.getWidth()) / 2;
-            g.drawString(s, xPos, 580 + 66);
+            g.drawString(s, xPos, 380 + 66);
+            for(int i= 0; i < players.size(); i++) {
+            	Player plyr = players.get(i);
+            	if(plyr.getMoney() == winner.getMoney())
+            		g.drawString("PLAYER WINNER "+ plyr.getName() + " " + plyr.getMoney() + " EP", xPos, 380+66 +100*(i+1));
+            }
             TrackDrawer.drawCamel(TrackDrawer.origImage, g, gamestate.getCamelRankings().get(0).getColor(), 1000, 700);
             g.setColor(Color.BLACK);
             g.drawString("CAMEL WINNER", 1150, 950);
