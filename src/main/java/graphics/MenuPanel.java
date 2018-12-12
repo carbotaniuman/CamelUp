@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
@@ -26,8 +27,8 @@ public class MenuPanel extends JPanel {
 		
 		listener = new MenuListener();
 		addMouseListener(listener);
-
-		getInputMap().put(KeyStroke.getKeyStroke("ESCAPE"), "BackToMenu");
+		
+		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "BackToMenu");
 		getActionMap().put("BackToMenu", new AbstractAction() {
 			private static final long serialVersionUID = 7596895278099231841L;
 			@Override

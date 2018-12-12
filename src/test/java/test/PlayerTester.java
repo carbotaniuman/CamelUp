@@ -30,7 +30,7 @@ public class PlayerTester {
 
 	@Test
 	public void moneySetterGetterTest() {
-		assertEquals(player.getMoney(), 0);
+		assertEquals(player.getMoney(), 3);
 		player.setMoney(5);
 		assertEquals(player.getMoney(), 5);
 		player.setMoney(Integer.MAX_VALUE);

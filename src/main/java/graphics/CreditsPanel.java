@@ -42,22 +42,27 @@ public class CreditsPanel extends JPanel {
 
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 50));
 		fm = g.getFontMetrics();
-		textSize = fm.getStringBounds("Quy Nguyen", g);
+		textSize = fm.getStringBounds("Quy Nguyen - Leader", g);
 		xPos = (1920 - (int) textSize.getWidth()) / 2;
-		g.drawString("Quy Nguyen", xPos, 450);
+		g.drawString("Quy Nguyen - Leader", xPos, 450);
 
-		textSize = fm.getStringBounds("Sidharth Srinivas", g);
+		textSize = fm.getStringBounds("Sidharth Srinivas - Programmer", g);
 		xPos = (1920 - (int) textSize.getWidth()) / 2;
-		g.drawString("Sidharth Srinivas", xPos, 550);
+		g.drawString("Sidharth Srinivas - Programmer", xPos, 550);
 
-		textSize = fm.getStringBounds("Andres Luengo", g);
+		textSize = fm.getStringBounds("Andres Luengo - Programmer", g);
 		xPos = (1920 - (int) textSize.getWidth()) / 2;
-		g.drawString("Andres Luengo", xPos, 650);
+		g.drawString("Andres Luengo - Programmer", xPos, 650);
 
-		textSize = fm.getStringBounds("Rhea Dixit", g);
+		textSize = fm.getStringBounds("Rhea Dixit - Programmer", g);
 		xPos = (1920 - (int) textSize.getWidth()) / 2;
-		g.drawString("Rhea Dixit", xPos, 750);
-
+		g.drawString("Rhea Dixit - Programmer", xPos, 750);
+		
+		textSize = fm.getStringBounds("Marshall Lu - Sacrifical Lamb", g);
+		xPos = (1920 - (int) textSize.getWidth()) / 2;
+		g.drawString("Marshall Lu - Sacrifical Lamb", xPos, 950);
+		
+		g.setFont(oldFont);
 	}
 
 	@Override
