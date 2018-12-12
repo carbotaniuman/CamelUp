@@ -167,9 +167,10 @@ public class GameState {
 			for (Player p : players) {
 				p.removeDesertCard();
 			}
-			int winCount = 0;
-			int loseCount = 0;
+			
 			for (Player p : players) {
+				int winCount = 0;
+				int loseCount = 0;
 				int tally = 0;
 				for (RoundBettingCard rbc : p.getRoundBets()) {
 					if (rbc.getColor().equals(getCamelRankings().get(0).getColor())) {
@@ -188,27 +189,28 @@ public class GameState {
 					gameEnded = true;
 					int[] amount = { 8, 5, 3, 2, 1 };
 					for (RaceBettingCard r : winBets) {
-						if (r.getPlayer().equals(p)) {
-							if (r.getColor().equals(getCamelRankings().get(0).getColor())) {
+						if (r.getColor().equals(getCamelRankings().get(0).getColor())) {
+							if (r.getPlayer().equals(p)) {
 								tally += amount[winCount];
-								if (winCount + 1 != amount.length) {
-									winCount++;
-								}
-							} else {
-								tally--;
 							}
+						} else if(r.getPlayer().equals(p)) {
+							tally--;
+						}
+						if (winCount + 1 != amount.length) {
+							winCount++;
 						}
 					}
+					
 					for (RaceBettingCard r : loseBets) {
-						if (r.getPlayer().equals(p)) {
-							if (r.getColor().equals(getCamelRankings().get(getCamelRankings().size() - 1).getColor())) {
+						if (r.getColor().equals(getCamelRankings().get(getCamelRankings().size() - 1).getColor())) {
+							if (r.getPlayer().equals(p)) {
 								tally += amount[loseCount];
-								if (loseCount + 1 != amount.length) {
-									loseCount++;
-								}
-							} else {
-								tally--;
 							}
+						} else if(r.getPlayer().equals(p)) {
+							tally--;
+						}
+						if (loseCount + 1 != amount.length) {	
+							loseCount++;
 						}
 					}
 				}
