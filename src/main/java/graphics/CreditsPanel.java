@@ -46,9 +46,9 @@ public class CreditsPanel extends JPanel {
 		xPos = (1920 - (int) textSize.getWidth()) / 2;
 		g.drawString("Quy Nguyen", xPos, 450);
 
-		textSize = fm.getStringBounds("Siddarth Srinivas", g);
+		textSize = fm.getStringBounds("Sidharth Srinivas", g);
 		xPos = (1920 - (int) textSize.getWidth()) / 2;
-		g.drawString("Siddarth Srinivas", xPos, 550);
+		g.drawString("Sidharth Srinivas", xPos, 550);
 
 		textSize = fm.getStringBounds("Andres Luengo", g);
 		xPos = (1920 - (int) textSize.getWidth()) / 2;
