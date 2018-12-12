@@ -338,4 +338,21 @@ public class GameState {
 			this.commitTurn();
 		}
 	}
+
+	public void flipDesertCard(int tileNum) {
+		if (!gameStarted) {
+			throw new IllegalStateException("Game has not started");
+		}
+		if (gameEnded) {
+			throw new IllegalStateException("Game has ended");
+		}
+
+		if(curPlayer.getDesertCard().isPresent()) {
+			Optional<DesertCard> old = curPlayer.getDesertCard();
+			curPlayer.setDesertCard(old.get().getMoveNum() != 1, tileNum);
+			track.placeDesertCard(curPlayer.getDesertCard(), curPlayer.getDesertCard().get(), tileNum);
+
+			this.commitTurn();
+		}
+	}
 }

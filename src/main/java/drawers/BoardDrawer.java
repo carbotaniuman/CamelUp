@@ -119,7 +119,7 @@ public class BoardDrawer {
 
 	private static void drawRaceBetButton(Graphics g, Color c, int x) {
 		Font oldFont = g.getFont();
-		g.setFont(new Font("TimesRoman", Font.PLAIN, 60));
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 56));
 		g.setColor(c);
 		g.fillRect(x, 0, 124, 40);
 		g.fillRect(x, 40, 124, 40);
