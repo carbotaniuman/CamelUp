@@ -188,7 +188,7 @@ public class GameState {
 					int count = 0;
 					for (RaceBettingCard r : winBets) {
 						if (r.getColor().equals(getCamelRankings().get(0).getColor())) {
-							tally = amount[count];
+							tally += amount[count];
 							if (count + 1 != amount.length) {
 								count++;
 							}
@@ -197,7 +197,7 @@ public class GameState {
 					count = 0;
 					for (RaceBettingCard r : loseBets) {
 						if (r.getColor().equals(getCamelRankings().get(getCamelRankings().size() - 1).getColor())) {
-							tally = amount[count];
+							tally += amount[count];
 							if (count + 1 != amount.length) {
 								count++;
 							}
