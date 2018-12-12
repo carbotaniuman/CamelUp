@@ -187,19 +187,27 @@ public class GameState {
 					int[] amount = { 5, 3, 2, 1 };
 					int count = 0;
 					for (RaceBettingCard r : winBets) {
-						if (r.getColor().equals(getCamelRankings().get(0).getColor())) {
-							tally += amount[count];
-							if (count + 1 != amount.length) {
-								count++;
+						if(r.getPlayer().equals(p)) {
+							if (r.getColor().equals(getCamelRankings().get(0).getColor())) {
+								tally += amount[count];
+								if (count + 1 != amount.length) {
+									count++;
+								}
+							} else {
+								count--;
 							}
 						}
 					}
 					count = 0;
 					for (RaceBettingCard r : loseBets) {
-						if (r.getColor().equals(getCamelRankings().get(getCamelRankings().size() - 1).getColor())) {
-							tally += amount[count];
-							if (count + 1 != amount.length) {
-								count++;
+						if(r.getPlayer().equals(p)) {
+							if (r.getColor().equals(getCamelRankings().get(getCamelRankings().size() - 1).getColor())) {
+								tally += amount[count];
+								if (count + 1 != amount.length) {
+									count++;
+								}
+							} else {
+								count--;
 							}
 						}
 					}
