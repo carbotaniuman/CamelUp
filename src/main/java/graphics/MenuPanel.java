@@ -100,6 +100,10 @@ public class MenuPanel extends JPanel {
 			
 			if (x > (1920 - 300) / 2 && x < (1920 - 300) / 2 + 300 && y > 550 && y < 650) {
 				removeMouseListener(listener);
+				curShow = new CreditsPanel();
+				add(curShow);
+				revalidate();
+				repaint();
 			}
 			
 			if (x > (1920 - 300) / 2 && x < (1920 - 300) / 2 + 300 && y > 700 && y < 800) {
