@@ -193,11 +193,12 @@ public class GameState {
 							if (r.getPlayer().equals(p)) {
 								tally += amount[winCount];
 							}
+							
+							if (winCount + 1 != amount.length) {
+								winCount++;
+							}
 						} else if(r.getPlayer().equals(p)) {
 							tally--;
-						}
-						if (winCount + 1 != amount.length) {
-							winCount++;
 						}
 					}
 					
@@ -206,11 +207,12 @@ public class GameState {
 							if (r.getPlayer().equals(p)) {
 								tally += amount[loseCount];
 							}
+							
+							if (loseCount + 1 != amount.length) {	
+								loseCount++;
+							}
 						} else if(r.getPlayer().equals(p)) {
 							tally--;
-						}
-						if (loseCount + 1 != amount.length) {	
-							loseCount++;
 						}
 					}
 				}
