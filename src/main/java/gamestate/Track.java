@@ -49,7 +49,8 @@ public class Track {
 
 		for (Camel c : camelList) {
 			camels.put(c.getColor(), c);
-			int startPos = ThreadLocalRandom.current().nextInt(0, 3);
+			int startPos = 15;
+//			int startPos = ThreadLocalRandom.current().nextInt(0, 3);
 			camelPos.put(c, startPos);
 			tiles[startPos].addCamelBot(c);
 		}

@@ -167,6 +167,8 @@ public class GameState {
 			for (Player p : players) {
 				p.removeDesertCard();
 			}
+			int winCount = 0;
+			int loseCount = 0;
 			for (Player p : players) {
 				int tally = 0;
 				for (RoundBettingCard rbc : p.getRoundBets()) {
@@ -184,30 +186,28 @@ public class GameState {
 				p.clearRoundBets();
 				if (track.hasCamelWon()) {
 					gameEnded = true;
-					int[] amount = { 5, 3, 2, 1 };
-					int count = 0;
+					int[] amount = { 8, 5, 3, 2, 1 };
 					for (RaceBettingCard r : winBets) {
-						if(r.getPlayer().equals(p)) {
+						if (r.getPlayer().equals(p)) {
 							if (r.getColor().equals(getCamelRankings().get(0).getColor())) {
-								tally += amount[count];
-								if (count + 1 != amount.length) {
-									count++;
+								tally += amount[winCount];
+								if (winCount + 1 != amount.length) {
+									winCount++;
 								}
 							} else {
-								count--;
+								tally--;
 							}
 						}
 					}
-					count = 0;
 					for (RaceBettingCard r : loseBets) {
-						if(r.getPlayer().equals(p)) {
+						if (r.getPlayer().equals(p)) {
 							if (r.getColor().equals(getCamelRankings().get(getCamelRankings().size() - 1).getColor())) {
-								tally += amount[count];
-								if (count + 1 != amount.length) {
-									count++;
+								tally += amount[loseCount];
+								if (loseCount + 1 != amount.length) {
+									loseCount++;
 								}
 							} else {
-								count--;
+								tally--;
 							}
 						}
 					}
@@ -355,7 +355,7 @@ public class GameState {
 			throw new IllegalStateException("Game has ended");
 		}
 
-		if(curPlayer.getDesertCard().isPresent()) {
+		if (curPlayer.getDesertCard().isPresent()) {
 			Optional<DesertCard> old = curPlayer.getDesertCard();
 			curPlayer.setDesertCard(old.get().getMoveNum() != 1, tileNum);
 			track.placeDesertCard(curPlayer.getDesertCard(), curPlayer.getDesertCard().get(), tileNum);
