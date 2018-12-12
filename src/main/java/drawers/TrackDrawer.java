@@ -252,10 +252,13 @@ public class TrackDrawer {
 			g.drawString("Flip Tile",x + xPos, y + 20 + yPos);
 		}
 		if ( val > 0 )
-			g.setColor(Color.BLUE);
+			g.setColor(new Color(29, 242, 39));
 		else
-			g.setColor(Color.RED);
+			g.setColor(new Color(246, 221, 131));
 		g.fillRect(x + 50, y + 50, 70, 70);
+		
+		g.setColor(Color.BLACK);
+		g.drawRect(x + 50, y + 50, 70, 70);
 		g.setFont(oldFont);
 	}
 }
