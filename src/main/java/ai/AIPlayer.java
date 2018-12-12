@@ -95,7 +95,6 @@ public class AIPlayer extends Player {
                 bestAction = new LoseBetAction(c);
             }
         }
-        System.out.println(bestAction);
         return bestAction;
     }
 
