@@ -30,6 +30,10 @@ run {
     main = 'GraphicsRunner'
 }
 
+shadowJar {
+    classifier = ''
+}
+
 jar {
     manifest {
         attributes(
