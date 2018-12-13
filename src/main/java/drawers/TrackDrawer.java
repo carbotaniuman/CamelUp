@@ -22,7 +22,6 @@ public class TrackDrawer {
 
 	static {
 		try {
-			System.out.println(ClassLoader.getSystemClassLoader().getResource("Camel.png"));
 			origImage = ImageIO.read(ClassLoader.getSystemClassLoader().getResource("Camel.png"));
 			camelImage = scale(origImage, 61, 40);
 		} catch (IOException e) {

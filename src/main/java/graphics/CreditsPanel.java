@@ -47,9 +47,9 @@ public class CreditsPanel extends JPanel {
 		xPos = (1920 - (int) textSize.getWidth()) / 2;
 		g.drawString("Rhea Dixit - Programmer", xPos, 750);
 
-		textSize = fm.getStringBounds("Marshall Lu - Sacrifical Lamb", g);
-		xPos = (1920 - (int) textSize.getWidth()) / 2;
-		g.drawString("Marshall Lu - Sacrifical Lamb", xPos, 950);
+//		textSize = fm.getStringBounds("Marshall Lu - Sacrifical Lamb", g);
+//		xPos = (1920 - (int) textSize.getWidth()) / 2;
+//		g.drawString("Marshall Lu - Sacrifical Lamb", xPos, 950);
 
 		g.setFont(oldFont);
 	}

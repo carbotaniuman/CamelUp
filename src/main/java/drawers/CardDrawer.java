@@ -156,7 +156,7 @@ public class CardDrawer {
 
 	public static void drawRollCard(Graphics g, int x, int y) {
 		Font oldFont = g.getFont();
-		g.setColor(new Color(132, 237, 233));
+		g.setColor(new Color(144, 92, 70));
 		g.fillRect(x, y, 150, 180);
 		g.setColor(Color.BLACK);
 		g.drawRect(x, y, 150, 180);

@@ -31,7 +31,7 @@ import immutable.RoundBettingCard;
 
 public class GameState {
 
-	public final static String[] names = { "KarleEngels", "E. Vincien", "Confucius", "Prince Zuko", "Madame Bob",
+	public final static String[] names = { "KarleEngels", "E. Vincien", "Confucius", "Prince Zuko", "Mme Bob Lee",
 			"Sg2themax", "DaLegend27", "Chrometor" };
 
 	public final static ImmutableBiMap<String, Color> COLORBIMAP = ImmutableBiMap.of("blue", new Color(51, 153, 255),

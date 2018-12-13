@@ -26,7 +26,7 @@ public class GameStartPanel extends JPanel implements ChangeListener, MouseListe
 	public GameStartPanel() {
 		setLayout(null);
 
-		SpinnerModel sm = new SpinnerNumberModel(5, 1, 8, 1);
+		SpinnerModel sm = new SpinnerNumberModel(5, 2, 8, 1);
 		spinner = new JSpinner(sm) {
 			private static final long serialVersionUID = 8916717439253552751L;
 
