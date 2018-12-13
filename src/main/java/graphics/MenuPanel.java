@@ -11,9 +11,15 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
+import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.AbstractAction;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
@@ -30,7 +36,9 @@ public class MenuPanel extends JPanel {
 
 		listener = new MenuListener();
 		addMouseListener(listener);
-
+		
+		setAudioClip("menu.wav");
+		
 		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "BackToMenu");
 		getActionMap().put("BackToMenu", new AbstractAction() {
 			private static final long serialVersionUID = 7596895278099231841L;
@@ -43,13 +51,28 @@ public class MenuPanel extends JPanel {
 					revalidate();
 					addMouseListener(listener);
 					repaint();
+					setAudioClip("menu.wav");
 				}
 			}
 		});
 	}
 	
 	private void setAudioClip(String path) {
-		InputStream is = MenuPanel.class.getResourceAsStream("/test.csv");
+		if(clip != null) {
+			clip.stop();
+			clip.close();
+		}
+		
+		InputStream is = new BufferedInputStream(ClassLoader.getSystemClassLoader().getResourceAsStream(path));
+		
+		try {
+			AudioInputStream temp = AudioSystem.getAudioInputStream(is);
+			clip = AudioSystem.getClip();
+			clip.open(temp);
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+		} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
+			throw new AssertionError(e);
+		}
 	}
 
 	@Override
@@ -105,6 +128,7 @@ public class MenuPanel extends JPanel {
 				add(curShow);
 				revalidate();
 				repaint();
+				setAudioClip("game.wav");
 			}
 
 			if (x > (1920 - 300) / 2 && x < (1920 - 300) / 2 + 300 && y > 550 && y < 650) {
@@ -113,6 +137,7 @@ public class MenuPanel extends JPanel {
 				add(curShow);
 				revalidate();
 				repaint();
+				setAudioClip("credits.wav");
 			}
 
 			if (x > (1920 - 300) / 2 && x < (1920 - 300) / 2 + 300 && y > 700 && y < 800) {
