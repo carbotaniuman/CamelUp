@@ -14,7 +14,7 @@ public class TextRunner {
 			System.out.println("Track:\n" + game.getTrack() + "\n");
 			System.out.println("Camel Rankings:\n" + game.getCamelRankings() + "\n");
 			System.out.println("Played Win Bets:\n" + game.getWinBets() + "\n");
-			System.out.println("Played Lose Bets:\n" + game.getLoseBets() +  "\n");
+			System.out.println("Played Lose Bets:\n" + game.getLoseBets() + "\n");
 			System.out.println("Players:\n" + collectionToString(game.getPlayers()));
 			System.out.println(game.getCurPlayer().getName() + "'s Turn:");
 			do {

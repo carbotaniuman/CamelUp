@@ -54,14 +54,14 @@ public class BoardDrawer {
 		}
 
 		// draws the buttons for the raceBettingCards
-		for(int x = 1300; x <= 1796; x += 124) {
+		for (int x = 1300; x <= 1796; x += 124) {
 			drawRaceBetButton(g, Color.GRAY, x);
 			drawRaceBetButton(g, Color.GRAY, x);
 			drawRaceBetButton(g, Color.GRAY, x);
 			drawRaceBetButton(g, Color.GRAY, x);
 			drawRaceBetButton(g, Color.GRAY, x);
 		}
-		
+
 		for (int i = 0; i < pl.getRaceBets().size(); i++) {
 			RaceBettingCard rbc = pl.getRaceBets().get(i);
 
@@ -116,7 +116,7 @@ public class BoardDrawer {
 			CardDrawer.drawPlacedRaceBettingCard(g, x, y, cards.peek().getColor(), cards.poll().getPlayer());
 		}
 	}
-	
+
 	public static void drawPlayerData(Graphics g, List<Player> players) {
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("TimesRoman", Font.ITALIC, 40));

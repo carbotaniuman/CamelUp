@@ -5,26 +5,15 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.geom.Rectangle2D;
-import java.util.List;
 
 import javax.swing.JPanel;
-
-import ai.AIPlayer;
-import drawers.BoardDrawer;
-import drawers.HandDrawer;
-import drawers.TrackDrawer;
-import gamestate.GameState;
-import gamestate.Player;
-import gamestate.GameListener;
 
 public class CreditsPanel extends JPanel {
 	private static final long serialVersionUID = -3381262603959472520L;
 
 	public CreditsPanel() {
-		
+
 	}
 
 	@Override
@@ -57,11 +46,11 @@ public class CreditsPanel extends JPanel {
 		textSize = fm.getStringBounds("Rhea Dixit - Programmer", g);
 		xPos = (1920 - (int) textSize.getWidth()) / 2;
 		g.drawString("Rhea Dixit - Programmer", xPos, 750);
-		
+
 		textSize = fm.getStringBounds("Marshall Lu - Sacrifical Lamb", g);
 		xPos = (1920 - (int) textSize.getWidth()) / 2;
 		g.drawString("Marshall Lu - Sacrifical Lamb", xPos, 950);
-		
+
 		g.setFont(oldFont);
 	}
 

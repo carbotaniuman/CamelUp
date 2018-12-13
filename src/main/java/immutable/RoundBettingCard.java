@@ -5,23 +5,23 @@ import java.awt.Color;
 import gamestate.GameState;
 
 public class RoundBettingCard implements Comparable<RoundBettingCard> {
-    private final Color color;
-    private final int points;
+	private final Color color;
+	private final int points;
 
-    public RoundBettingCard(Color c, int p) {
-    	color = c;
-    	points = p;
-    }
+	public RoundBettingCard(Color c, int p) {
+		color = c;
+		points = p;
+	}
 
-    public Color getColor() {
-        return color;
-    }
+	public Color getColor() {
+		return color;
+	}
 
-    public int getPoints() {
-        return points;
-    }
-    
-    public String toString() {
+	public int getPoints() {
+		return points;
+	}
+
+	public String toString() {
 		return "RoundBettingCard: " + points + " " + GameState.COLORBIMAP.inverse().get(color);
 	}
 

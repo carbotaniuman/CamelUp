@@ -114,7 +114,7 @@ public class Track {
 				}
 				tiles[oldPos % 16].removeCamels(list);
 			} else {
-				if(rolled == 1) {
+				if (rolled == 1) {
 					newTile = tiles[oldPos % 16];
 					tiles[oldPos % 16].removeCamels(list);
 					newTile.addCamelsBot(list);
@@ -129,7 +129,7 @@ public class Track {
 					tiles[oldPos % 16].removeCamels(list);
 				}
 			}
-			
+
 		} else {
 			newTile.addCamelsTop(list);
 
@@ -169,14 +169,14 @@ public class Track {
 
 		if (newNum - 1 == origNum)
 			return true;
-		
-		if(tiles[newNum - 1].getDesertCard().isPresent())
+
+		if (tiles[newNum - 1].getDesertCard().isPresent())
 			return false;
 
 		if (newNum == 15)
 			return true;
 
-		if(newNum + 1 == origNum) {
+		if (newNum + 1 == origNum) {
 			return true;
 		} else {
 			return !tiles[newNum + 1].getDesertCard().isPresent();

@@ -25,10 +25,11 @@ public class GameStartPanel extends JPanel implements ChangeListener, MouseListe
 
 	public GameStartPanel() {
 		setLayout(null);
-		
+
 		SpinnerModel sm = new SpinnerNumberModel(5, 1, 8, 1);
 		spinner = new JSpinner(sm) {
 			private static final long serialVersionUID = 8916717439253552751L;
+
 			@Override
 			public Dimension getPreferredSize() {
 				return new Dimension(100, 25);
@@ -45,7 +46,7 @@ public class GameStartPanel extends JPanel implements ChangeListener, MouseListe
 
 	@Override
 	public void stateChanged(ChangeEvent e) {
-		
+
 		repaint();
 	}
 
@@ -129,9 +130,9 @@ public class GameStartPanel extends JPanel implements ChangeListener, MouseListe
 				repaint();
 			}
 		}
-		
-		if(x > (1920 - 300) / 2 && x < (1920 - 300) / 2 + 300 && y > 150 && y < 250) {
-			//System.out.println("EEE");
+
+		if (x > (1920 - 300) / 2 && x < (1920 - 300) / 2 + 300 && y > 150 && y < 250) {
+			// System.out.println("EEE");
 			removeMouseListener(this);
 			GamePanel game = new GamePanel(Arrays.copyOf(choices, (int) spinner.getValue()));
 			game.setBounds(0, 0, 1920, 1080);
@@ -146,12 +147,20 @@ public class GameStartPanel extends JPanel implements ChangeListener, MouseListe
 	public Dimension getPreferredSize() {
 		return new Dimension(1920, 1080);
 	}
+
 	@Override
-	public void mouseClicked(MouseEvent e) {}
+	public void mouseClicked(MouseEvent e) {
+	}
+
 	@Override
-	public void mouseEntered(MouseEvent e) {}
+	public void mouseEntered(MouseEvent e) {
+	}
+
 	@Override
-	public void mouseExited(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {
+	}
+
 	@Override
-	public void mouseReleased(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {
+	}
 }

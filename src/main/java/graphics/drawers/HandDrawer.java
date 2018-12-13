@@ -44,7 +44,7 @@ public class HandDrawer {
 			else if (r.getColor().equals((GameState.CAMELCOLORS.get(4))))// BLUE
 				CardDrawer.drawRoundBettingCard(g, (1920 - 750), 800 + numBlu++ * 80, r);
 		}
-		
+
 		// Balance
 		g.drawRect(180, 800, 570, 100);
 		g.setFont(new Font("Serif", Font.ITALIC, 30));

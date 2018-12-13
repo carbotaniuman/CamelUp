@@ -23,17 +23,18 @@ public class MenuPanel extends JPanel {
 	private MenuListener listener;
 
 	public MenuPanel() {
-		setLayout(new FlowLayout (FlowLayout.LEADING, 0, 0));
-		
+		setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
+
 		listener = new MenuListener();
 		addMouseListener(listener);
-		
+
 		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "BackToMenu");
 		getActionMap().put("BackToMenu", new AbstractAction() {
 			private static final long serialVersionUID = 7596895278099231841L;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(curShow != null) {
+				if (curShow != null) {
 					remove(curShow);
 					curShow = null;
 					revalidate();
@@ -98,7 +99,7 @@ public class MenuPanel extends JPanel {
 				revalidate();
 				repaint();
 			}
-			
+
 			if (x > (1920 - 300) / 2 && x < (1920 - 300) / 2 + 300 && y > 550 && y < 650) {
 				removeMouseListener(listener);
 				curShow = new CreditsPanel();
@@ -106,7 +107,7 @@ public class MenuPanel extends JPanel {
 				revalidate();
 				repaint();
 			}
-			
+
 			if (x > (1920 - 300) / 2 && x < (1920 - 300) / 2 + 300 && y > 700 && y < 800) {
 				System.exit(0);
 			}

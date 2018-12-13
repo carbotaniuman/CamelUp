@@ -25,11 +25,11 @@ public class DesertCard {
 	public Player getPlayer() {
 		return p;
 	}
-	
+
 	public int getTile() {
 		return tile;
 	}
-	
+
 	public String toString() {
 		return "DesertCard: " + p.getName() + " " + (isOasis ? "1" : "-1");
 	}

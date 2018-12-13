@@ -3,6 +3,7 @@ package ai;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+
 import gamestate.Tile;
 import gamestate.Track;
 import immutable.Camel;
@@ -32,7 +33,7 @@ public class AITrack extends Track {
 				}
 				tiles[oldPos % 16].removeCamels(list);
 			} else {
-				if(rolled == 1) {
+				if (rolled == 1) {
 					tiles[oldPos % 16].removeCamels(list);
 					newTile.addCamelsBot(list);
 				} else {
@@ -51,7 +52,7 @@ public class AITrack extends Track {
 			for (Camel camel : list) {
 				camelPos.put(camel, oldPos + rolled);
 			}
-			
+
 			tiles[oldPos % 16].removeCamels(list);
 		}
 	}

@@ -1,26 +1,29 @@
 package test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.awt.Color;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.awt.Color;
 
 import game.Die;
 
 public class DieTester {
 	private Die die;
-	
+
 	@Before
-    public void setUp() {
+	public void setUp() {
 		die = new Die(Color.RED);
-    }
+	}
 
-
-    @After
-    public void tearDown() {
-    	die = null;
-    }
+	@After
+	public void tearDown() {
+		die = null;
+	}
 
 	@Test
 	public void dieEqualityTest() {
@@ -36,10 +39,10 @@ public class DieTester {
 		die.resetIfRolled();
 		assertFalse(die.getIfRolled());
 	}
-	
+
 	@Test
 	public void rollTest() {
-		for(int i = 0; i < 100; i++) {
+		for (int i = 0; i < 100; i++) {
 			die.roll();
 			assertTrue(die.getLastRoll() >= 1 && die.getLastRoll() <= 3);
 		}

@@ -9,11 +9,11 @@ import java.util.stream.Collectors;
 public class Pyramid {
 	private final List<Die> notRolledDice;
 	private final List<Die> rolledDice;
-	
+
 	private Die lastDie;
 
 	public Pyramid(List<Color> colors) {
-		if(colors.size() < 1) {
+		if (colors.size() < 1) {
 			throw new IllegalArgumentException("At least one die needed");
 		}
 		notRolledDice = new ArrayList<Die>();
@@ -22,7 +22,7 @@ public class Pyramid {
 			notRolledDice.add(new Die(c));
 		resetDice();
 	}
-	
+
 	public Pyramid(Pyramid p) {
 		notRolledDice = p.notRolledDice.stream().map(Die::new).collect(Collectors.toList());
 		rolledDice = p.rolledDice.stream().map(Die::new).collect(Collectors.toList());
@@ -34,7 +34,7 @@ public class Pyramid {
 		notRolledDice.remove(lastDie);
 		return lastDie;
 	}
-	
+
 	public Die getLastDie() {
 		return lastDie;
 	}
@@ -53,8 +53,7 @@ public class Pyramid {
 		return notRolledDice;
 	}
 
-	public List<Die> getRolledDice()
-	{
+	public List<Die> getRolledDice() {
 		return rolledDice;
 	}
 }

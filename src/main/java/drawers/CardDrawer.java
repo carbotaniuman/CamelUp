@@ -28,7 +28,7 @@ public class CardDrawer {
 		g.drawString(plusOrMinus, x + xPos, y + yPos);
 		g.setFont(oldFont);
 	}
-	
+
 	public static void drawPlacedDesertCard(Graphics g, int val, int x, int y, Player orig, Player curPlayer) {
 		Font oldFont = g.getFont();
 		g.setColor(Color.YELLOW);
@@ -38,12 +38,12 @@ public class CardDrawer {
 		g.setFont(new Font("Serif", Font.PLAIN, 20));
 
 		FontMetrics fm = g.getFontMetrics();
-		Rectangle2D textSize = fm.getStringBounds(val + ":" +  orig.getName(), g);
+		Rectangle2D textSize = fm.getStringBounds(val + ":" + orig.getName(), g);
 		int xPos = (160 - (int) textSize.getWidth()) / 2;
 		int yPos = (20 - (int) textSize.getHeight()) / 2 + fm.getAscent();
-		g.drawString(val + ":" +  orig.getName(), x + xPos, y + yPos);
-		
-		if(orig.equals(curPlayer)) {
+		g.drawString(val + ":" + orig.getName(), x + xPos, y + yPos);
+
+		if (orig.equals(curPlayer)) {
 			g.setColor(Color.YELLOW);
 			g.fillRect(x, y + 20, 160, 20);
 			g.setColor(Color.BLACK);
@@ -51,14 +51,14 @@ public class CardDrawer {
 			textSize = fm.getStringBounds("Flip Tile", g);
 			xPos = (160 - (int) textSize.getWidth()) / 2;
 			yPos = (20 - (int) textSize.getHeight()) / 2 + fm.getAscent();
-			g.drawString("Flip Tile",x + xPos, y + 20 + yPos);
+			g.drawString("Flip Tile", x + xPos, y + 20 + yPos);
 		}
-		if ( val > 0 )
+		if (val > 0)
 			g.setColor(new Color(29, 242, 39));
 		else
 			g.setColor(new Color(246, 221, 131));
 		g.fillRect(x + 50, y + 50, 70, 70);
-		
+
 		g.setColor(Color.BLACK);
 		g.drawRect(x + 50, y + 50, 70, 70);
 		g.setFont(oldFont);
@@ -72,9 +72,9 @@ public class CardDrawer {
 		g.drawRect(x, y, 150, 80);
 		g.drawLine(x + 75, y, x + 75, y + 80);
 		g.drawLine(x, y + 40, x + 75, y + 40);
-		
+
 		g.setFont(new Font("TimesRoman", Font.BOLD, 30));
-		
+
 		FontMetrics fm = g.getFontMetrics();
 		Rectangle2D textSize = fm.getStringBounds("1", g);
 		int xPos = (75 - (int) textSize.getWidth()) / 2;
@@ -84,7 +84,7 @@ public class CardDrawer {
 		xPos = (75 - (int) textSize.getWidth()) / 2;
 		yPos = (40 - (int) textSize.getHeight()) / 2 + fm.getAscent();
 		g.drawString("-1", x + xPos, y + 40 + yPos);
-		
+
 		g.setFont(new Font("TimesRoman", Font.BOLD, 60));
 		fm = g.getFontMetrics();
 		textSize = fm.getStringBounds(String.valueOf(r.getPoints()), g);
@@ -100,13 +100,13 @@ public class CardDrawer {
 		g.fillRect(x, y, 150, 180);
 		g.setColor(Color.BLACK);
 		g.drawRect(x, y, 150, 180);
-		
-		Graphics2D g2 = (Graphics2D)g;
+
+		Graphics2D g2 = (Graphics2D) g;
 		Stroke oldStroke = g2.getStroke();
 		g2.setStroke(new BasicStroke(4));
 		g.drawOval(x + (150 - 140) / 2, y + (180 - 140) / 2, 140, 140);
 		g2.setStroke(oldStroke);
-		
+
 		g.setColor(c);
 		g.fillOval(x + (150 - 140) / 2, y + (180 - 140) / 2, 140, 140);
 
@@ -120,14 +120,14 @@ public class CardDrawer {
 		g.drawString(p.getName(), x + xPos, y + yPos);
 		g.setFont(oldFont);
 	}
-	
+
 	public static void drawPlacedRaceBettingCard(Graphics g, int x, int y, Color c, Player p) {
 		Font oldFont = g.getFont();
 		g.setColor(new Color(144, 92, 70));
 		g.fillRect(x, y, 150, 180);
 		g.setColor(Color.BLACK);
-		
-		Graphics2D g2 = (Graphics2D)g;
+
+		Graphics2D g2 = (Graphics2D) g;
 		Stroke oldStroke = g2.getStroke();
 		g2.setStroke(new BasicStroke(2));
 		g.drawRect(x, y, 150, 180);
@@ -139,17 +139,17 @@ public class CardDrawer {
 		int xPos = (150 - (int) textSize.getWidth()) / 2;
 		int yPos = (180 - (int) textSize.getHeight()) / 2 + fm.getAscent();
 		g.drawString("?", x + xPos, y + yPos);
-		
+
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		fm = g.getFontMetrics();
 		textSize = fm.getStringBounds(p.getName(), g);
 		xPos = (150 - (int) textSize.getWidth()) / 2;
 		yPos = (180 - (int) textSize.getHeight()) / 2 + fm.getAscent();
 		g.drawString(p.getName(), x + xPos, y + yPos + 50);
-		
+
 		g.setFont(oldFont);
 	}
-	
+
 	public static void drawRollCard(Graphics g, int x, int y) {
 		Font oldFont = g.getFont();
 		g.setColor(new Color(132, 237, 233));

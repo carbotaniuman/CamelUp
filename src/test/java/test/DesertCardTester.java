@@ -1,5 +1,6 @@
 package test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -14,15 +15,15 @@ import immutable.DesertCard;
 public class DesertCardTester {
 	@Rule
 	public MockitoRule rule = MockitoJUnit.rule().strictness(Strictness.STRICT_STUBS);
-	
+
 	@Mock
 	private Player player;
-	
+
 	@Test
 	public void playerMoveNumTest() {
 		DesertCard ds = new DesertCard(player, false, 0);
 		assertEquals(ds.getMoveNum(), -1);
-		
+
 		DesertCard dsi = new DesertCard(player, true, 0);
 		assertEquals(dsi.getMoveNum(), 1);
 	}
@@ -31,7 +32,7 @@ public class DesertCardTester {
 	public void playerEqualityTest() {
 		DesertCard ds = new DesertCard(player, false, 0);
 		assertEquals(ds.getPlayer(), player);
-		
+
 		DesertCard dsi = new DesertCard(player, true, 0);
 		assertEquals(dsi.getPlayer(), player);
 	}

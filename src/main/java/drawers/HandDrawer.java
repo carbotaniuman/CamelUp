@@ -22,15 +22,15 @@ public class HandDrawer {
 		g.drawRect(0, 800, 1920, 280);
 
 		// DesertCard
-		if ( !p.getDesertCard().isPresent())
+		if (!p.getDesertCard().isPresent())
 			CardDrawer.drawDesertCard(g, (180 - 70) / 2, 800 + (100 - 70) / 2, "+/-", !p.getDesertCard().isPresent());
 
 		// RaceBettingCards
 		List<RaceBettingCard> cards = p.getRaceBets();
 		for (int i = 0; i < cards.size(); i++)
 			CardDrawer.drawRaceBettingCard(g, 150 * i, 900, cards.get(i).getColor(), p);
-		
-		//RollCards
+
+		// RollCards
 		for (int i = 0, x = 775; i < p.getRollCards(); i++, x += 50)
 			CardDrawer.drawRollCard(g, x, 900);
 
@@ -49,7 +49,7 @@ public class HandDrawer {
 			else if (r.getColor().equals((GameState.CAMELCOLORS.get(4))))// BLUE
 				CardDrawer.drawRoundBettingCard(g, (1920 - 750), 800 + numBlu++ * 80, r);
 		}
-		
+
 		// Balance
 		g.drawRect(180, 800, 570, 100);
 		g.setFont(new Font("Serif", Font.ITALIC, 30));

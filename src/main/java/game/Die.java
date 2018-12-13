@@ -12,8 +12,8 @@ public class Die {
 	public Die(Color c) {
 		camelColor = c;
 	}
-	
-	//AI Constructor
+
+	// AI Constructor
 	public Die(Die d) {
 		camelColor = d.camelColor;
 		ifRolled = d.ifRolled;
@@ -24,7 +24,7 @@ public class Die {
 		lastRoll = ThreadLocalRandom.current().nextInt(1, 4);
 		ifRolled = true;
 	}
-	
+
 	public Color getColor() {
 		return camelColor;
 	}
@@ -36,8 +36,8 @@ public class Die {
 	public boolean getIfRolled() {
 		return ifRolled;
 	}
-	public void resetIfRolled()
-	{
+
+	public void resetIfRolled() {
 		ifRolled = false;
 	}
 }

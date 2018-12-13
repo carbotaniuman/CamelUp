@@ -1,14 +1,14 @@
 package gamestate;
 
-import immutable.DesertCard;
-import immutable.RaceBettingCard;
-import immutable.RoundBettingCard;
-
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
+import immutable.DesertCard;
+import immutable.RaceBettingCard;
+import immutable.RoundBettingCard;
 
 public class Player {
 	private final ArrayList<RaceBettingCard> raceBets;

@@ -21,7 +21,7 @@ public class RaceBettingCard {
 	public Player getPlayer() {
 		return myPlayer;
 	}
-	
+
 	public String toString() {
 		return "RaceBettingCard: " + myPlayer.getName() + " " + GameState.COLORBIMAP.inverse().get(color);
 	}

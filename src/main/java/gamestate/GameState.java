@@ -31,8 +31,8 @@ import immutable.RoundBettingCard;
 
 public class GameState {
 
-	public final static String[] names = { "KarleEngels", "E. Vincien", "Confucius", "Prince Zuko",
-			"Madame Bob", "Sg2themax", "DaLegend27", "Chrometor" };
+	public final static String[] names = { "KarleEngels", "E. Vincien", "Confucius", "Prince Zuko", "Madame Bob",
+			"Sg2themax", "DaLegend27", "Chrometor" };
 
 	public final static ImmutableBiMap<String, Color> COLORBIMAP = ImmutableBiMap.of("blue", new Color(51, 153, 255),
 			"green", Color.green, "yellow", Color.yellow, "white", Color.white, "orange", Color.orange);
@@ -177,7 +177,7 @@ public class GameState {
 					for (Player p : players) {
 						p.removeDesertCard();
 					}
-					
+
 					for (Player p : players) {
 						int winCount = 0;
 						int loseCount = 0;
@@ -203,25 +203,26 @@ public class GameState {
 									if (r.getPlayer().equals(p)) {
 										tally += amount[winCount];
 									}
-									
+
 									if (winCount + 1 != amount.length) {
 										winCount++;
 									}
-								} else if(r.getPlayer().equals(p)) {
+								} else if (r.getPlayer().equals(p)) {
 									tally--;
 								}
 							}
-							
+
 							for (RaceBettingCard r : loseBets) {
-								if (r.getColor().equals(getCamelRankings().get(getCamelRankings().size() - 1).getColor())) {
+								if (r.getColor()
+										.equals(getCamelRankings().get(getCamelRankings().size() - 1).getColor())) {
 									if (r.getPlayer().equals(p)) {
 										tally += amount[loseCount];
 									}
-									
-									if (loseCount + 1 != amount.length) {	
+
+									if (loseCount + 1 != amount.length) {
 										loseCount++;
 									}
-								} else if(r.getPlayer().equals(p)) {
+								} else if (r.getPlayer().equals(p)) {
 									tally--;
 								}
 							}
@@ -233,7 +234,7 @@ public class GameState {
 						}
 					}
 				}
-				
+
 				Timer timer = new Timer(200, new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {

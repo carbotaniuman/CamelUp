@@ -54,14 +54,14 @@ public class BoardDrawer {
 		}
 
 		// draws the buttons for the raceBettingCards
-		for(int x = 1300; x <= 1796; x += 124) {
+		for (int x = 1300; x <= 1796; x += 124) {
 			drawRaceBetButton(g, Color.GRAY, x);
 			drawRaceBetButton(g, Color.GRAY, x);
 			drawRaceBetButton(g, Color.GRAY, x);
 			drawRaceBetButton(g, Color.GRAY, x);
 			drawRaceBetButton(g, Color.GRAY, x);
 		}
-		
+
 		for (int i = 0; i < pl.getRaceBets().size(); i++) {
 			RaceBettingCard rbc = pl.getRaceBets().get(i);
 

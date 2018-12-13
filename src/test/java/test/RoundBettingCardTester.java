@@ -1,9 +1,11 @@
 package test;
-import static org.junit.Assert.*;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Color;
+
+import org.junit.Test;
 
 import immutable.RoundBettingCard;
 
@@ -13,7 +15,7 @@ public class RoundBettingCardTester {
 		RoundBettingCard rbc = new RoundBettingCard(Color.RED, 5);
 		assertEquals(rbc.getColor(), Color.RED);
 	}
-	
+
 	@Test
 	public void compareToTest() {
 		RoundBettingCard rbc1 = new RoundBettingCard(Color.RED, 5);
