@@ -38,10 +38,10 @@ public class CardDrawer {
 		g.setFont(new Font("Serif", Font.PLAIN, 20));
 
 		FontMetrics fm = g.getFontMetrics();
-		Rectangle2D textSize = fm.getStringBounds(val + ":" + orig.getName(), g);
+		Rectangle2D textSize = fm.getStringBounds(orig.getName(), g);
 		int xPos = (160 - (int) textSize.getWidth()) / 2;
 		int yPos = (20 - (int) textSize.getHeight()) / 2 + fm.getAscent();
-		g.drawString(val + ":" + orig.getName(), x + xPos, y + yPos);
+		g.drawString(orig.getName(), x + xPos, y + yPos);
 
 		if (orig.equals(curPlayer)) {
 			g.setColor(Color.YELLOW);
@@ -56,10 +56,14 @@ public class CardDrawer {
 		if (val > 0)
 			g.setColor(new Color(29, 242, 39));
 		else
-			g.setColor(new Color(246, 221, 131));
+			g.setColor(Color.RED);
 		g.fillRect(x + 50, y + 50, 70, 70);
 
 		g.setColor(Color.BLACK);
+		textSize = fm.getStringBounds(val == 1 ? "+" : "-", g);
+		xPos = (70 - (int) textSize.getWidth()) / 2;
+		yPos = (70 - (int) textSize.getHeight()) / 2 + fm.getAscent();
+		g.drawString(val == 1 ? "+" : "-", x + 50 + xPos, y + 50 + yPos);
 		g.drawRect(x + 50, y + 50, 70, 70);
 		g.setFont(oldFont);
 	}
