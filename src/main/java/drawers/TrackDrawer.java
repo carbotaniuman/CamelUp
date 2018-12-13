@@ -43,6 +43,7 @@ public class TrackDrawer {
 		g.drawRect(320, 320, 160, 160);
 		g.setColor(new Color(135, 206, 235));
 		g.fillRect(321, 321, 159, 159);
+		
 		// drawing the track
 		int x1 = 640;
 		int x2 = 0;
@@ -77,7 +78,7 @@ public class TrackDrawer {
 			if (track.canPlaceCard(i) || (player.getDesertCard().isPresent() && track.canMoveCard(player.getDesertCard().get().getTile(), i))) 
 				drawPlus(g, x1, i1);
 			else if(track.getTile(i).getDesertCard().isPresent())
-				drawMiniDesert(g, track.getTile(i).getDesertCard().get().getMoveNum(), x1, i1, track.getTile(i).getDesertCard().get().getPlayer(), player);
+				CardDrawer.drawPlacedDesertCard(g, track.getTile(i).getDesertCard().get().getMoveNum(), x1, i1, track.getTile(i).getDesertCard().get().getPlayer(), player);
 		}
 		for (int i2 = 640; i2 > 0; i2 -= 160, i++) {
 			g.setColor(new Color(255, 245, 175));
@@ -99,7 +100,7 @@ public class TrackDrawer {
 			if (track.canPlaceCard(i) || (player.getDesertCard().isPresent() && track.canMoveCard(player.getDesertCard().get().getTile(), i)) || (player.getDesertCard().isPresent() && track.canMoveCard(player.getDesertCard().get().getTile(), i))) 
 				drawPlus(g, i2, y1);
 			else if(track.getTile(i).getDesertCard().isPresent())
-				drawMiniDesert(g, track.getTile(i).getDesertCard().get().getMoveNum(), i2, y1, track.getTile(i).getDesertCard().get().getPlayer(), player);
+				CardDrawer.drawPlacedDesertCard(g, track.getTile(i).getDesertCard().get().getMoveNum(), i2, y1, track.getTile(i).getDesertCard().get().getPlayer(), player);
 		}
 		for (int i3 = 640; i3 > 0; i3 -= 160, i++) {
 			g.setColor(new Color(255, 245, 175));
@@ -121,7 +122,7 @@ public class TrackDrawer {
 			if (track.canPlaceCard(i) || (player.getDesertCard().isPresent() && track.canMoveCard(player.getDesertCard().get().getTile(), i))) 
 				drawPlus(g, x2, i3);
 			else if(track.getTile(i).getDesertCard().isPresent())
-				drawMiniDesert(g, track.getTile(i).getDesertCard().get().getMoveNum(), x2, i3, track.getTile(i).getDesertCard().get().getPlayer(), player);
+				CardDrawer.drawPlacedDesertCard(g, track.getTile(i).getDesertCard().get().getMoveNum(), x2, i3, track.getTile(i).getDesertCard().get().getPlayer(), player);
 		}
 		for (int i4 = 0; i4 < 640; i4 += 160, i++) {
 			g.setColor(new Color(255, 245, 175));
@@ -143,7 +144,7 @@ public class TrackDrawer {
 			if (track.canPlaceCard(i) || (player.getDesertCard().isPresent() && track.canMoveCard(player.getDesertCard().get().getTile(), i))) 
 				drawPlus(g, i4, y2);
 			else if(track.getTile(i).getDesertCard().isPresent())
-				drawMiniDesert(g, track.getTile(i).getDesertCard().get().getMoveNum(), i4, y2, track.getTile(i).getDesertCard().get().getPlayer(), player);
+				CardDrawer.drawPlacedDesertCard(g, track.getTile(i).getDesertCard().get().getMoveNum(), i4, y2, track.getTile(i).getDesertCard().get().getPlayer(), player);
 		}
 		for (int i5 = 0; i5 < 320; i5 += 160, i++) {
 			g.setColor(new Color(255, 245, 175));
@@ -173,7 +174,7 @@ public class TrackDrawer {
 			if (track.canPlaceCard(i) || (player.getDesertCard().isPresent() && track.canMoveCard(player.getDesertCard().get().getTile(), i))) 
 				drawPlus(g, x1, i5);
 			else if(track.getTile(i).getDesertCard().isPresent())
-				drawMiniDesert(g, track.getTile(i).getDesertCard().get().getMoveNum(), x1, i5, track.getTile(i).getDesertCard().get().getPlayer(), player);
+				CardDrawer.drawPlacedDesertCard(g, track.getTile(i).getDesertCard().get().getMoveNum(), x1, i5, track.getTile(i).getDesertCard().get().getPlayer(), player);
 		}
 	}
 
@@ -224,41 +225,6 @@ public class TrackDrawer {
 		g.setFont(new Font("Serif", Font.PLAIN, 20));
 		g.drawString("+", x + 5, y + 17);
 		g.drawString("-", x + 7, y + 36);
-		g.setFont(oldFont);
-	}
-
-	private static void drawMiniDesert(Graphics g, int val, int x, int y, Player orig, Player curPlayer) {
-		Font oldFont = g.getFont();
-		g.setColor(Color.YELLOW);
-		g.fillRect(x, y, 160, 20);
-		g.setColor(Color.BLACK);
-		g.drawRect(x, y, 160, 20);
-		g.setFont(new Font("Serif", Font.PLAIN, 20));
-
-		FontMetrics fm = g.getFontMetrics();
-		Rectangle2D textSize = fm.getStringBounds(val + ":" +  orig.getName(), g);
-		int xPos = (160 - (int) textSize.getWidth()) / 2;
-		int yPos = (20 - (int) textSize.getHeight()) / 2 + fm.getAscent();
-		g.drawString(val + ":" +  orig.getName(), x + xPos, y + yPos);
-		
-		if(orig.equals(curPlayer)) {
-			g.setColor(Color.YELLOW);
-			g.fillRect(x, y + 20, 160, 20);
-			g.setColor(Color.BLACK);
-			g.drawRect(x, y + 20, 160, 20);
-			textSize = fm.getStringBounds("Flip Tile", g);
-			xPos = (160 - (int) textSize.getWidth()) / 2;
-			yPos = (20 - (int) textSize.getHeight()) / 2 + fm.getAscent();
-			g.drawString("Flip Tile",x + xPos, y + 20 + yPos);
-		}
-		if ( val > 0 )
-			g.setColor(new Color(29, 242, 39));
-		else
-			g.setColor(new Color(246, 221, 131));
-		g.fillRect(x + 50, y + 50, 70, 70);
-		
-		g.setColor(Color.BLACK);
-		g.drawRect(x + 50, y + 50, 70, 70);
 		g.setFont(oldFont);
 	}
 }

@@ -23,12 +23,16 @@ public class HandDrawer {
 
 		// DesertCard
 		if ( !p.getDesertCard().isPresent())
-			CardDrawer.drawDesertCard(g, 0, 800, "+/-", !p.getDesertCard().isPresent());
+			CardDrawer.drawDesertCard(g, (180 - 70) / 2, 800 + (100 - 70) / 2, "+/-", !p.getDesertCard().isPresent());
 
 		// RaceBettingCards
 		List<RaceBettingCard> cards = p.getRaceBets();
 		for (int i = 0; i < cards.size(); i++)
 			CardDrawer.drawRaceBettingCard(g, 150 * i, 900, cards.get(i).getColor(), p);
+		
+		//RollCards
+		for (int i = 0, x = 775; i < p.getRollCards(); i++, x += 50)
+			CardDrawer.drawRollCard(g, x, 900);
 
 		// RoundBettingCards
 		int numWh = 0, numOrng = 0, numYel = 0, numGrn = 0, numBlu = 0;

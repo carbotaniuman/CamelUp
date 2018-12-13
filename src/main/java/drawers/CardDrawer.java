@@ -16,16 +16,51 @@ public class CardDrawer {
 	public static void drawDesertCard(Graphics g, int x, int y, String plusOrMinus, boolean fill) {
 		Font oldFont = g.getFont();
 		g.setColor(Color.YELLOW);
-		g.fillRect(x, y, 180, 100);
+		g.fillRect(x, y, 70, 70);
 		g.setColor(Color.BLACK);
-		g.drawRect(x, y, 180, 100);
+		g.drawRect(x, y, 70, 70);
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("TimesRoman", Font.BOLD, 30));
 		FontMetrics fm = g.getFontMetrics();
 		Rectangle2D textSize = fm.getStringBounds(plusOrMinus, g);
-		int xPos = (180 - (int) textSize.getWidth()) / 2;
-		int yPos = (100 - (int) textSize.getHeight()) / 2 + fm.getAscent();
+		int xPos = (70 - (int) textSize.getWidth()) / 2;
+		int yPos = (70 - (int) textSize.getHeight()) / 2 + fm.getAscent();
 		g.drawString(plusOrMinus, x + xPos, y + yPos);
+		g.setFont(oldFont);
+	}
+	
+	public static void drawPlacedDesertCard(Graphics g, int val, int x, int y, Player orig, Player curPlayer) {
+		Font oldFont = g.getFont();
+		g.setColor(Color.YELLOW);
+		g.fillRect(x, y, 160, 20);
+		g.setColor(Color.BLACK);
+		g.drawRect(x, y, 160, 20);
+		g.setFont(new Font("Serif", Font.PLAIN, 20));
+
+		FontMetrics fm = g.getFontMetrics();
+		Rectangle2D textSize = fm.getStringBounds(val + ":" +  orig.getName(), g);
+		int xPos = (160 - (int) textSize.getWidth()) / 2;
+		int yPos = (20 - (int) textSize.getHeight()) / 2 + fm.getAscent();
+		g.drawString(val + ":" +  orig.getName(), x + xPos, y + yPos);
+		
+		if(orig.equals(curPlayer)) {
+			g.setColor(Color.YELLOW);
+			g.fillRect(x, y + 20, 160, 20);
+			g.setColor(Color.BLACK);
+			g.drawRect(x, y + 20, 160, 20);
+			textSize = fm.getStringBounds("Flip Tile", g);
+			xPos = (160 - (int) textSize.getWidth()) / 2;
+			yPos = (20 - (int) textSize.getHeight()) / 2 + fm.getAscent();
+			g.drawString("Flip Tile",x + xPos, y + 20 + yPos);
+		}
+		if ( val > 0 )
+			g.setColor(new Color(29, 242, 39));
+		else
+			g.setColor(new Color(246, 221, 131));
+		g.fillRect(x + 50, y + 50, 70, 70);
+		
+		g.setColor(Color.BLACK);
+		g.drawRect(x + 50, y + 50, 70, 70);
 		g.setFont(oldFont);
 	}
 
@@ -112,6 +147,22 @@ public class CardDrawer {
 		yPos = (180 - (int) textSize.getHeight()) / 2 + fm.getAscent();
 		g.drawString(p.getName(), x + xPos, y + yPos + 50);
 		
+		g.setFont(oldFont);
+	}
+	
+	public static void drawRollCard(Graphics g, int x, int y) {
+		Font oldFont = g.getFont();
+		g.setColor(new Color(132, 237, 233));
+		g.fillRect(x, y, 150, 180);
+		g.setColor(Color.BLACK);
+		g.drawRect(x, y, 150, 180);
+
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+		FontMetrics fm = g.getFontMetrics();
+		Rectangle2D textSize = fm.getStringBounds("Roll Card", g);
+		int xPos = (150 - (int) textSize.getWidth()) / 2;
+		int yPos = (180 - (int) textSize.getHeight()) / 2 + fm.getAscent();
+		g.drawString("Roll Card", x + xPos, y + yPos);
 		g.setFont(oldFont);
 	}
 }

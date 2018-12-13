@@ -116,6 +116,22 @@ public class BoardDrawer {
 			CardDrawer.drawPlacedRaceBettingCard(g, x, y, cards.peek().getColor(), cards.poll().getPlayer());
 		}
 	}
+	
+	public static void drawPlayerData(Graphics g, List<Player> players) {
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("TimesRoman", Font.ITALIC, 40));
+		g.drawString("Player Data", 1530, 380);
+		g.setFont(new Font("Monospaced", Font.BOLD, 24));
+		String st = String.format("%-11s %-8s %-9s %-5s %-5s", "Name", "RaceBets", "RoundBets", "Rolls", "Money");
+		g.drawString(st, 1320, 410 + 33);
+		for (int i1 = 0; i1 < players.size(); i1++) {
+			Player player = players.get(i1);
+			g.setFont(new Font("Monospaced", Font.BOLD, 24));
+			String s = String.format("%-11s %-8d %-9d %-5s %-5s", player.getName(), player.getRaceBets().size(),
+					player.getRoundBets().size(), player.getRollCards(), player.getMoney() + " EP");
+			g.drawString(s, 1320, 410 + 33 * (i1 + 2));
+		}
+	}
 
 	private static void drawRaceBetButton(Graphics g, Color c, int x) {
 		Font oldFont = g.getFont();
@@ -158,22 +174,6 @@ public class BoardDrawer {
 			g.fillOval(x + 25, y + 25, 10, 10);
 			g.fillOval(x + 10, y + 10, 10, 10);
 			g.fillOval(x + 40, y + 40, 10, 10);
-		}
-	}
-
-	public static void drawPlayerData(Graphics g, List<Player> players) {
-		g.setColor(Color.BLACK);
-		g.setFont(new Font("TimesRoman", Font.ITALIC, 40));
-		g.drawString("Player Data", 1530, 380);
-		g.setFont(new Font("Monospaced", Font.BOLD, 24));
-		String st = String.format("%-15s %-8s %-10s %-6s", "Name", "RaceBets", "RoundBets", "Money");
-		g.drawString(st, 1320, 410 + 33);
-		for (int i1 = 0; i1 < players.size(); i1++) {
-			Player player = players.get(i1);
-			g.setFont(new Font("Monospaced", Font.BOLD, 24));
-			String s = String.format("%-15s %-8d %-10d %-5s", player.getName(), player.getRaceBets().size(),
-					player.getRoundBets().size(), player.getMoney() + " EP");
-			g.drawString(s, 1320, 410 + 33 * (i1 + 2));
 		}
 	}
 }

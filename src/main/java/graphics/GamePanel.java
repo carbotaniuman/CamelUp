@@ -95,7 +95,7 @@ public class GamePanel extends JPanel implements MouseListener, GameListener {
                 int xPos = (1920 - (int) textSize.getWidth()) / 2;
                 int yPos = (1080 - (int) textSize.getHeight()) / 2 + fm.getAscent();
                 g.drawString("AI Player's Turn", xPos, yPos);
-            } else if (gamestate.isSleeping()) {
+            } /*else if (gamestate.isSleeping()) {
                 g.setColor(new Color(18, 67, 183));
                 g.setFont(new Font("TimesRoman", Font.ITALIC, 120));
                 FontMetrics fm = g.getFontMetrics();
@@ -103,7 +103,7 @@ public class GamePanel extends JPanel implements MouseListener, GameListener {
                 int xPos = (1920 - (int) textSize.getWidth()) / 2;
                 int yPos = (1080 - (int) textSize.getHeight()) / 2 + fm.getAscent();
                 g.drawString("Processing Turn", xPos, yPos);
-            }
+            }*/
             g.setFont(oldFont);
         }
     }

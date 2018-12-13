@@ -31,8 +31,8 @@ import immutable.RoundBettingCard;
 
 public class GameState {
 
-	public final static String[] names = { "KarleEngels18", "Evile Vinciente", "A Confucius", "Prince Zuko",
-			"Madame Bob Lee", "Sg2themax", "DaLegend27", "Chrometor" };
+	public final static String[] names = { "KarleEngels", "E. Vincien", "Confucius", "Prince Zuko",
+			"Madame Bob", "Sg2themax", "DaLegend27", "Chrometor" };
 
 	public final static ImmutableBiMap<String, Color> COLORBIMAP = ImmutableBiMap.of("blue", new Color(51, 153, 255),
 			"green", Color.green, "yellow", Color.yellow, "white", Color.white, "orange", Color.orange);
@@ -161,97 +161,104 @@ public class GameState {
 	}
 
 	private void commitTurn() {
-		if (pyramid.areAllDiceRolled() || track.hasCamelWon()) {
-			pyramid.resetDice();
-			track.removeAllDesertCards();
-			for (Player p : players) {
-				p.removeDesertCard();
-			}
-			
-			for (Player p : players) {
-				int winCount = 0;
-				int loseCount = 0;
-				int tally = 0;
-				for (RoundBettingCard rbc : p.getRoundBets()) {
-					if (rbc.getColor().equals(getCamelRankings().get(0).getColor())) {
-						tally += rbc.getPoints();
-					} else if (rbc.getColor().equals(getCamelRankings().get(1).getColor())) {
-						tally += 1;
-					} else {
-						tally -= 1;
-					}
-					roundBets.get(rbc.getColor()).add(rbc);
-				}
-				tally += p.getRollCards();
-				p.resetRollCards();
-				p.clearRoundBets();
-				if (track.hasCamelWon()) {
-					gameEnded = true;
-					int[] amount = { 8, 5, 3, 2, 1 };
-					for (RaceBettingCard r : winBets) {
-						if (r.getColor().equals(getCamelRankings().get(0).getColor())) {
-							if (r.getPlayer().equals(p)) {
-								tally += amount[winCount];
-							}
-							
-							if (winCount + 1 != amount.length) {
-								winCount++;
-							}
-						} else if(r.getPlayer().equals(p)) {
-							tally--;
-						}
-					}
-					
-					for (RaceBettingCard r : loseBets) {
-						if (r.getColor().equals(getCamelRankings().get(getCamelRankings().size() - 1).getColor())) {
-							if (r.getPlayer().equals(p)) {
-								tally += amount[loseCount];
-							}
-							
-							if (loseCount + 1 != amount.length) {	
-								loseCount++;
-							}
-						} else if(r.getPlayer().equals(p)) {
-							tally--;
-						}
-					}
-				}
-				if (p.getMoney() + tally < 0) {
-					p.setMoney(0);
-				} else {
-					p.setMoney(p.getMoney() + tally);
-				}
-			}
-		}
-
-		turnIndex++;
-
 		for (GameListener tl : listeners) {
 			tl.gameChanged();
 		}
 
+		turnIndex++;
+
 		isSleeping = true;
-		Timer timer = new Timer(500, new ActionListener() {
+		Timer timer = new Timer(100, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				curPlayerIndex = (curPlayerIndex + 1) % players.size();
-				curPlayer = players.get(curPlayerIndex);
-
-				for (GameListener tl : listeners) {
-					tl.gameChanged();
-				}
-
-				if (!track.hasCamelWon()) {
-					Timer timer = new Timer(1000, new ActionListener() {
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							processAITurn();
+				if (pyramid.areAllDiceRolled() || track.hasCamelWon()) {
+					pyramid.resetDice();
+					track.removeAllDesertCards();
+					for (Player p : players) {
+						p.removeDesertCard();
+					}
+					
+					for (Player p : players) {
+						int winCount = 0;
+						int loseCount = 0;
+						int tally = 0;
+						for (RoundBettingCard rbc : p.getRoundBets()) {
+							if (rbc.getColor().equals(getCamelRankings().get(0).getColor())) {
+								tally += rbc.getPoints();
+							} else if (rbc.getColor().equals(getCamelRankings().get(1).getColor())) {
+								tally += 1;
+							} else {
+								tally -= 1;
+							}
+							roundBets.get(rbc.getColor()).add(rbc);
 						}
-					});
-					timer.setRepeats(false);
-					timer.start();
+						tally += p.getRollCards();
+						p.resetRollCards();
+						p.clearRoundBets();
+						if (track.hasCamelWon()) {
+							gameEnded = true;
+							int[] amount = { 8, 5, 3, 2, 1 };
+							for (RaceBettingCard r : winBets) {
+								if (r.getColor().equals(getCamelRankings().get(0).getColor())) {
+									if (r.getPlayer().equals(p)) {
+										tally += amount[winCount];
+									}
+									
+									if (winCount + 1 != amount.length) {
+										winCount++;
+									}
+								} else if(r.getPlayer().equals(p)) {
+									tally--;
+								}
+							}
+							
+							for (RaceBettingCard r : loseBets) {
+								if (r.getColor().equals(getCamelRankings().get(getCamelRankings().size() - 1).getColor())) {
+									if (r.getPlayer().equals(p)) {
+										tally += amount[loseCount];
+									}
+									
+									if (loseCount + 1 != amount.length) {	
+										loseCount++;
+									}
+								} else if(r.getPlayer().equals(p)) {
+									tally--;
+								}
+							}
+						}
+						if (p.getMoney() + tally < 0) {
+							p.setMoney(0);
+						} else {
+							p.setMoney(p.getMoney() + tally);
+						}
+					}
 				}
-				isSleeping = false;
+				
+				Timer timer = new Timer(200, new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						curPlayerIndex = (curPlayerIndex + 1) % players.size();
+						curPlayer = players.get(curPlayerIndex);
+
+						for (GameListener tl : listeners) {
+							tl.gameChanged();
+						}
+
+						if (!track.hasCamelWon()) {
+							Timer timer = new Timer(1000, new ActionListener() {
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									processAITurn();
+								}
+							});
+							timer.setRepeats(false);
+							timer.start();
+						}
+						isSleeping = false;
+					}
+				});
+				timer.setRepeats(false);
+				timer.start();
 			}
 		});
 		timer.setRepeats(false);
