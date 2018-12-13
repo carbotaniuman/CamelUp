@@ -11,7 +11,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
+import java.io.InputStream;
 
+import javax.sound.sampled.Clip;
 import javax.swing.AbstractAction;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
@@ -21,6 +23,7 @@ public class MenuPanel extends JPanel {
 	private static final long serialVersionUID = -58760937816298343L;
 	private JPanel curShow;
 	private MenuListener listener;
+	private Clip clip;
 
 	public MenuPanel() {
 		setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
@@ -43,6 +46,10 @@ public class MenuPanel extends JPanel {
 				}
 			}
 		});
+	}
+	
+	private void setAudioClip(String path) {
+		InputStream is = MenuPanel.class.getResourceAsStream("/test.csv");
 	}
 
 	@Override

@@ -8,7 +8,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -23,8 +22,9 @@ public class TrackDrawer {
 
 	static {
 		try {
-			camelImage = scale(ImageIO.read(new File("Camel.png")), 61, 40);
-			origImage = ImageIO.read(new File("Camel.png"));
+			System.out.println(ClassLoader.getSystemClassLoader().getResource("Camel.png"));
+			origImage = ImageIO.read(ClassLoader.getSystemClassLoader().getResource("Camel.png"));
+			camelImage = scale(origImage, 61, 40);
 		} catch (IOException e) {
 			throw new AssertionError(e);
 		}

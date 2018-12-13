@@ -1,9 +1,20 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'jacoco'
+apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:4.0.3'
+    }
+}
 
 repositories {
-    jcenter()
+	jcenter()
 }
 
 jacocoTestReport {
@@ -13,6 +24,21 @@ jacocoTestReport {
         csv.enabled false
         html.destination "${buildDir}/reports/coverage"
     }
+}
+
+run {
+    main = 'GraphicsRunner'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Implementation-Title': 'Camel Up',
+                'Main-Class': 'GraphicsRunner',
+        )
+    }
+    mainClassName = "GraphicsRunner"
+    baseName = 'Quizlet-Bot'
 }
 
 dependencies {
