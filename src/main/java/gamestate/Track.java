@@ -167,10 +167,7 @@ public class Track {
 		if (!tiles[newNum].getCamels().isEmpty() || tiles[newNum].getDesertCard().isPresent())
 			return false;
 
-		if (newNum - 1 == origNum)
-			return true;
-
-		if (tiles[newNum - 1].getDesertCard().isPresent())
+		if (newNum - 1 != origNum && tiles[newNum - 1].getDesertCard().isPresent())
 			return false;
 
 		if (newNum == 15)
