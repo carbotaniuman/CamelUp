@@ -32,7 +32,7 @@ public class AIPlayer extends Player {
 		HashMap<Color, Integer> roundWin = new HashMap<>();
 		HashMap<Color, Integer> roundSec = new HashMap<>();
 
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 10000; i++) {
 			GameSimulator rs = new GameSimulator(g.getTrack(), g.getPyramid());
 			while (rs.canSimulateRound()) {
 				rs.moveCamel();
@@ -46,8 +46,8 @@ public class AIPlayer extends Player {
 			if (!g.getRoundBets().get(c).isEmpty()) {
 				int roundVMax = g.getRoundBets().get(c).first().getPoints();
 
-				double chanceFirst = roundWin.getOrDefault(c, 0) / 1000.0;
-				double chanceSecond = roundSec.getOrDefault(c, 0) / 1000.0;
+				double chanceFirst = roundWin.getOrDefault(c, 0) / 10000.0;
+				double chanceSecond = roundSec.getOrDefault(c, 0) / 10000.0;
 				double chanceElse = 1 - chanceFirst - chanceSecond;
 				double roundV = (roundVMax * chanceFirst + 1 * chanceSecond - 1 * chanceElse)
 						* dieRolledRoundMult(g.getPyramid().getRolledDice().size());
@@ -61,7 +61,7 @@ public class AIPlayer extends Player {
 		HashMap<Color, Integer> gameWin = new HashMap<>();
 		HashMap<Color, Integer> gameLose = new HashMap<>();
 
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 10000; i++) {
 			GameSimulator rs = new GameSimulator(g.getTrack(), g.getPyramid());
 			while (rs.canSimulateGame()) {
 				while (rs.canSimulateRound()) {
@@ -78,8 +78,8 @@ public class AIPlayer extends Player {
 
 		for (RaceBettingCard rbc : getRaceBets()) {
 			Color c = rbc.getColor();
-			double chanceWin = gameWin.getOrDefault(c, 0) / 1000.0;
-			double chanceLose = gameLose.getOrDefault(c, 0) / 1000.0;
+			double chanceWin = gameWin.getOrDefault(c, 0) / 10000.0;
+			double chanceLose = gameLose.getOrDefault(c, 0) / 10000.0;
 
 			double chanceFirstWinPlace = (1.0 / 625.0) * Math.pow(g.getWinBets().size() - 25, 2);
 			double chanceFirstLosePlace = (1.0 / 625.0) * Math.pow(g.getLoseBets().size() - 25, 2);
@@ -122,7 +122,7 @@ public class AIPlayer extends Player {
 	}
 
 	public double raceWinMult(int firstCamelPos) {
-		return Math.pow((firstCamelPos - 4) / 9.0, 2);
+		return Math.pow((firstCamelPos - 2) / 8.0, 2) * 1 / 2;
 	}
 
 	public double raceLoseMult(int secondToLastCamelPos, int lastCamelPos) {

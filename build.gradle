@@ -3,6 +3,7 @@ apply plugin: 'eclipse'
 apply plugin: 'jacoco'
 apply plugin: 'application'
 apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'edu.sc.seis.launch4j'
 
 buildscript {
     repositories {
@@ -10,6 +11,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:4.0.3'
+        classpath 'edu.sc.seis.gradle:launch4j:2.4.4'
     }
 }
 
@@ -31,7 +33,17 @@ run {
 }
 
 shadowJar {
+	minimize()
     classifier = ''
+}
+
+launch4j {
+    outfile = 'CamelUp.exe'
+    mainClassName = project.mainClassName
+    copyConfigurable = project.tasks.shadowJar.outputs.files
+    jar = "lib/${project.tasks.shadowJar.archiveName}"
+    icon = "${projectDir}/src/main/resources/Icon.ico"
+    fileDescription = "Camel Up by Quy Nguyen, etc."
 }
 
 jar {
@@ -46,6 +58,7 @@ jar {
 }
 
 dependencies {
+	runtimeOnly group: 'org.slf4j', name: 'slf4j-nop', version: '1.7.25'
     implementation 'org.slf4j:slf4j-api:1.7.25'
     implementation group: 'com.google.guava', name: 'guava', version: '23.5-jre'
 	testImplementation group: 'org.mockito', name: 'mockito-core', version: '2.23.4'
